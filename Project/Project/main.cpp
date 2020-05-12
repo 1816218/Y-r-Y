@@ -4,7 +4,7 @@
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	ChangeWindowMode(TRUE);//ウィンドウ
-	SetWindowText("コロネパンデミック");
+	SetWindowText(WINDOW_NAME);
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 16);
 	if (DxLib_Init() == -1) return -1;//初期化と裏画面化
 	SetDrawScreen(DX_SCREEN_BACK);
