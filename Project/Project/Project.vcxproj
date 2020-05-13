@@ -20,9 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scene\SceneMng.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\BaseSceneh.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Scene\SceneMng.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
