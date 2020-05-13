@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\SceneMng.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Scene\GameScene.h" />
+    <ClInclude Include="ImageMng.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Scene\SceneMng.h" />

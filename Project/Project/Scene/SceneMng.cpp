@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "SceneMng.h"
+#include "GameScene.h"
 
 std::unique_ptr<SceneMng, SceneMng::SceneMngDeleter> SceneMng::s_Instance(new SceneMng);
 
