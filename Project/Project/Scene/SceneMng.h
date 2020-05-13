@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseSceneh.h"
+#include "BaseScene.h"
 
 #define lpSceneMng SceneMng::GetInstance()
 
@@ -25,6 +25,7 @@ private:
 
 	bool SysInit(void);		//¼½ÃÑˆ—
 
+	unique_Base _activeScene;	// “®ì‚µ‚Ä‚¢‚é¼°İ
 	static std::unique_ptr<SceneMng, SceneMngDeleter> s_Instance;
 };
 
