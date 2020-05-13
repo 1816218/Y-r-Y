@@ -18,17 +18,12 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-=======
+
     <ClCompile Include="Scene\SceneMng.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ImageMng.cpp">
->>>>>>> c4441f4c38d706ba02ed91a2b40cedefd83f3423
+
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,15 +31,7 @@
     <ClInclude Include="main.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="MODEL_BASE.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-=======
+
     <ClInclude Include="Scene\SceneMng.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -52,7 +39,7 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ImageMng.h">
->>>>>>> c4441f4c38d706ba02ed91a2b40cedefd83f3423
+
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
