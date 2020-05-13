@@ -1,4 +1,5 @@
 #include "main.h"
+
 #include"Player.h"
 //メイン処理
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
@@ -9,8 +10,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	if (DxLib_Init() == -1) return -1;//初期化と裏画面化
 	SetDrawScreen(DX_SCREEN_BACK);
 	//Player player;
-	MODEL_BASE* player;
-	player = new Player();
+	Player* player;
+	player = new Player;
 
 	//メインループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) != 1)
