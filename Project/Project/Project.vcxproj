@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -28,6 +29,17 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="MODEL_BASE.h" />
     <ClInclude Include="Player.h" />
+=======
+    <ClCompile Include="ImageMng.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scene\SceneMng.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ImageMng.h" />
+    <ClInclude Include="Scene\BaseScene.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="Scene\SceneMng.h" />
+>>>>>>> c4441f4c38d706ba02ed91a2b40cedefd83f3423
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,9 +1,11 @@
-#include "main.h"
+#include <DxLib.h>
+#include "Scene/SceneMng.h"
 
 #include"Player.h"
 //メイン処理
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+<<<<<<< HEAD
 	ChangeWindowMode(TRUE);//ウィンドウ
 	SetWindowText(WINDOW_NAME);
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 16);
@@ -21,8 +23,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		//if (player != nullptr) { player->Draw(); }
 		ScreenFlip();
 	}
+=======
+	lpSceneMng.Run();
+>>>>>>> c4441f4c38d706ba02ed91a2b40cedefd83f3423
 
 	DxLib_End();//終了の処理
 	return 0;//ソフトの処理
-
 }
