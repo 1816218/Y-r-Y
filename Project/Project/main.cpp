@@ -9,7 +9,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	if (DxLib_Init() == -1) return -1;//初期化と裏画面化
 	SetDrawScreen(DX_SCREEN_BACK);
 	//Player player;
-	Player* player;
+	MODEL_BASE* player;
 	player = new Player();
 
 	//メインループ
