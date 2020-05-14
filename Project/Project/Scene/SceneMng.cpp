@@ -13,7 +13,7 @@ void SceneMng::Run(void)
 	{
 		ClsDrawScreen();
 
-		DrawRotaGraph(100, 100, 1, 0, IMAGE_ID.SetID("image/player.png", { 32,32 }, { 3,4 })[0], true);
+		DrawRotaGraph(100, 100, 1, 0, ImageMng::GetInstance().SetID("image/player.png", { 32,32 }, { 3,4 })[0], true);
 
 		ScreenFlip();
 	}

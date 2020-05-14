@@ -18,10 +18,9 @@ const VEC_INT& ImageMng::SetID(const std::string& fileName, const Vector2& divSi
 	if (imgDivMap.find(fileName) == imgDivMap.end())
 	{
 		//ìÆìIÇ»óvëfêîÇê›íË(vectorå^îzóÒ)
-		imgDivMap[fileName].reserve(divNum.x * divNum.y);
+		imgDivMap[fileName].resize(divNum.x*divNum.y);
 
-		LoadDivGraph(fileName.c_str(), divNum.x* divNum.y, divNum.x, divNum.y, divSize.x,divSize.y, &imgDivMap[fileName][0], true);
+		LoadDivGraph(fileName.c_str(), divNum.x*divNum.y,divNum.x, divNum.y,divSize.x, divSize.y,&imgDivMap[fileName][0], true);
 	}
-
 	return imgDivMap[fileName];
 }
