@@ -4,7 +4,7 @@
 #include <string>
 #include "VECTOR2.h"
 
-#define  IMAGE_ID(N) ImageMng::GetInstance(N)
+#define  IMAGE_ID ImageMng::GetInstance()
 using VEC_INT = std::vector<int>;
 
 class ImageMng
