@@ -13,9 +13,9 @@ public:
 	~MODEL_BASE() {};
 	//必ず継承したクラスで実装する必要がある
 	virtual void Update(void) = 0;
-	virtual void Render(void) = 0;
+	virtual void Draw(void) = 0;
 
-	VECTOR GetPosition() { return pos; }
+//	VECTOR GetPosition() { return pos; }
 	/*VECTOR GetRotation() { return rol; }
 	VECTOR GetTarget() { return target; }
 	*/
