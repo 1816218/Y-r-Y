@@ -8,14 +8,17 @@ void SceneMng::Run(void)
 {
 	SysInit();
 
+	//int i = 0;
+
 	//ƒƒCƒ“ƒ‹[ƒv
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) != 1)
 	{
 		ClsDrawScreen();
 
-		DrawRotaGraph(100, 100, 1, 0, ImageMng::GetInstance().SetID("image/player.png", { 32,32 }, { 3,4 })[0], true);
+		//DrawRotaGraph(100, 100, 1, 0, ImageMng::GetInstance().SetID("image/player.png", { 32,32 }, { 3,4 })[i/10%12], true);
 
 		ScreenFlip();
+		//i++;
 	}
 }
 
@@ -36,10 +39,8 @@ bool SceneMng::SysInit(void)
 	{
 		return -1;	//DX×²ÌŞ×Ø‰Šú‰»ˆ—
 	}
-	
 	SetDrawScreen(DX_SCREEN_BACK);
 	
-
 	return true;
 }
 
