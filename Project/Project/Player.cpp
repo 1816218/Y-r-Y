@@ -1,8 +1,8 @@
+#include <DxLib.h>
 #include "Player.h"
-
+#include"ImageMng.h"
 Player::Player()
 {
-	model=LoadGraph("ÉvÉåÉCÉÑÅ[.png");
 }
 
 Player::~Player()
@@ -24,7 +24,7 @@ void Player::Update()
 
 void Player::Draw()
 {
-	DrawGraph(pos.x, pos.y, model,true);
+	DrawGraph(pos.x, pos.y, IMAGE_ID.SetID("image/player.png"),true);
 }
 
 

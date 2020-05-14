@@ -1,12 +1,13 @@
 #pragma once
 
 #include"main.h"
+#include"VECTOR2.h"
 class MODEL_BASE
 {
 protected:
 	int model;		//モデルデータ用
 	//VECTOR target;//向いている方向
-	VECTOR pos;//XYZ軸方向
+	Vector2 pos;	//XYZ軸方向
 public:
 	
 	MODEL_BASE() {};
@@ -19,6 +20,4 @@ public:
 	/*VECTOR GetRotation() { return rol; }
 	VECTOR GetTarget() { return target; }
 	*/
-	
-	
 };
