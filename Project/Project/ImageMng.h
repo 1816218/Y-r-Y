@@ -27,7 +27,7 @@ public:
 	//登録(アニメーション)
 	const VEC_INT& SetID(const std::string & fileName, const Vector2 & divSize, const Vector2 & divNum);
 private:
-	ImageMng();
+	ImageMng() {}
 
 	//-----画像登録用map
 	std::map<std::string, int> imgMap;	//画像一枚用
