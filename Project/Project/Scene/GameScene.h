@@ -1,6 +1,7 @@
 #pragma once
+#include <vector>
 #include "BaseScene.h"
-
+#include "../Player.h"
 
 class GameScene :
 	public BaseScene
@@ -19,6 +20,6 @@ private:
 	bool Init(void);
 	void Draw(void);
 
-	int gHandle;
+	Player* player;
 };
 
