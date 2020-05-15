@@ -12,6 +12,14 @@ protected:
 	int speed;
 	Vector2 movepos;
 	int movFlag;
+	int i;
+	enum MOV_DIR {						//方角の種類
+		DIR_DOWN,
+		DIR_LEFT,
+		DIR_RIGHT,
+		DIR_UP,
+		DIR_MAX
+	};
 
 public:
 	
