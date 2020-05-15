@@ -28,12 +28,14 @@
   <ItemGroup>
     <ClInclude Include="details\VECTOR2.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="MODEL_BASE.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Scene\SceneMng.h" />
+    <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="VECTOR2.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

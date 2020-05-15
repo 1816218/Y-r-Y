@@ -1,10 +1,11 @@
 #pragma once
 #include <memory>
 
-// シーンのID
+//シーンのID
 enum class SCN_ID
 {
-	GAME,	// ｹﾞｰﾑﾒｲﾝ
+	TITLE,	//ゲームタイトル
+	GAME,	//ゲームメイン
 	MAX
 };
 

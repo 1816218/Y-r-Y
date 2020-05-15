@@ -26,6 +26,7 @@ private:
 	bool SysInit(void);		//¼½ÃÑˆ—
 
 	unique_Base _activeScene;	// “®ì‚µ‚Ä‚¢‚é¼°İ
+
 	static std::unique_ptr<SceneMng, SceneMngDeleter> s_Instance;
 };
 
