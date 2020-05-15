@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseScene.h"
+#include "../VECTOR2.h"
 class TitleScene :
 	public BaseScene
 {
@@ -10,7 +11,11 @@ public:
 	unique_Base UpDate(unique_Base own) override;
 
 	SCN_ID GetSceneID(void);
+private:
+	bool Init(void);
+	void Draw(void);
 
-
+	Vector2F pos;	//タイトルロゴの座標
+	float bright;	//明るさ
 };
 
