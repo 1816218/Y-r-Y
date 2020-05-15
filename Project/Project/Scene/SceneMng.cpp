@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include "SceneMng.h"
 #include "../ImageMng.h"
-#include "TitleScene.h"
+#include "GameScene.h"
 
 std::unique_ptr<SceneMng, SceneMng::SceneMngDeleter> SceneMng::s_Instance(new SceneMng);
 
@@ -19,6 +19,7 @@ void SceneMng::Run(void)
 	{
 		ClsDrawScreen();
 
+		//“®ì‚³‚¹‚éƒV[ƒ“ˆ—
 		_activeScene = _activeScene->UpDate(std::move(_activeScene));
 
 		ScreenFlip();
@@ -44,7 +45,7 @@ bool SceneMng::SysInit(void)
 	}
 	SetDrawScreen(DX_SCREEN_BACK);
 	
-	_activeScene = std::make_unique<TitleScene>();
+	_activeScene = std::make_unique<GameScene>();
 
 	return true;
 }
