@@ -1,7 +1,6 @@
 #include <DxLib.h>
 #include "Player.h"
 #include"ImageMng.h"
-int i;
 Player::Player()
 {
 }
@@ -24,6 +23,7 @@ void Player::Init()
 void Player::Update()
 {
 	{
+
 
 
 			if (CheckHitKey(KEY_INPUT_RIGHT))
@@ -49,6 +49,7 @@ void Player::Update()
 				dir = DIR_DOWN;
 				movFlag = 1;
 			}
+		
 		
 		if (movFlag == 1)
 		{
