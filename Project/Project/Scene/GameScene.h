@@ -2,6 +2,7 @@
 #include <vector>
 #include "BaseScene.h"
 #include "../Player.h"
+#include "../Enemy.h"
 
 class GameScene :
 	public BaseScene
@@ -20,6 +21,7 @@ private:
 	bool Init(void);
 	void Draw(void);
 
-	Player* player;
+	Player* _player;
+	Enemy* _enemy;
 };
 

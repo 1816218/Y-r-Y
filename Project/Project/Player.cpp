@@ -84,4 +84,9 @@ void Player::Draw()
 	
 }
 
+Vector2& Player::GetPos(void)
+{
+	return pos;
+}
+
 

@@ -1,14 +1,23 @@
 #pragma once
-#include "MODEL_BASE.h"
-class Enemy :public MODEL_BASE
+#include "VECTOR2.h"
+
+class Enemy
 {
-private:
 public:
 	Enemy();
 	~Enemy();
-	void Init();
-	void Update();
-	void Draw();
+
+	bool Init(void);
+	void UpDate(void);
+	void Draw(void);
+
+	void SetPos(Vector2& pos);
+private:
+
+	Vector2F _pos;	//ç¿ïW
+	float _speed;	//â¡ë¨ìx
+
+	Vector2 _playerPos;
 
 };
 

@@ -6,7 +6,7 @@ GameScene::GameScene()
 {
 	Init();
 
-	player->Init();
+	_player->Init();
 }
 
 GameScene::~GameScene()
@@ -16,7 +16,11 @@ GameScene::~GameScene()
 unique_Base GameScene::UpDate(unique_Base own)
 {
 	//ƒQ[ƒ€ƒƒCƒ“‚Ìˆ—
-	player->Update();
+	_player->Update();
+
+	_enemy->SetPos(_player->GetPos());
+
+	_enemy->UpDate();
 
 	Draw();
 
@@ -26,12 +30,14 @@ unique_Base GameScene::UpDate(unique_Base own)
 bool GameScene::Init(void)
 {
 	//ƒQ[ƒ€‰Šúˆ—
-	player = new Player();
+	_player = new Player();
+	_enemy = new Enemy();
 
 	return true;
 }
 
 void GameScene::Draw(void)
 {
-	player->Draw();
+	_player->Draw();
+	_enemy->Draw();
 }

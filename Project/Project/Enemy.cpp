@@ -4,28 +4,41 @@
 
 Enemy::Enemy()
 {
+	Init();
 }
 
 Enemy::~Enemy()
 {
 }
 
-void Enemy::Init()
+bool Enemy::Init(void)
 {
-	pos.x = SCREEN_SIZE_X / 3;
-	pos.y = SCREEN_SIZE_Y / 3;
+	_pos = { 0.0f, 0.0f };
+	_speed = 0.0f;
 
-	i = 0;
+	return false;
+}
+
+void Enemy::UpDate(void)
+{
+	if (_pos.x < _playerPos.x)
+	{
+		_pos.x++;
+	}
+
+	if (_pos.y < _playerPos.y)
+	{
+		_pos.y++;
+	}
 
 }
 
-void Enemy::Update()
+void Enemy::Draw(void)
 {
-
+	DrawBox(_pos.x - 15, _pos.y - 15, _pos.x + 15, _pos.y + 15, GetColor(255, 0, 0), true);
 }
 
-void Enemy::Draw()
+void Enemy::SetPos(Vector2& pos)
 {
-	DrawRotaGraph(pos.x, pos.y, 1, 0, ImageMng::GetInstance().SetID("image/.png", { 32,32 }, { 4,4 })[dir * 4 + i / 6 % 4], true);
-
+	_playerPos = pos;
 }
