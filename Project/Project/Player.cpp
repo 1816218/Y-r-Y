@@ -24,29 +24,32 @@ void Player::Init()
 void Player::Update()
 {
 	{
-		if (CheckHitKey(KEY_INPUT_RIGHT))
-		{
-			dir = DIR_RIGHT;
-			movFlag = 1;
 
-		}
-		if (CheckHitKey(KEY_INPUT_LEFT))
-		{
-			dir = DIR_LEFT;
-			movFlag = 1;
 
-		}
-		if (CheckHitKey(KEY_INPUT_UP))
-		{
-			dir = DIR_UP;
-			movFlag = 1;
+			if (CheckHitKey(KEY_INPUT_RIGHT))
+			{
+				dir = DIR_RIGHT;
+				movFlag = 1;
 
-		}
-		if (CheckHitKey(KEY_INPUT_DOWN))
-		{
-			dir = DIR_DOWN;
-			movFlag = 1;
-		}
+			}
+			if (CheckHitKey(KEY_INPUT_LEFT))
+			{
+				dir = DIR_LEFT;
+				movFlag = 1;
+
+			}
+			if (CheckHitKey(KEY_INPUT_UP))
+			{
+				dir = DIR_UP;
+				movFlag = 1;
+
+			}
+			if (CheckHitKey(KEY_INPUT_DOWN))
+			{
+				dir = DIR_DOWN;
+				movFlag = 1;
+			}
+		
 		if (movFlag == 1)
 		{
 			i++;
@@ -76,7 +79,7 @@ void Player::Update()
 
 void Player::Draw()
 {
-	DrawRotaGraph(pos.x, pos.y, 1, 0, ImageMng::GetInstance().SetID("image/player.png", { 32,32 }, { 3,4 })[dir*4+i / 12 % 3], true);
+	DrawRotaGraph(pos.x, pos.y, 1, 0, ImageMng::GetInstance().SetID("image/player2.png", { 32,32 }, { 4,4 })[dir*4+i / 6 % 4], true);
 	
 }
 
