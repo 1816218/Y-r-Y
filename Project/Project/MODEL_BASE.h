@@ -8,6 +8,11 @@ protected:
 	int model;		//モデルデータ用
 	//VECTOR target;//向いている方向
 	Vector2 pos;	//XYZ軸方向
+	int dir;
+	int speed;
+	Vector2 movepos;
+	int movFlag;
+
 public:
 	
 	MODEL_BASE() {};
