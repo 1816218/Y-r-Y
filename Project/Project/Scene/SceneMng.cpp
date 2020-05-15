@@ -1,24 +1,27 @@
 #include <DxLib.h>
 #include "SceneMng.h"
 #include "../ImageMng.h"
+#include "TitleScene.h"
 
 std::unique_ptr<SceneMng, SceneMng::SceneMngDeleter> SceneMng::s_Instance(new SceneMng);
 
+//-----メイン処理
 void SceneMng::Run(void)
 {
 	SysInit();
 
-	//int i = 0;
+	//-----画像の読み込み
+
+
 
 	//メインループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) != 1)
 	{
 		ClsDrawScreen();
 
-		//DrawRotaGraph(100, 100, 1, 0, ImageMng::GetInstance().SetID("image/player.png", { 32,32 }, { 3,4 })[i/10%12], true);
+		_activeScene = _activeScene->UpDate(std::move(_activeScene));
 
 		ScreenFlip();
-		//i++;
 	}
 }
 
@@ -41,6 +44,8 @@ bool SceneMng::SysInit(void)
 	}
 	SetDrawScreen(DX_SCREEN_BACK);
 	
+	_activeScene = std::make_unique<TitleScene>();
+
 	return true;
 }
 
