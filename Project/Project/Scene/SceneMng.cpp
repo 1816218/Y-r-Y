@@ -1,6 +1,6 @@
 #include <DxLib.h>
 #include "SceneMng.h"
-#include "TitleScene.h"
+#include "GameScene.h"
 #include "../InputKey.h"
 
 std::unique_ptr<SceneMng, SceneMng::SceneMngDeleter> SceneMng::s_Instance(new SceneMng);
@@ -10,19 +10,15 @@ void SceneMng::Run(void)
 {
 	SysInit();
 
-	//-----画像の読み込み
-
-
-
 	//メインループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) != 1)
 	{
 		ClsDrawScreen();
 
-		lpInputKey.UpDate();
+		lpInputKey.Update();
 
 		//動作させるシーン処理
-		_activeScene = _activeScene->UpDate(std::move(_activeScene));
+		_activeScene = _activeScene->Update(std::move(_activeScene));
 
 		ScreenFlip();
 	}
@@ -47,7 +43,7 @@ bool SceneMng::SysInit(void)
 	}
 	SetDrawScreen(DX_SCREEN_BACK);
 	
-	_activeScene = std::make_unique<TitleScene>();
+	_activeScene = std::make_unique<GameScene>();
 
 	return true;
 }

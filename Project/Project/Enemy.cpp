@@ -19,7 +19,7 @@ bool Enemy::Init(void)
 	return false;
 }
 
-void Enemy::UpDate(void)
+void Enemy::Update(void)
 {
 	if (_pos.x < _playerPos.x)
 	{

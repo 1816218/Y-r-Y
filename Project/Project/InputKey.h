@@ -28,7 +28,7 @@ public:
 	~InputKey();
 
 	void Init(void);
-	bool UpDate(void);
+	bool Update(void);
 
 	int newKey[KEY_MAX];
 	int oldKey[KEY_MAX];

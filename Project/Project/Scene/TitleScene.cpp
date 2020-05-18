@@ -11,7 +11,7 @@ TitleScene::~TitleScene()
 {
 }
 
-unique_Base TitleScene::UpDate(unique_Base own)
+unique_Base TitleScene::Update(unique_Base own)
 {
 	//SPACEキーが押されたらゲームシーンに切り替える
 	if (CheckHitKey(KEY_INPUT_SPACE))

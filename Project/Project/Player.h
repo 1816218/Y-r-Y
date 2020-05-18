@@ -22,7 +22,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	
-	Vector2F& SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg);
+	void SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg);
 
 	Vector2F& GetPos(void);
 

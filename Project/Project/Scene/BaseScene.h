@@ -17,6 +17,6 @@ class BaseScene
 public:
 	BaseScene() {};
 	virtual ~BaseScene() {};
-	virtual unique_Base UpDate(unique_Base own) = 0;
+	virtual unique_Base Update(unique_Base own) = 0;
 	virtual SCN_ID GetSceneID(void) = 0;
 };

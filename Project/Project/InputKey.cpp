@@ -24,7 +24,7 @@ void InputKey::Init(void)
 	}
 }
 //-----キー情報の更新
-bool InputKey::UpDate(void)
+bool InputKey::Update(void)
 {
 	//押していない状態
 	for (int i = 0; i < KEY_MAX; i++)

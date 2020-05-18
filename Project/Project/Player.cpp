@@ -32,19 +32,21 @@ void Player::Update(void)
 
 void Player::Draw(void)
 {
+	//アニメーション
 	_moveFlag != false ? _animeCnt++ : _animeCnt = 0;
 
 	DrawRotaGraphF(_pos.x, _pos.y, 1, 0, 
 		ImageMng::GetInstance().SetID("image/player2.png", { 32,32 }, { 4,4 })[(_dir*4) + (_animeCnt/4%4)], true);
 }
 
-Vector2F& Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg)
+void Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg)
 {
 	if (lpInputKey.newKey[key])
 	{
 		_dir = dir;
 		_moveFlag = flg;
 		_speed = speed;
+
 		_pos += _speed;
 	}
 	else if(lpInputKey.upKey[key])
@@ -52,7 +54,6 @@ Vector2F& Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F&
 		_speed = { 0,0 };
 		_moveFlag = false;
 	}
-	return _speed;
 }
 
 Vector2F& Player::GetPos(void)
