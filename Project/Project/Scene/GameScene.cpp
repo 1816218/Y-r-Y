@@ -5,8 +5,6 @@
 GameScene::GameScene()
 {
 	Init();
-
-	_player->Init();
 }
 
 GameScene::~GameScene()

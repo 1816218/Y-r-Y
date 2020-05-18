@@ -9,9 +9,9 @@ private:
 public:
 	Player();
 	~Player();
-	void Init();
-	void Update();
-	void Draw();
+	void Init(void);
+	void Update(void);
+	void Draw(void);
 	
 	Vector2& GetPos(void);
 };

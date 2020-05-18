@@ -3,6 +3,7 @@
 #include"ImageMng.h"
 Player::Player()
 {
+	Init();
 }
 
 Player::~Player()
@@ -10,7 +11,7 @@ Player::~Player()
 	DeleteGraph(model);
 }
 
-void Player::Init()
+void Player::Init(void)
 {
 	pos.x = SCREEN_SIZE_X / 2;
 	pos.y = SCREEN_SIZE_Y / 2;
@@ -20,7 +21,7 @@ void Player::Init()
 	 i = 0;
 }
 
-void Player::Update()
+void Player::Update(void)
 {
 	{
 
@@ -78,7 +79,7 @@ void Player::Update()
 	}
 }
 
-void Player::Draw()
+void Player::Draw(void)
 {
 	DrawRotaGraph(pos.x, pos.y, 1, 0, ImageMng::GetInstance().SetID("image/player2.png", { 32,32 }, { 4,4 })[dir*4+i / 6 % 4], true);
 	
