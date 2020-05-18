@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include "SceneMng.h"
-#include "../ImageMng.h"
 #include "TitleScene.h"
+#include "../InputKey.h"
 
 std::unique_ptr<SceneMng, SceneMng::SceneMngDeleter> SceneMng::s_Instance(new SceneMng);
 
@@ -18,6 +18,8 @@ void SceneMng::Run(void)
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) != 1)
 	{
 		ClsDrawScreen();
+
+		lpInputKey.UpDate();
 
 		//“®ì‚³‚¹‚éƒV[ƒ“ˆ—
 		_activeScene = _activeScene->UpDate(std::move(_activeScene));

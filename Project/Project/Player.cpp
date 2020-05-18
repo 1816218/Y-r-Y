@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "Player.h"
 #include"ImageMng.h"
+
 Player::Player()
 {
 	Init();
@@ -8,86 +9,55 @@ Player::Player()
 
 Player::~Player()
 {
-	DeleteGraph(model);
 }
 
 void Player::Init(void)
 {
-	pos.x = SCREEN_SIZE_X / 2;
-	pos.y = SCREEN_SIZE_Y / 2;
-	dir = DIR_DOWN;
-	speed = 4;
-	movFlag = 0;
-	 i = 0;
+	_pos = {800 / 2, 640 / 2};
+	_dir = DIR_DOWN;
+	_speed = { 0,0 };
+	_moveFlag = false;
+	_animeCnt = 0;
 }
 
 void Player::Update(void)
 {
-	{
+	SetMove(KEY_UP,    DIR_UP,    {  0, -2 }, true);
+	SetMove(KEY_RIGHT, DIR_RIGHT, {  2,  0 }, true);
+	SetMove(KEY_LEFT,  DIR_LEFT,  { -2,  0 }, true);
+	SetMove(KEY_DOWN,  DIR_DOWN,  {  0,  2 }, true);
 
-
-
-			if (CheckHitKey(KEY_INPUT_RIGHT))
-			{
-				dir = DIR_RIGHT;
-				movFlag = 1;
-
-			}
-			if (CheckHitKey(KEY_INPUT_LEFT))
-			{
-				dir = DIR_LEFT;
-				movFlag = 1;
-
-			}
-			if (CheckHitKey(KEY_INPUT_UP))
-			{
-				dir = DIR_UP;
-				movFlag = 1;
-
-			}
-			if (CheckHitKey(KEY_INPUT_DOWN))
-			{
-				dir = DIR_DOWN;
-				movFlag = 1;
-			}
-		
-		
-		if (movFlag == 1)
-		{
-			i++;
-			movepos = pos;
-
-			switch (dir)
-			{
-
-			case DIR_UP:
-				movepos.y -= speed;
-				break;
-			case DIR_RIGHT:
-				movepos.x += speed;
-				break;
-			case DIR_DOWN:
-				movepos.y += speed;
-				break;
-			case DIR_LEFT:
-				movepos.x -= speed;
-				break;
-			}
-			pos = movepos;
-		}
-
-	}
+	Draw();
 }
 
 void Player::Draw(void)
 {
-	DrawRotaGraph(pos.x, pos.y, 1, 0, ImageMng::GetInstance().SetID("image/player2.png", { 32,32 }, { 4,4 })[dir*4+i / 6 % 4], true);
-	
+	_moveFlag != false ? _animeCnt++ : _animeCnt = 0;
+
+	DrawRotaGraphF(_pos.x, _pos.y, 1, 0, 
+		ImageMng::GetInstance().SetID("image/player2.png", { 32,32 }, { 4,4 })[(_dir*4) + (_animeCnt/4%4)], true);
 }
 
-Vector2& Player::GetPos(void)
+Vector2F& Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg)
 {
-	return pos;
+	if (lpInputKey.newKey[key])
+	{
+		_dir = dir;
+		_moveFlag = flg;
+		_speed = speed;
+		_pos += _speed;
+	}
+	else if(lpInputKey.upKey[key])
+	{
+		_speed = { 0,0 };
+		_moveFlag = false;
+	}
+	return _speed;
+}
+
+Vector2F& Player::GetPos(void)
+{
+	return _pos;
 }
 
 
