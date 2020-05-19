@@ -26,7 +26,6 @@ bool GameScene::Init(void)
 {
 	//ƒQ[ƒ€‰Šúˆ—
 	_player = new Player();
-
 	return true;
 }
 

@@ -24,6 +24,7 @@
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="InputKey.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\SceneMng.cpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="HitCheck.h" />
     <ClInclude Include="InputKey.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="ImageMng.h" />
