@@ -19,23 +19,12 @@ bool Enemy::Init(void)
 	return false;
 }
 
-void Enemy::UpDate(void)
+void Enemy::Update(void)
 {
-	if (_pos.x < _playerPos.x)
-	{
-		_pos.x++;
-	}
-
-	if (_pos.y < _playerPos.y)
-	{
-		_pos.y++;
-	}
-
 }
 
 void Enemy::Draw(void)
 {
-	DrawBox(_pos.x - 15, _pos.y - 15, _pos.x + 15, _pos.y + 15, GetColor(255, 0, 0), true);
 }
 
 void Enemy::SetPos(Vector2& pos)

@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "GameScene.h"
-#include"../Player.h"
+#include "../Player.h"
+#include "../ImageMng.h"
 
 GameScene::GameScene()
 {
@@ -11,7 +12,7 @@ GameScene::~GameScene()
 {
 }
 
-unique_Base GameScene::UpDate(unique_Base own)
+unique_Base GameScene::Update(unique_Base own)
 {
 	//ƒQ[ƒ€ƒƒCƒ“‚Ìˆ—
 	_player->Update();
@@ -25,11 +26,11 @@ bool GameScene::Init(void)
 {
 	//ƒQ[ƒ€‰Šúˆ—
 	_player = new Player();
-
 	return true;
 }
 
 void GameScene::Draw(void)
 {
+	DrawGraph(0, 0, IMAGE_ID.SetID("image/map.png"), true);
 	_player->Draw();
 }

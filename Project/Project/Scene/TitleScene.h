@@ -8,7 +8,7 @@ public:
 	TitleScene();
 	~TitleScene();
 
-	unique_Base UpDate(unique_Base own) override;
+	unique_Base Update(unique_Base own) override;
 
 	SCN_ID GetSceneID(void);
 private:

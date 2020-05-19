@@ -22,8 +22,8 @@ public:
 	void Update(void);
 	void Draw(void);
 	
-	Vector2F& SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg);
-
+	void SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg);
+	bool IntersectRectRect(int _x1, int _y1, int _w1, int _h1, int _x2, int _y2, int _w2, int _h2);
 	Vector2F& GetPos(void);
 
 private:
@@ -32,5 +32,6 @@ private:
 	int _dir;
 	int _animeCnt;
 	bool _moveFlag;
+
 	Vector2F _speed;
 };

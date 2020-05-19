@@ -12,7 +12,7 @@ public:
 	~GameScene();
 
 
-	unique_Base UpDate(unique_Base own) override;
+	unique_Base Update(unique_Base own) override;
 
 	//ƒV[ƒ“ID‚ğæ“¾
 	SCN_ID GetSceneID(void) override { return SCN_ID::GAME; }
