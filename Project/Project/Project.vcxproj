@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="HitCheck.cpp" />
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="InputKey.cpp" />
     <ClCompile Include="main.cpp" />
@@ -31,6 +32,7 @@
   <ItemGroup>
     <ClInclude Include="details\VECTOR2.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="HitCheck.h" />
     <ClInclude Include="InputKey.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene\GameScene.h" />
