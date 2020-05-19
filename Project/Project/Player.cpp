@@ -54,11 +54,29 @@ void Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& spee
 		_speed = { 0,0 };
 		_moveFlag = false;
 	}
+	
+}
+
+
+
+bool Player::IntersectRectRect(int _x1, int _y1, int _w1, int _h1, int _x2, int _y2, int _w2, int _h2)
+{
+	if (
+		(_x1 <= _x2 + _w2)  //・・・①
+		&& (_x1 + _w1 >= _x2)  //・・・② 
+		&& (_y1 <= _y2 + _h2)  //・・・③ 
+		&& (_y1 + _h1 >= _y2)  //・・・④
+		)
+	{
+		return true;
+	}
+	return false;
 }
 
 Vector2F& Player::GetPos(void)
 {
 	return _pos;
 }
+
 
 
