@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "../Player.h"
 #include "../ImageMng.h"
+#include "../Map.h"
 
 GameScene::GameScene()
 {
@@ -33,4 +34,5 @@ void GameScene::Draw(void)
 {
 	DrawGraph(0, 0, IMAGE_ID.SetID("image/map.png"), true);
 	_player->Draw();
+	lpMap.Draw();
 }

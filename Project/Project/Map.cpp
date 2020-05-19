@@ -1,31 +1,57 @@
+#include <DxLib.h>
 #include "Map.h"
+#include "ImageMng.h"
 
-std::unique_ptr<Map, Map::MapDeleter> Map::s_Instance(new Map);
-
-bool Map::Init()
-{
-	FILE* fp;
-	
-	//ファイルを開けなかった場合 false を返す
-	if ((fopen_s(&fp, "date.csv", "r")) != 0)
-	{
-		return false;
-	}
-
-	fread(_mapData.data(), _mapData.size(), 1, fp);
-
-
-	return true;
-}
-
-void Map::Draw(void)
-{
-}
+Map* Map::s_Instance = nullptr;
 
 Map::Map()
 {
+	Init();
 }
 
 Map::~Map()
 {
 }
+
+void Map::Init()
+{
+	FILE *fp;
+	
+	//ファイルを開く
+	if ((fopen_s(&fp, "Data/mapData.csv", "rb")) != 0)
+	{
+		for (int y = 0; y < MAP_CHIP_Y; y++)
+		{
+			for (int x = 0; x < MAP_CHIP_X; x++)
+			{
+				mapData[y][x] = 0;
+			}
+		}
+
+		DrawString(0, 0, "ファイルは開けませんでした", 0xffffff);
+		return;
+	}
+
+	for (int y = 0; y < MAP_CHIP_Y; y++)
+	{
+		for (int x = 0; x < MAP_CHIP_X; x++)
+		{
+			fread(&mapData[y][x], 4, 24, fp);
+		}
+	}
+	DrawString(0, 0, "ファイルが開けました!", 0xffffff);
+
+	fclose(fp);	//ファイルを閉じる
+}
+
+void Map::Draw(void)
+{
+	for (int y = 0; y < MAP_CHIP_Y; y++)
+	{
+		for (int x = 0; x < MAP_CHIP_X; x++)
+		{
+			DrawFormatString(x*16,y*16, 0xffffff, "%d", mapData[y][x]);
+		}
+	}
+}
+
