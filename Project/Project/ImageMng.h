@@ -25,7 +25,7 @@ public:
 	const int& SetID(std::string fileName);
 
 	//登録(アニメーション)
-	const VEC_INT& SetID(const std::string & fileName, const Vector2 & divSize, const Vector2 & divNum);
+	const VEC_INT& SetID(const std::string & fileName, const Vector2F & divSize, const Vector2 & divNum);
 private:
 	ImageMng() {}
 

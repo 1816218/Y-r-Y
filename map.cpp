@@ -26,6 +26,8 @@ void Map::Init()
 	{
 		return;
 	}
+
+
 	for (int y = 0; y < MAP_CHIP_Y; y++)
 	{
 		for (int x = 0; x < MAP_CHIP_X; x++)
