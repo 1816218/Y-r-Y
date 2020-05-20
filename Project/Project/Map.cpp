@@ -6,7 +6,7 @@ Map* Map::s_Instance = nullptr;
 
 Map::Map()
 {
-	LoadDivGraph("image/map.png", 24, 6, 4, 32, 32, Image);
+	LoadDivGraph("image/map.png", 24, 6, 4, 32, 32, _image);
 	Init();
 }
 
