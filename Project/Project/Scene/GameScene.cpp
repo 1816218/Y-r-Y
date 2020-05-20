@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "GameScene.h"
 #include "../Player.h"
+#include"../Enemy.h"
 #include "../ImageMng.h"
 #include "../Map.h"
 
@@ -17,7 +18,6 @@ unique_Base GameScene::Update(unique_Base own)
 {
 	//ƒQ[ƒ€ƒƒCƒ“‚Ìˆ—
 	_player->Update();
-
 	Draw();
 
 	return std::move(own);
@@ -34,5 +34,5 @@ void GameScene::Draw(void)
 {
 	DrawGraph(0, 0, IMAGE_ID.SetID("image/map.png"), true);
 	_player->Draw();
-	lpMap.Draw();
+	lpMap.Init();
 }

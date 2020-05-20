@@ -79,7 +79,7 @@ bool InputKey::Update(void)
 	if (padInput1&PAD_INPUT_6)newKey[_1P_RB] = 1;
 	if (padInput1&PAD_INPUT_7)newKey[_1P_SELECT] = 1;
 	if (padInput1&PAD_INPUT_8)newKey[_1P_START] = 1;
-
+	
 	//トリガとアップ
 	for (int i = 0; i < KEY_MAX; i++) {
 		trgKey[i] = newKey[i] & ~oldKey[i];//トリガ
