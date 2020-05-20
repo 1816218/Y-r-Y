@@ -10,6 +10,10 @@ enum KEY_CODE
 	KEY_SPACE,
 
 //XBox360入力キー
+	_1P_UP,
+	_1P_RIGHT,
+	_1P_DOWN,
+	_1P_LEFT,
 	_1P_A,
 	_1P_B,
 	_1P_X,
