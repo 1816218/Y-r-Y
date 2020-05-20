@@ -39,7 +39,7 @@ bool InputKey::Update(void)
 	if (CheckHitKey(KEY_INPUT_LEFT)) newKey[KEY_LEFT] = true;
 	if (CheckHitKey(KEY_INPUT_DOWN)) newKey[KEY_DOWN] = true;
 	if (CheckHitKey(KEY_INPUT_SPACE)) newKey[KEY_SPACE] = true;
-
+/*
 //Xbox360キー入力（XBox360、アナログスティック）
 	GetJoypadXInputState(DX_INPUT_PAD1, &xBox360input);//pad1を検出（毎回呼ぶことで途中での抜き差しにも対応）
 	if (xBox360input.Buttons[XINPUT_BUTTON_DPAD_UP])newKey[_1P_UP] = 1;//デジタル方向ボタン上
@@ -79,7 +79,7 @@ bool InputKey::Update(void)
 	if (padInput1&PAD_INPUT_6)newKey[_1P_RB] = 1;
 	if (padInput1&PAD_INPUT_7)newKey[_1P_SELECT] = 1;
 	if (padInput1&PAD_INPUT_8)newKey[_1P_START] = 1;
-
+	*/
 	//トリガとアップ
 	for (int i = 0; i < KEY_MAX; i++) {
 		trgKey[i] = newKey[i] & ~oldKey[i];//トリガ

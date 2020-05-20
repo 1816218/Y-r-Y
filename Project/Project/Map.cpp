@@ -18,7 +18,7 @@ void Map::Init()
 	FILE *fp;
 	
 	//ファイルを開く
-	if ((fopen_s(&fp, "Data/mapData.csv", "rb")) != 0)
+	if ((fopen_s(&fp, "Data/map.csv", "rb")) != 0)
 	{
 		for (int y = 0; y < MAP_CHIP_Y; y++)
 		{
@@ -30,14 +30,6 @@ void Map::Init()
 
 		DrawString(0, 0, "ファイルは開けませんでした", 0xffffff);
 		return;
-	}
-
-	for (int y = 0; y < MAP_CHIP_Y; y++)
-	{
-		for (int x = 0; x < MAP_CHIP_X; x++)
-		{
-			fread(&mapData[y][x], 4, 24, fp);
-		}
 	}
 	DrawString(0, 0, "ファイルが開けました!", 0xffffff);
 
