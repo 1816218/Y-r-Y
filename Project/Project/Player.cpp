@@ -2,7 +2,7 @@
 #include "Player.h"
 #include"ImageMng.h"
 #include"main.h"
-
+#include"HitCheck.h"
 Player::Player()
 {
 	Init();
@@ -10,6 +10,7 @@ Player::Player()
 
 Player::~Player()
 {
+
 }
 
 void Player::Init(void)
@@ -29,7 +30,10 @@ void Player::Update(void)
 	SetMove(KEY_RIGHT, DIR_RIGHT, {  2,  0 }, true);
 	SetMove(KEY_LEFT,  DIR_LEFT,  { -2,  0 }, true);
 	SetMove(KEY_DOWN,  DIR_DOWN,  {  0,  2 }, true);
-
+	SetMove(_1P_UP, DIR_UP, { 0, -2 }, true);
+	SetMove(_1P_RIGHT, DIR_RIGHT, { 2,  0 }, true);
+	SetMove(_1P_LEFT, DIR_LEFT, { -2,  0 }, true);
+	SetMove(_1P_DOWN, DIR_DOWN, { 0,  2 }, true);
 	Draw();
 }
 

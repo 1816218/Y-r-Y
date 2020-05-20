@@ -8,7 +8,7 @@ public:
 	~Enemy();
 
 	bool Init(void);
-	void Update(Vector2& pos);
+	void Update(void);
 	void Draw(void);
 
 	void SetPos(Vector2& pos);
