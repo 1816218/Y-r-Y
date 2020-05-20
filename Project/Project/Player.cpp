@@ -50,7 +50,6 @@ void Player::Update(void)
 	{
 		_pos.y = SCREEN_SIZE_Y-16;
 	}
-	bool IsHitAABB(int ax, int ay, int aw, int ah, int bx, int by, int bw, int bh);
 
 	Draw();
 }
@@ -80,11 +79,7 @@ void Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& spee
 		_speed = { 0,0 };
 		_moveFlag = false;
 	}
-	
 }
-
-
-
 
 Vector2F& Player::GetPos(void)
 {
