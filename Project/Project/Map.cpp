@@ -18,20 +18,22 @@ void Map::Init()
 	FILE *fp;
 	
 	//ファイルを開く
-	if ((fopen_s(&fp, "Data/map.csv", "rb")) != 0)
-	{
-		for (int y = 0; y < MAP_CHIP_Y; y++)
-		{
-			for (int x = 0; x < MAP_CHIP_X; x++)
-			{
-				mapData[y][x] = 0;
-			}
-		}
+	fopen_s(&fp, "Data/map.csv", "r");
 
-		DrawString(0, 0, "ファイルは開けませんでした", 0xffffff);
+	//ファイルの中身が空なら処理を抜ける
+	if (fp == nullptr)
+	{
 		return;
 	}
-	DrawString(0, 0, "ファイルが開けました!", 0xffffff);
+
+	//ファイルの読み込み
+	for (int y = 0; y < MAP_CHIP_Y; y++)
+	{
+		for (int x = 0; x < MAP_CHIP_X; x++)
+		{
+			fscanf_s(fp, "%d", &mapData[y][x]);
+		}
+	}
 
 	fclose(fp);	//ファイルを閉じる
 }
@@ -42,7 +44,7 @@ void Map::Draw(void)
 	{
 		for (int x = 0; x < MAP_CHIP_X; x++)
 		{
-			DrawFormatString(x*16,y*16, 0xffffff, "%d", mapData[y][x]);
+			DrawGraph(x * 32, y * 32, IMAGE_ID.SetID("image/map.png", { 32,32 }, { 6,4 })[mapData[y][x]], true);
 		}
 	}
 }

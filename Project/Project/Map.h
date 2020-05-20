@@ -3,8 +3,8 @@
 #include <vector>
 
 #define lpMap Map::GetInstance()
-#define MAP_CHIP_X 8
-#define MAP_CHIP_Y 3
+#define MAP_CHIP_X 25
+#define MAP_CHIP_Y 20
 #define MAP_CHIP_SIZE 32
 
 class Map
@@ -26,7 +26,9 @@ public:
 private:
 	Map();
 
-	int mapData[MAP_CHIP_Y][MAP_CHIP_X];
+	int mapData[MAP_CHIP_Y][MAP_CHIP_X] = { 0 };
+
+	int num, num2;
 
 	static Map* s_Instance;
 };
