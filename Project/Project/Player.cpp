@@ -40,6 +40,7 @@ void Player::Draw(void)
 
 	DrawRotaGraphF(_pos.x, _pos.y, 1, 0,
 		ImageMng::GetInstance().SetID("image/player2.png", { _size.x,_size.y }, { 4,4 })[(_dir * 4) + (_animeCnt / 4 % 4)], true);
+
 }
 
 void Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg)
