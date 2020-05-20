@@ -39,7 +39,11 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="HitCheck.cpp">
+=======
     <ClCompile Include="Map.cpp">
+>>>>>>> aba018c24a5641d03fb88efe33f020c7d5d66ade
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +81,11 @@
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="HitCheck.h">
+=======
     <ClInclude Include="Map.h">
+>>>>>>> aba018c24a5641d03fb88efe33f020c7d5d66ade
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,7 +22,5 @@ private:
 	void Draw(void);
 
 	Player* _player;
-
-	int  deleteCnt;
 };
 
