@@ -29,7 +29,7 @@ void Player::Update(void)
 	SetMove(KEY_UP, DIR_UP, { 0, -0.5 }, true);
 	SetMove(KEY_RIGHT, DIR_RIGHT, { 0.5,  0 }, true);
 	SetMove(KEY_LEFT, DIR_LEFT, { -0.5,  0 }, true);
-	SetMove(KEY_DOWN, DIR_DOWN, { 0,  2 }, true);
+	SetMove(KEY_DOWN, DIR_DOWN, { 0,  0.5 }, true);
 
 	/*
 	SetMove(_1P_UP, DIR_UP, { 0, -2 }, true);
@@ -41,22 +41,23 @@ void Player::Update(void)
 
 	*/
 
-	if (_pos.x < 0+16)
+	_pos += _speed;
 
+	if (_pos.x < 0+16)
 	{
-		_pos.x = 0+48;
+		_pos.x = 0+16;
 	}
-	if (_pos.x > SCREEN_SIZE_X-48)
+	if (_pos.x > SCREEN_SIZE_X-16)
 	{
-		_pos.x = SCREEN_SIZE_X-48;
+		_pos.x = SCREEN_SIZE_X-16;
 	}
-	if (_pos.y < 0+144)
+	if (_pos.y < 0+16)
 	{
-		_pos.y = 0+144;
+		_pos.y = 0+16;
 	}
-	if (_pos.y > SCREEN_SIZE_Y-48)
+	if (_pos.y > SCREEN_SIZE_Y-16)
 	{
-		_pos.y = SCREEN_SIZE_Y-48;
+		_pos.y = SCREEN_SIZE_Y-16;
 	}
 
 	Draw();
