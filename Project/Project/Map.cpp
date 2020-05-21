@@ -16,27 +16,20 @@ Map::~Map()
 
 void Map::Init()
 {
-	//FILE *fp;
-	//
-	////ファイルを開く
-	//fopen_s(&fp, "Data/map.csv", "r");
+	FILE *fp;
+	
+	//ファイルを開く
+	fopen_s(&fp, "Data/map.csv", "r");
 
-	////ファイルの中身が空なら処理を抜ける
-	//if (fp == nullptr)
-	//{
-	//	return;
-	//}
+	//ファイルの中身が空なら処理を抜ける
+	if (fp == nullptr)
+	{
+		return;
+	}
 
-	////ファイルの読み込み
-	//for (int y = 0; y < MAP_CHIP_Y; y++)
-	//{
-	//	for (int x = 0; x < MAP_CHIP_X; x++)
-	//	{
-	//		fscanf_s(fp, "%d", &mapData[y][x]);
-	//	}
-	//}
+	//ファイルの読み込み
 
-	//fclose(fp);	//ファイルを閉じる
+	fclose(fp);	//ファイルを閉じる
 }
 
 void Map::Draw(void)
@@ -49,4 +42,3 @@ void Map::Draw(void)
 		}
 	}
 }
-
