@@ -1,11 +1,13 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <string>
+#include "VECTOR2.h"
 
 #define lpMap Map::GetInstance()
+
 #define MAP_CHIP_X 25
 #define MAP_CHIP_Y 20
-#define MAP_CHIP_SIZE 32
 
 class Map
 {
@@ -20,12 +22,13 @@ public:
 	}
 	~Map();
 
-	void Init();
+	void Init(void);
 	void Draw(void);
 
 private:
 	Map();
 
+<<<<<<< HEAD
 
 	int mapData[MAP_CHIP_Y][MAP_CHIP_X] = { 1 };
 
@@ -55,6 +58,12 @@ private:
 		{24, 9,10,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,11},
 		{ 5,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22, 5}};
 
+=======
+	int _image[24];							//画像のハンドル
+	int _mapData[MAP_CHIP_Y][MAP_CHIP_X];	//マップデータを格納
+
+	Vector2 _mapChipSize;	//マップチップのサイス
+>>>>>>> bdb3d1291db9210f6e0411fef9329f7f7fd71acf
 
 	static Map* s_Instance;
 };
