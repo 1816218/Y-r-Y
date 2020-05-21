@@ -40,12 +40,7 @@ void Player::Update(void)
 	if (_pos.x < 0+48)
 
 	*/
-<<<<<<< HEAD
 
-	if (CheckRangeMove({ 0,0 }, { 800, 640 }))
-	{
-		_pos += _speed;
-=======
 	if (_pos.x < 0+16)
 
 	{
@@ -62,7 +57,6 @@ void Player::Update(void)
 	if (_pos.y > SCREEN_SIZE_Y-48)
 	{
 		_pos.y = SCREEN_SIZE_Y-48;
->>>>>>> cb2d77e772220bb1780d7637251ce8950d8095e6
 	}
 
 	Draw();
@@ -101,18 +95,5 @@ Vector2F& Player::GetPos(void)
 {
 	return _pos;
 }
-//-----移動できる最大範囲(範囲：マップ内)
-bool Player::CheckRangeMove(const Vector2F& startPos, const Vector2F& endPos)
-{
-	if (_pos.x - _size.x / 2 < startPos.x 
-		|| _pos.y - _size.y / 2 < startPos.y
-		|| _pos.x + _size.x / 2 > endPos.x
-		|| _pos.y + _size.y / 2 > endPos.y)
-	{
-		return false;
-	}
-	return true;
-}
-
 
 

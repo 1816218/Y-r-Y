@@ -30,10 +30,6 @@ public:
 	//現在の座標を取得する
 	Vector2F& GetPos(void);
 private:
-	//移動可能範囲(範囲：マップ内)
-	bool CheckRangeMove(const Vector2F& startPos, const Vector2F& endPos);
-
-
 	Vector2F _pos;
 	int _dir;
 	int _animeCnt;
