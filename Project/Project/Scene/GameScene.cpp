@@ -32,7 +32,6 @@ bool GameScene::Init(void)
 
 void GameScene::Draw(void)
 {
-	DrawGraph(0, 0, IMAGE_ID.SetID("image/map.png"), true);
+	lpMap.Draw();
 	_player->Draw();
-	lpMap.Init();
 }

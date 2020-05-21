@@ -34,6 +34,23 @@ void Player::Update(void)
 	SetMove(_1P_RIGHT, DIR_RIGHT, { 2,  0 }, true);
 	SetMove(_1P_LEFT, DIR_LEFT, { -2,  0 }, true);
 	SetMove(_1P_DOWN, DIR_DOWN, { 0,  2 }, true);
+	if (_pos.x < 0+16)
+	{
+		_pos.x = 0+16;
+	}
+	if (_pos.x > SCREEN_SIZE_X-16)
+	{
+		_pos.x = SCREEN_SIZE_X-16;
+	}
+	if (_pos.y < 0+16)
+	{
+		_pos.y = 0+16;
+	}
+	if (_pos.y > SCREEN_SIZE_Y-16)
+	{
+		_pos.y = SCREEN_SIZE_Y-16;
+	}
+
 	Draw();
 }
 
@@ -62,11 +79,7 @@ void Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& spee
 		_speed = { 0,0 };
 		_moveFlag = false;
 	}
-	
 }
-
-
-
 
 Vector2F& Player::GetPos(void)
 {
