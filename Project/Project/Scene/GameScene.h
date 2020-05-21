@@ -22,5 +22,6 @@ private:
 	void Draw(void);
 
 	Player* _player;
+	Enemy* _enemy;
 };
 
