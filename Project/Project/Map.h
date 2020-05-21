@@ -26,7 +26,7 @@ public:
 private:
 	Map();
 
-	int mapData[MAP_CHIP_Y][MAP_CHIP_X] = { 0 };
+	int mapData[MAP_CHIP_Y][MAP_CHIP_X] = { 1 };
 
 	int num, num2;
 
