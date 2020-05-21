@@ -15,7 +15,8 @@ Enemy::~Enemy()
 
 bool Enemy::Init(void)
 {
-	_pos = { 500.0f, 400.0f };
+	_pos.x = GetRand(SCREEN_SIZE_X - _size.x);
+	_pos.y=	GetRand(SCREEN_SIZE_Y-_size.y) ;
 	_speed = 0.0f;
 	_Flag = false;
 	_size = { 32,32 };
@@ -28,8 +29,8 @@ bool Enemy::Init(void)
 void Enemy::Update(void)
 {
 
-
-		if (_Flag==false) {
+	// GetRand(_pos.x);
+		if (_moveFlag==false) {
 			if (_pos.x + _size.x / 2 < _playerPos.x) {
 				_pos.x += _speed;
 			}

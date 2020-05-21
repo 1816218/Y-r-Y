@@ -28,7 +28,6 @@ public:
 private:
 	Map();
 
-<<<<<<< HEAD
 
 	int mapData[MAP_CHIP_Y][MAP_CHIP_X] = { 1 };
 
@@ -58,12 +57,8 @@ private:
 		{24, 9,10,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,11},
 		{ 5,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22, 5}};
 
-=======
-	int _image[24];							//画像のハンドル
-	int _mapData[MAP_CHIP_Y][MAP_CHIP_X];	//マップデータを格納
 
 	Vector2 _mapChipSize;	//マップチップのサイス
->>>>>>> bdb3d1291db9210f6e0411fef9329f7f7fd71acf
 
 	static Map* s_Instance;
 };

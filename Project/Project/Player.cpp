@@ -35,12 +35,12 @@ void Player::Update(void)
 	SetMove(_1P_RIGHT, DIR_RIGHT, { 2,  0 }, true);
 	SetMove(_1P_LEFT, DIR_LEFT, { -2,  0 }, true);
 	SetMove(_1P_DOWN, DIR_DOWN, { 0,  2 }, true);
-<<<<<<< HEAD
+
 	if (_pos.x < 0+48)
-=======
+
 	*/
 	if (_pos.x < 0+16)
->>>>>>> bdb3d1291db9210f6e0411fef9329f7f7fd71acf
+
 	{
 		_pos.x = 0+48;
 	}
