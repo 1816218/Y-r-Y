@@ -26,14 +26,23 @@ void Player::Init(void)
 
 void Player::Update(void)
 {
-	SetMove(KEY_UP,    DIR_UP,    {  0, -2 }, true);
-	SetMove(KEY_RIGHT, DIR_RIGHT, {  2,  0 }, true);
-	SetMove(KEY_LEFT,  DIR_LEFT,  { -2,  0 }, true);
-	SetMove(KEY_DOWN,  DIR_DOWN,  {  0,  2 }, true);
+	SetMove(KEY_UP, DIR_UP, { 0, -0.5 }, true);
+	SetMove(KEY_RIGHT, DIR_RIGHT, { 0.5,  0 }, true);
+	SetMove(KEY_LEFT, DIR_LEFT, { -0.5,  0 }, true);
+	SetMove(KEY_DOWN, DIR_DOWN, { 0,  0.5 }, true);
+
+	/*
 	SetMove(_1P_UP, DIR_UP, { 0, -2 }, true);
 	SetMove(_1P_RIGHT, DIR_RIGHT, { 2,  0 }, true);
 	SetMove(_1P_LEFT, DIR_LEFT, { -2,  0 }, true);
 	SetMove(_1P_DOWN, DIR_DOWN, { 0,  2 }, true);
+
+	if (_pos.x < 0+48)
+
+	*/
+
+	_pos += _speed;
+
 	if (_pos.x < 0+16)
 	{
 		_pos.x = 0+16;
@@ -53,28 +62,30 @@ void Player::Update(void)
 
 	Draw();
 }
-
+//-----描画
 void Player::Draw(void)
 {
 	//アニメーション
 	_moveFlag != false ? _animeCnt++ : _animeCnt = 0;
 
 	DrawRotaGraphF(_pos.x, _pos.y, 1, 0,
-		ImageMng::GetInstance().SetID("image/player2.png", { _size.x,_size.y }, { 4,4 })[(_dir * 4) + (_animeCnt / 4 % 4)], true);
+		ImageMng::GetInstance().SetID("image/player.png", { _size.x,_size.y }, { 4,4 })[(_dir * 4) + (_animeCnt / 20 % 4)], true);
 
 }
-
+//-----移動処理
 void Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg)
 {
-	if (lpInputKey.newKey[key])
+	if (!_moveFlag)
 	{
-		_dir = dir;
-		_moveFlag = flg;
-		_speed = speed;
+		if (lpInputKey.newKey[key])
+		{
+			_dir = dir;
+			_speed = speed;
 
-		_pos += _speed;
+			_moveFlag = flg;
+		}
 	}
-	else if(lpInputKey.upKey[key])
+	else if (lpInputKey.upKey[key])
 	{
 		_speed = { 0,0 };
 		_moveFlag = false;
@@ -85,6 +96,5 @@ Vector2F& Player::GetPos(void)
 {
 	return _pos;
 }
-
 
 

@@ -20,13 +20,16 @@ public:
 	~Player();
 	void Init(void);
 	void Update(void);
+
+	//•`‰æ
 	void Draw(void);
-	
+
+	//ˆÚ“®ˆ—
 	void SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg);
+
+	//Œ»İ‚ÌÀ•W‚ğæ“¾‚·‚é
 	Vector2F& GetPos(void);
-
 private:
-
 	Vector2F _pos;
 	int _dir;
 	int _animeCnt;

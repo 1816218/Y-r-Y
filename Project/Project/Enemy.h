@@ -1,5 +1,13 @@
 #pragma once
 #include "VECTOR2.h"
+enum E_DIR
+{
+	EDIR_DOWN,
+	EDIR_LEFT,
+	EDIR_RIGHT,
+	EDIR_UP,
+	EDIR_MAX
+};
 
 class Enemy
 {
