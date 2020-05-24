@@ -1,5 +1,6 @@
 #pragma once
 #include "VECTOR2.h"
+
 enum E_DIR
 {
 	EDIR_DOWN,
@@ -9,13 +10,18 @@ enum E_DIR
 	EDIR_MAX
 };
 
+
 class Enemy
 {
+protected:
+	VECTOR vPos;
+	bool flag;
 public:
-	Enemy();
+	Enemy() {};
+	Enemy(int* tex, VECTOR& pos);
 	~Enemy();
 
-	bool Init(void);
+	void Render();
 	void Update(void);
 	void Draw(void);
 
@@ -23,11 +29,13 @@ public:
 private:
 
 	Vector2F _pos;	//ç¿ïW
-	float _speed;	//â¡ë¨ìx
+	Vector2F _speed;	//â¡ë¨ìx
 	float _Flag;
 	int _animeCnt;
 	bool _moveFlag;
 	int _dir;
+	int EnemyCnt;
+	float _scale;
 	Vector2F _size;
 	Vector2 _playerPos;
 

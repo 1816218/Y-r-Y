@@ -17,6 +17,7 @@ void Map::Init(void)
 {
 	LoadDivGraph("image/map.png", 24, 6, 4, 32, 32, _image);
 
+	/*
 	//-----ファイルの読み込み
 	FILE* fp;
 	//ファイルを開く
@@ -35,6 +36,7 @@ void Map::Init(void)
 		}
 	}
 	fclose(fp);	//ファイルを閉じる
+	*/
 }
 
 void Map::Draw(void)
