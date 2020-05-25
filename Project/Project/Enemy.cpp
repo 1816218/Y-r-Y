@@ -16,7 +16,7 @@ Enemy::~Enemy()
 
 bool Enemy::Init(void)
 {
-	for (int i = 0; i < ENEMY_MAX; i++)
+	for (int i = 0; i < 100; i++)
 	{
 
 		_pos.x = GetRand(SCREEN_SIZE_X - _size.x);
@@ -144,14 +144,12 @@ void Enemy::Update(void)
 
 void Enemy::Draw(void)
 {
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		{
-			enemy[i] = NULL;
-		}
 		_moveFlag != false ? _animeCnt++ : _animeCnt = 0;
+	DrawRotaGraphF(0, 0, 1, 0,
+		ImageMng::GetInstance().SetID("image/enemy1.png", { _size.x,_size.y }, { 4,4 })[(_dir * 4) + (_animeCnt / 4 % 4)], true);
 
-	}
+
+	
 }
 
 

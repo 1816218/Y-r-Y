@@ -13,15 +13,10 @@ enum E_DIR
 
 class Enemy
 {
-protected:
-	VECTOR vPos;
-	bool flag;
 public:
-	Enemy() {};
-	Enemy(int* tex, VECTOR& pos);
+	Enemy() ;
 	~Enemy();
-
-	void Render();
+	bool Init(void);
 	void Update(void);
 	void Draw(void);
 
