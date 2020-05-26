@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include "VECTOR2.h"
-
+#include"HitCheck.h"
 #define lpMap Map::GetInstance()
 
 #define MAP_CHIP_X 25
@@ -23,6 +23,7 @@ public:
 	~Map();
 
 	void Init(void);
+	void Hit(void);
 	void Draw(void);
 
 private:
