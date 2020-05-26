@@ -4,23 +4,34 @@
 ImageMng* ImageMng::s_Instance = nullptr;	//²İ½Àİ½‚·‚é
 
 //-----‰æ‘œ‚Ì“o˜^(‰æ‘œˆê–‡)
-const int& ImageMng::SetID(std::string fileName)
+const VEC_INT& ImageMng::SetID(const std::string& keyName, const std::string& fileName)
 {
-	if (imgMap.find(fileName) == imgMap.end())
-	{
-		imgMap[fileName] = LoadGraph(fileName.c_str());
-	}
-	return imgMap[fileName];
-}
-//-----‰æ‘œ‚Ì“o˜^(ƒAƒjƒ[ƒVƒ‡ƒ“)
-const VEC_INT& ImageMng::SetID(const std::string& fileName, const Vector2F& divSize, const Vector2& divNum)
-{
-	if (imgDivMap.find(fileName) == imgDivMap.end())
+	if (imgMap.find(keyName) == imgMap.end())
 	{
 		//“®“I‚È—v‘f”‚ğİ’è(vectorŒ^”z—ñ)
-		imgDivMap[fileName].resize(divNum.x*divNum.y);
+		imgMap[keyName].resize(1);
 
-		LoadDivGraph(fileName.c_str(), divNum.x*divNum.y,divNum.x, divNum.y,divSize.x, divSize.y,&imgDivMap[fileName][0], true);
+		imgMap[keyName][0] = LoadGraph(fileName.c_str());
 	}
-	return imgDivMap[fileName];
+	return imgMap[keyName];
+}
+//-----‰æ‘œ‚Ì“o˜^(ƒAƒjƒ[ƒVƒ‡ƒ“)
+const VEC_INT& ImageMng::SetID(const std::string& keyName, const std::string& fileName, const Vector2F& divSize, const Vector2& divNum)
+{
+	if (imgMap.find(keyName) == imgMap.end())
+	{
+		//“®“I‚È—v‘f”‚ğİ’è(vectorŒ^”z—ñ)
+		imgMap[keyName].resize(divNum.x*divNum.y);
+
+		LoadDivGraph(fileName.c_str(), divNum.x*divNum.y, divNum.x, divNum.y, divSize.x, divSize.y, &imgMap[keyName][0], true);
+	}
+	return imgMap[keyName];
+}
+
+const VEC_INT& ImageMng::GetID(const std::string& keyName)
+{
+	if (imgMap.find(keyName) != imgMap.end())
+	{
+		return imgMap[keyName];
+	}
 }

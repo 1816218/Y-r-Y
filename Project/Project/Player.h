@@ -1,39 +1,40 @@
 #pragma once
-#include <DxLib.h>
+#include "Obj.h"
 #include"VECTOR2.h"
 #include "InputKey.h"
 
-//方角の種類
-enum P_DIR 
-{
-	DIR_DOWN,
-	DIR_LEFT,
-	DIR_RIGHT,
-	DIR_UP,
-	DIR_MAX
-};
-
-class Player
+class Player : public Obj
 {
 public:
-	Player();
+	Player() {}
+	Player(const Vector2F& pos, const Vector2F& size);
 	~Player();
-	void Init(void);
-	void Update(void);
+
+	bool Init(void);
+	void Update(void) override;
 
 	//描画
-	void Draw(void);
+	void Draw(void) override;
 
 	//移動処理
-	void SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg);
+	void Move(void);
 
-	//現在の座標を取得する
-	Vector2F& GetPos(void);
+
+	//-----Get・Set
+	//座標
+	const Vector2F& GetPos(void);
+	void SetPos(const Vector2F& pos);
+	//サイズ
+	const Vector2F& GetSize(void);
+	void SetSize(const Vector2F& size);
+	//角度
+	const double GetAngle(void);
+	void SetAngle(const double angle);
+	//拡大率
+	const double GetExRate(void);
+	void SetExRate(const double exRate);
 private:
-	Vector2F _pos;
-	int _dir;
-	int _animeCnt;
-	bool _moveFlag;
-	Vector2F _size;
-	Vector2F _speed;
+	bool _moveFlag;			//true:移動、false:停止
+	CHARA_DIR _direction;	//向き
+	int _animCnt;			//アニメーションカウント
 };

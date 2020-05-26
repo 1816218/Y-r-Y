@@ -1,8 +1,7 @@
 #pragma once
 #include <vector>
 #include "BaseScene.h"
-#include "../Player.h"
-#include "../Enemy.h"
+#include "../Obj.h"
 
 class GameScene :
 	public BaseScene
@@ -15,13 +14,14 @@ public:
 	unique_Base Update(unique_Base own) override;
 
 	//シーンIDを取得
-	SCN_ID GetSceneID(void) override { return SCN_ID::GAME; }
-
+	SCN_ID GetSceneID(void) override;
+	void SetSceneID(SCN_ID sceneID) override;
 private:
 	bool Init(void);
 	void Draw(void);
 
-	Player* _player;
-	Enemy* _enemy;
+	Vector2F _gameScreenSize;	//スクリーンサイズ
+
+	std::vector<Obj*> _objects;
 };
 

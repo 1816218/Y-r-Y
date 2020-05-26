@@ -10,7 +10,8 @@ public:
 
 	unique_Base Update(unique_Base own) override;
 
-	SCN_ID GetSceneID(void);
+	SCN_ID GetSceneID(void) override;
+	void SetSceneID(SCN_ID sceneID) override;
 private:
 	bool Init(void);
 	void Draw(void);

@@ -15,9 +15,8 @@ Map::~Map()
 
 void Map::Init(void)
 {
-	LoadDivGraph("image/map.png", 24, 6, 4, 32, 32, _image);
+	LoadDivGraph("image/map.png",24, 6, 4 ,32, 32, _image);
 
-	/*
 	//-----ファイルの読み込み
 	FILE* fp;
 	//ファイルを開く
@@ -36,7 +35,6 @@ void Map::Init(void)
 		}
 	}
 	fclose(fp);	//ファイルを閉じる
-	*/
 }
 
 void Map::Draw(void)
@@ -45,7 +43,7 @@ void Map::Draw(void)
 	{
 		for (int x = 0; x < MAP_CHIP_X; x++)
 		{
-			DrawGraph(x * _mapChipSize.x, y * _mapChipSize.y, _image[mapData[y][x]], true);
+			DrawGraph(x * _mapChipSize.x, y * _mapChipSize.y, _image[_mapData[y][x]], true);
 		}
 	}
 }
