@@ -1,100 +1,126 @@
 #include <DxLib.h>
 #include "Player.h"
 #include"ImageMng.h"
-#include"main.h"
-#include"HitCheck.h"
-Player::Player()
+
+Player::Player(const Vector2F& pos, const Vector2F& size)
 {
+	_pos = pos;
+	_size = size;
 	Init();
 }
 
 Player::~Player()
 {
-
 }
 
-void Player::Init(void)
+bool Player::Init(void)
 {
-	_pos = {SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2};
-	_dir = DIR_DOWN;
-	_speed = { 0,0 };
-	_moveFlag = false;
-	_animeCnt = 0;
-	_size = { 32,32 };
+	_angle = 0.0;
+	_exRate = 1.0;
 
+	_alive = true;
+	_death = false;
+
+	_moveFlag = false;
+	_direction = CHARA_DIR::DOWN;
+	_animCnt = 0;
+	return true;
 }
 
 void Player::Update(void)
 {
-	SetMove(KEY_UP, DIR_UP, { 0, -0.5 }, true);
-	SetMove(KEY_RIGHT, DIR_RIGHT, { 0.5,  0 }, true);
-	SetMove(KEY_LEFT, DIR_LEFT, { -0.5,  0 }, true);
-	SetMove(KEY_DOWN, DIR_DOWN, { 0,  0.5 }, true);
+	_moveFlag = false;
 
-	/*
-	SetMove(_1P_UP, DIR_UP, { 0, -2 }, true);
-	SetMove(_1P_RIGHT, DIR_RIGHT, { 2,  0 }, true);
-	SetMove(_1P_LEFT, DIR_LEFT, { -2,  0 }, true);
-	SetMove(_1P_DOWN, DIR_DOWN, { 0,  2 }, true);
-
-	if (_pos.x < 0+48)
-
-	*/
-
-	_pos += _speed;
-
-	if (_pos.x < 0+16)
-	{
-		_pos.x = 0+16;
-	}
-	if (_pos.x > SCREEN_SIZE_X-16)
-	{
-		_pos.x = SCREEN_SIZE_X-16;
-	}
-	if (_pos.y < 0+16)
-	{
-		_pos.y = 0+16;
-	}
-	if (_pos.y > SCREEN_SIZE_Y-16)
-	{
-		_pos.y = SCREEN_SIZE_Y-16;
-	}
+	Move();
 
 	Draw();
 }
 //-----描画
 void Player::Draw(void)
 {
-	//アニメーション
-	_moveFlag != false ? _animeCnt++ : _animeCnt = 0;
+	//-----アニメーション
+	//動いている状態のときは
+	//アニメーションカウントを増やす
+	_moveFlag != false ? _animCnt++ : _animCnt = 0;
 
-	DrawRotaGraphF(_pos.x, _pos.y, 1, 0,
-		ImageMng::GetInstance().SetID("image/player.png", { _size.x,_size.y }, { 4,4 })[(_dir * 4) + (_animeCnt / 20 % 4)], true);
-
+	DrawRotaGraphF(_pos.x, _pos.y, _exRate, _angle, IMAGE_ID("player")[(static_cast<int>(_direction) * 4) + (_animCnt / 20 % 4)], true);
 }
 //-----移動処理
-void Player::SetMove(const KEY_CODE& key, const P_DIR& dir, const Vector2F& speed, bool flg)
+void Player::Move(void)
 {
-	if (!_moveFlag)
+	auto move = [&](bool flag, const CHARA_DIR& dir, const Vector2F& speed)
 	{
-		if (lpInputKey.newKey[key])
+		if (!flag)
 		{
-			_dir = dir;
-			_speed = speed;
-
-			_moveFlag = flg;
+			_moveFlag = true;
 		}
-	}
-	else if (lpInputKey.upKey[key])
+
+		if (_direction != dir)
+		{
+			_direction = dir;
+		}
+		_pos += speed;
+	};
+
+	//キー入力による移動
+	if (lpInputKey.newKey[KEY_CODE::KEY_UP])
 	{
-		_speed = { 0,0 };
-		_moveFlag = false;
+		move(_moveFlag, CHARA_DIR::UP, { 0, -1 });
+	}
+	if (lpInputKey.newKey[KEY_CODE::KEY_RIGHT])
+	{
+		move(_moveFlag, CHARA_DIR::RIGHT, { 1, 0 });
+	}
+	if (lpInputKey.newKey[KEY_CODE::KEY_LEFT])
+	{
+		move(_moveFlag, CHARA_DIR::LEFT, { -1, 0 });
+	}
+	if (lpInputKey.newKey[KEY_CODE::KEY_DOWN])
+	{
+		move(_moveFlag, CHARA_DIR::DOWN, { 0, 1 });
 	}
 }
 
-Vector2F& Player::GetPos(void)
+//-----Get・Set
+//座標
+const Vector2F& Player::GetPos(void)
 {
 	return _pos;
+}
+
+void Player::SetPos(const Vector2F& pos)
+{
+	_pos = pos;
+}
+//サイズ
+const Vector2F& Player::GetSize(void)
+{
+	return _size;
+}
+
+void Player::SetSize(const Vector2F& size)
+{
+	_size = size;
+}
+//角度
+const double Player::GetAngle(void)
+{
+	return _angle;
+}
+
+void Player::SetAngle(const double angle)
+{
+	_angle = angle;
+}
+//拡大率
+const double Player::GetExRate(void)
+{
+	return _exRate;
+}
+
+void Player::SetExRate(const double exRate)
+{
+	_exRate = exRate;
 }
 
 

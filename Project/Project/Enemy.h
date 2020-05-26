@@ -1,38 +1,32 @@
 #pragma once
+#include "Obj.h"
 #include "VECTOR2.h"
 
-enum E_DIR
-{
-	EDIR_DOWN,
-	EDIR_LEFT,
-	EDIR_RIGHT,
-	EDIR_UP,
-	EDIR_MAX
-};
-
-
-class Enemy
+class Enemy : public Obj
 {
 public:
-	Enemy() ;
+	Enemy();
+	Enemy(const Vector2F& pos, const Vector2F& size);
 	~Enemy();
+
 	bool Init(void);
-	void Update(void);
-	void Draw(void);
+	void Update(void) override;
 
-	void SetPos(Vector2& pos);
+	//ï`âÊ
+	void Draw(void) override;
+
+	const Vector2F& GetPos(void);
+	void SetPos(const Vector2F& pos);
+
+	const Vector2F& GetSize(void);
+	void SetSize(const Vector2F& size);
+
+	const double GetAngle(void);
+	void SetAngle(const double angle);
+
+	const double GetExRate(void);
+	void SetExRate(const double exRate);
 private:
-
-	Vector2F _pos;	//ç¿ïW
-	Vector2F _speed;	//â¡ë¨ìx
-	float _Flag;
-	int _animeCnt;
-	bool _moveFlag;
-	int _dir;
-	int EnemyCnt;
-	float _scale;
-	Vector2F _size;
-	Vector2 _playerPos;
 
 };
 
