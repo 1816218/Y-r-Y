@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "Player.h"
 #include"ImageMng.h"
+#include "Map.h"
 
 Player::Player(const Vector2F& pos, const Vector2F& size)
 {
@@ -65,19 +66,31 @@ void Player::Move(void)
 	//ÉLÅ[ì¸óÕÇ…ÇÊÇÈà⁄ìÆ
 	if (lpInputKey.newKey[KEY_CODE::KEY_UP])
 	{
-		move(_moveFlag, CHARA_DIR::UP, { 0, -1 });
+		if (!lpMap.Collision(_pos, { 0, 0 }))
+		{
+			move(_moveFlag, CHARA_DIR::UP, { 0, -1 });
+		}
 	}
 	if (lpInputKey.newKey[KEY_CODE::KEY_RIGHT])
 	{
-		move(_moveFlag, CHARA_DIR::RIGHT, { 1, 0 });
+		if (!lpMap.Collision(_pos, { 16, 0 }))
+		{
+			move(_moveFlag, CHARA_DIR::RIGHT, { 1, 0 });
+		}
 	}
 	if (lpInputKey.newKey[KEY_CODE::KEY_LEFT])
 	{
-		move(_moveFlag, CHARA_DIR::LEFT, { -1, 0 });
+		if (!lpMap.Collision(_pos, { -16, 0 }))
+		{
+			move(_moveFlag, CHARA_DIR::LEFT, { -1, 0 });
+		}
 	}
 	if (lpInputKey.newKey[KEY_CODE::KEY_DOWN])
 	{
-		move(_moveFlag, CHARA_DIR::DOWN, { 0, 1 });
+		if (!lpMap.Collision(_pos, { 0, 16 }))
+		{
+			move(_moveFlag, CHARA_DIR::DOWN, { 0, 1 });
+		}
 	}
 }
 
