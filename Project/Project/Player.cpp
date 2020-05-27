@@ -33,8 +33,6 @@ void Player::Update(void)
 	_moveFlag = false;
 
 	Move();
-
-	Draw();
 }
 //-----•`‰æ
 void Player::Draw(void)
