@@ -62,28 +62,28 @@ void Player::Move(void)
 	};
 
 	//ÉLÅ[ì¸óÕÇ…ÇÊÇÈà⁄ìÆ
-	if (lpInputKey.newKey[KEY_CODE::KEY_UP])
+	if (lpInputKey.newKey[KEY_CODE::_1P_UP])
 	{
 		if (!lpMap.Collision(_pos, { 0, 0 }))
 		{
 			move(_moveFlag, CHARA_DIR::UP, { 0, -1 });
 		}
 	}
-	if (lpInputKey.newKey[KEY_CODE::KEY_RIGHT])
+	if (lpInputKey.newKey[KEY_CODE::_1P_RIGHT])
 	{
 		if (!lpMap.Collision(_pos, { 16, 0 }))
 		{
 			move(_moveFlag, CHARA_DIR::RIGHT, { 1, 0 });
 		}
 	}
-	if (lpInputKey.newKey[KEY_CODE::KEY_LEFT])
+	if (lpInputKey.newKey[KEY_CODE::_1P_LEFT])
 	{
 		if (!lpMap.Collision(_pos, { -16, 0 }))
 		{
 			move(_moveFlag, CHARA_DIR::LEFT, { -1, 0 });
 		}
 	}
-	if (lpInputKey.newKey[KEY_CODE::KEY_DOWN])
+	if (lpInputKey.newKey[KEY_CODE::_1P_DOWN])
 	{
 		if (!lpMap.Collision(_pos, { 0, 16 }))
 		{
