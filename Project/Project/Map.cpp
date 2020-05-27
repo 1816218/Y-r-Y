@@ -34,7 +34,13 @@ void Map::Init(void)
 	{
 		for (int x = 0; x < MAP_CHIP_X; x++)
 		{
-			fscanf_s(fp, "%d", &_mapData[y][x]);
+			fscanf_s(fp, "%d", &_mapData[y][x].id);
+			if (_mapData[y][x].id == 3 || _mapData[y][x].id == 4 || _mapData[y][x].id == 5 || _mapData[y][x].id == 16 || _mapData[y][x].id == 17 
+				|| _mapData[y][x].id == 18 || _mapData[y][x].id == 19 || _mapData[y][x].id == 20 || _mapData[y][x].id == 21 || _mapData[y][x].id == 22)
+			{
+				continue;
+			}
+			_mapData[y][x].type = CHIP_TYPE::WALL;
 		}
 	}
 	fclose(fp);	//ファイルを閉じる
@@ -46,7 +52,7 @@ void Map::Draw(void)
 	{
 		for (int x = 0; x < MAP_CHIP_X; x++)
 		{
-			DrawGraph(x * _mapChipSize.x, y * _mapChipSize.y, IMAGE_ID("map")[_mapData[y][x]], true);
+			DrawGraph(x * _mapChipSize.x, y * _mapChipSize.y, IMAGE_ID("map")[_mapData[y][x].id], true);
 		}
 	}
 }
@@ -55,28 +61,9 @@ bool Map::Collision(Vector2F pos, Vector2F size)
 {
 	Vector2 chip = { (int)(pos.x + size.x) / _mapChipSize.x, (int)(pos.y + size.y) / _mapChipSize.y };
 
-	int num = _mapData[chip.y][chip.x];
-
-	switch (num)
+	if (_mapData[chip.y][chip.x].type == CHIP_TYPE::WALL)
 	{
-
-	case 0:		//壁(白)
-	case 1:
-	case 2:
-	case 6:
-	case 7:
-	case 8:
-	case 12:
-	case 13:
-	case 14:
-	case 9:		//壁(灰)
-	case 10:
-	case 11:	//壁(白、黒)
-	case 15:
-	case 23:
-
 		return true;
-		break;
 	}
 	return false;
 }

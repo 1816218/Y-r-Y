@@ -3,11 +3,22 @@
 #include <vector>
 #include <string>
 #include "VECTOR2.h"
-#include"HitCheck.h"
-#define lpMap Map::GetInstance()
 
+#define lpMap Map::GetInstance()
 #define MAP_CHIP_X 25
 #define MAP_CHIP_Y 20
+
+enum class CHIP_TYPE
+{
+	WALL,	//壁
+	FLOOR	//床
+};
+
+struct MapChip
+{
+	CHIP_TYPE type;	//チップ種類
+	int id;			//チップ番号
+};
 
 class Map
 {
@@ -30,7 +41,7 @@ public:
 private:
 	Map();
 
-	int _mapData[MAP_CHIP_Y][MAP_CHIP_X] = { 1 };
+	MapChip _mapData[MAP_CHIP_Y][MAP_CHIP_X];
 
 /*	int _mapData[MAP_CHIP_Y][MAP_CHIP_X] = {
 		{ 5,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15, 5},
