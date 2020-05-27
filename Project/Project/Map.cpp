@@ -59,8 +59,17 @@ bool Map::Collision(Vector2F pos, Vector2F size)
 
 	switch (num)
 	{
+	case 3:
+	case 4:
 	case 9:
 	case 10:
+	case 11:
+	case 12:
+	case 13:
+	case 14:
+	case 15:
+	case 23:
+
 
 		return true;
 		break;
