@@ -7,7 +7,8 @@
 #define lpImageMng ImageMng::GetInstance()
 #define IMAGE_ID(KEY) ImageMng::GetInstance().GetID(KEY)
 
-using VEC_INT = std::vector<int>;
+using Vec_int = std::vector<int>;
+using Pair_int = std::pair<int, int>;
 
 class ImageMng
 {
@@ -24,18 +25,21 @@ public:
 	~ImageMng() {}
 
 	//“o˜^
-	const VEC_INT& SetID(const std::string & keyName, const std::string & fileName);
+	const Vec_int& SetID(const std::string & keyName, const std::string & fileName);
 
 	//“o˜^(ƒAƒjƒ[ƒVƒ‡ƒ“)
-	const VEC_INT& SetID(const std::string& keyName, const std::string & fileName, const Vector2F & divSize, const Vector2 & divNum);
+	const Vec_int& SetID(const std::string& keyName, const std::string & fileName, const Vector2F & divSize, const Vector2 & divNum);
 
 	//‰æ‘œƒnƒ“ƒhƒ‹æ“¾
-	const VEC_INT& GetID(const std::string& keyName);
+	const Vec_int& GetID(const std::string& keyName);
+
+	//•`‰æŠÖ”
+	
 private:
 	ImageMng() {}
 
 	//-----‰æ‘œ“o˜^—pmap
-	std::map<std::string, VEC_INT> imgMap;	//‰æ‘œ“o˜^(–¼‘OA‰æ‘œ)
+	std::map<std::string, Vec_int> _imgMap;	//‰æ‘œ“o˜^(–¼‘OA‰æ‘œ)
 
 	static ImageMng* s_Instance;
 };

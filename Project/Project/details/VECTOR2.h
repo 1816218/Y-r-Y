@@ -182,27 +182,3 @@ Vector2Temple<T> operator%(const Vector2Temple<T> & v, const T k)
 {
 	return Vector2Temple<T>(v.x % k, v.y % k);
 }
-
-/*
-Vector2Temple operator+(const Vector2Temple & u, const int v)
-{
-	Vector2Temple vec;
-	vec.x = u.x + v;
-	vec.y = u.y + v;
-	return vec;
-}
-
-Vector2Temple operator+(const Vector2Temple & u, int v)
-{
-	Vector2Temple vec = u;
-	vec.x += v;
-	vec.y += v;
-	return vec;
-}
-
-Vector2Temple operator+(Vector2Temple u, int v)
-{
-
-	return u;
-}
-*/
