@@ -3,7 +3,7 @@
 #include <sstream>
 #include "Map.h"
 #include "ImageMng.h"
-#include"HitCheck.h"
+
 
 Map* Map::s_Instance = nullptr;
 
@@ -18,11 +18,7 @@ Map::~Map()
 
 void Map::Init(void)
 {
-<<<<<<< HEAD
-	LoadDivGraph("image/map.png", 24, 6, 4, 32, 32, _image);
-=======
 	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,4 });
->>>>>>> f0df67c88ec50f8131b76a2f235cd37b7219d606
 
 	//-----ファイルの読み込み
 	FILE* fp;
@@ -44,25 +40,7 @@ void Map::Init(void)
 	fclose(fp);	//ファイルを閉じる
 }
 
-void Map::Hit(void)
-{
-	for (int y = 0; y < MAP_CHIP_Y; y++)
-	{
-		for (int x = 0; x < MAP_CHIP_X; x++)
-		{
-			int no = _mapData[MAP_CHIP_Y][MAP_CHIP_X];
-			if (no >= 10 && no < 20)
-			{
-				if (HitCheck()(x * MAP_CHIP_X, y * MAP_CHIP_Y, 32, 32,
-					x, y, 32, 32))
-				{
-					// ブロックに当たった
-					DrawString(0, 0, "当たった!", 0xffffff);
-				}
-			}
-		}
-	}
-}
+
 void Map::Draw(void)
 {
 	for (int y = 0; y < MAP_CHIP_Y; y++)
@@ -84,6 +62,7 @@ bool Map::Collision(Vector2F pos, Vector2F size)
 	{
 	case 9:
 	case 10:
+
 		return true;
 		break;
 	}
