@@ -1,4 +1,6 @@
 #include <DxLib.h>
+#include <fstream>
+#include <sstream>
 #include "Map.h"
 #include "ImageMng.h"
 
@@ -15,8 +17,6 @@ Map::~Map()
 
 void Map::Init(void)
 {
-	LoadDivGraph("image/map.png",24, 6, 4 ,32, 32, _image);
-
 	//-----ファイルの読み込み
 	FILE* fp;
 	//ファイルを開く
@@ -31,7 +31,7 @@ void Map::Init(void)
 	{
 		for (int x = 0; x < MAP_CHIP_X; x++)
 		{
-			fscanf_s(fp, "%d", &mapData[y][x]);
+			fscanf_s(fp, "%d", &_mapData[y][x]);
 		}
 	}
 	fclose(fp);	//ファイルを閉じる
@@ -43,7 +43,24 @@ void Map::Draw(void)
 	{
 		for (int x = 0; x < MAP_CHIP_X; x++)
 		{
-			DrawGraph(x * _mapChipSize.x, y * _mapChipSize.y, _image[_mapData[y][x]], true);
+			DrawGraph(x * _mapChipSize.x, y * _mapChipSize.y, IMAGE_ID("map")[_mapData[y][x]], true);
 		}
 	}
 }
+
+bool Map::Collision(Vector2F pos, Vector2F size)
+{
+	Vector2 chip = { (int)(pos.x + size.x) / _mapChipSize.x, (int)(pos.y + size.y) / _mapChipSize.y };
+
+	int num = _mapData[chip.y][chip.x];
+
+	switch (num)
+	{
+	case 9:
+	case 10:
+		return true;
+		break;
+	}
+	return false;
+}
+
