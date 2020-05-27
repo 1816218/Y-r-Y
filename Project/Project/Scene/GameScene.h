@@ -23,5 +23,6 @@ private:
 	Vector2F _gameScreenSize;	//スクリーンサイズ
 
 	std::vector<Obj*> _objects;
+	Obj* _player;
 };
 
