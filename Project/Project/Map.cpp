@@ -17,6 +17,8 @@ Map::~Map()
 
 void Map::Init(void)
 {
+	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,4 });
+
 	//-----ファイルの読み込み
 	FILE* fp;
 	//ファイルを開く
