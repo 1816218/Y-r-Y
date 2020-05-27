@@ -59,6 +59,7 @@ bool Map::Collision(Vector2F pos, Vector2F size)
 
 	switch (num)
 	{
+<<<<<<< HEAD
 	case 3:
 	case 4:
 	case 9:
@@ -71,6 +72,22 @@ bool Map::Collision(Vector2F pos, Vector2F size)
 	case 23:
 
 
+=======
+	case 0:		//•Ç(”’)
+	case 1:
+	case 2:
+	case 6:
+	case 7:
+	case 8:
+	case 12:
+	case 13:
+	case 14:
+	case 9:		//•Ç(ŠD)
+	case 10:
+	case 11:	//•Ç(”’A•)
+	case 15:
+	case 23:
+>>>>>>> 322445718d21ece172f0bc4f20dcab4673fc2414
 		return true;
 		break;
 	}

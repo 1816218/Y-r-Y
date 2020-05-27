@@ -28,11 +28,18 @@ const Vec_int& ImageMng::SetID(const std::string& keyName, const std::string& fi
 	}
 	return _imgMap[keyName];
 }
-
+//-----‰æ‘œƒnƒ“ƒhƒ‹‚ğæ“¾
 const Vec_int& ImageMng::GetID(const std::string& keyName)
 {
+	//—v‘f‚ªŒ©‚Â‚©‚Á‚½‚ç‰æ‘œƒnƒ“ƒhƒ‹‚ğ•Ô‚·
 	if (_imgMap.find(keyName) != _imgMap.end())
 	{
 		return _imgMap[keyName];
 	}
 }
+//-----•`‰æ‡”Ô‚ğ“o˜^
+void ImageMng::StackDrawList(int localZorder, Vec_int drawGraph)
+{
+	_drawList.insert(std::make_pair(localZorder, drawGraph));
+}
+
