@@ -21,8 +21,6 @@ unique_Base GameScene::Update(unique_Base own)
 	{
 		obj->Update();
 	}
-
-
 	Draw();
 
 	return std::move(own);
@@ -41,7 +39,7 @@ void GameScene::SetSceneID(SCN_ID sceneID)
 bool GameScene::Init(void)
 {
 	//ƒQ[ƒ€‰Šúˆ—
-	_objects.push_back(new Player({ 800/2, 640/2 }, { 32, 32 }));
+	_objects.push_back(new Player({ 800/2, 640/3 }, { 32, 32 }));
 
 	_sceneID = SCN_ID::MAIN;
 
@@ -55,5 +53,4 @@ void GameScene::Draw(void)
 	{
 		obj->Draw();
 	}
-
 }
