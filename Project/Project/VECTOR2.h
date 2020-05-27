@@ -33,6 +33,15 @@ public:
 	Vector2Temple& operator/=(T k);
 	Vector2Temple operator+() const;	// プラスを掛ける
 	Vector2Temple operator-() const;	// マイナスを掛ける
+
+	///ベクトルの大きさを返します
+	float Magnitude()const;
+
+	///正規化(大きさを１に)します
+	void Normalize();
+
+	///正規化ベクトルを返します
+	Vector2Temple<T> Normalized();
 };
 
 // ベクトルの演算
@@ -48,6 +57,9 @@ Vector2Temple<T> operator+(const Vector2Temple<T>& u, const Vector2Temple<T>& v)
 // Vector2Temple - Vector2Temple
 template<class T>
 Vector2Temple<T> operator-(const Vector2Temple<T>& u, const Vector2Temple<T>& v);
+// Vector2Temple * Vector2Temple
+template<class T>
+Vector2Temple<T> operator*(const Vector2Temple<T>& u, const Vector2Temple<T>& v);
 // int * Vector2Temple
 template<class T>
 Vector2Temple<T> operator*(const T k, const Vector2Temple<T>& v);

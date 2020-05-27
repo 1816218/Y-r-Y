@@ -1,6 +1,6 @@
 #pragma once
 #include "../VECTOR2.h"
-
+#include <cmath>
 template<class T>
 Vector2Temple<T>::Vector2Temple()
 {
@@ -133,6 +133,27 @@ Vector2Temple<T> Vector2Temple<T>::operator-() const
 	return Vector2Temple<T>(-this->x, -this->y);
 }
 
+template<class T>
+float Vector2Temple<T>::Magnitude() const
+{
+	return hypot(this->x, this->y);
+}
+
+template<class T>
+void Vector2Temple<T>::Normalize()
+{
+	float mag = Magnitude();
+	this->x /= mag;
+	this->y /= mag;
+}
+
+template<class T>
+Vector2Temple<T> Vector2Temple<T>::Normalized()
+{
+	float mag = Magnitude();
+	return Vector2Temple<T>(this->x / mag, this->x / mag);
+}
+
 // ベクトルの演算
 // 参照で渡した瞬間は値を保持しているが渡した後は保持している保証はないからコピーで渡す
 template<class T>
@@ -157,6 +178,12 @@ template<class T>
 Vector2Temple<T> operator-(const Vector2Temple<T> & u, const Vector2Temple<T> & v)
 {
 	return Vector2Temple<T>(u.x - v.x, u.y - v.y);
+}
+
+template<class T>
+Vector2Temple<T> operator*(const Vector2Temple<T>& u, const Vector2Temple<T>& v)
+{
+	return Vector2Temple<T>(u.x * v.x, u.y * v.y);
 }
 
 template<class T>

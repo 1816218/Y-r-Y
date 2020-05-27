@@ -26,17 +26,22 @@ bool Enemy::Init(void)
 	_alive = true;
 	_death = false;
 
+	_speed = { 1,1 };
+
 	return true;
 }
 
 void Enemy::Update(void)
 {
+	Vector2F direction = _playerPos - _pos;
+	direction.Normalize();
+	_pos += direction * _speed;
 }
 
 void Enemy::Draw(void)
 {
+	DrawRotaGraph(_pos.x, _pos.y, _exRate, _angle, IMAGE_ID("enemy")[0], true);
 }
-
 
 const Vector2F& Enemy::GetPos(void)
 {
@@ -45,7 +50,7 @@ const Vector2F& Enemy::GetPos(void)
 
 void Enemy::SetPos(const Vector2F& pos)
 {
-	_pos = pos;
+	_playerPos = pos;
 }
 
 const Vector2F& Enemy::GetSize(void)
