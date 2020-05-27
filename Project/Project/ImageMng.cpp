@@ -42,4 +42,3 @@ void ImageMng::StackDrawList(int localZorder, Vec_int drawGraph)
 {
 	_drawList.insert(std::make_pair(localZorder, drawGraph));
 }
-

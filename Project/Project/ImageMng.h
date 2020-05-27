@@ -35,11 +35,12 @@ public:
 
 	//•`‰æ‡‚Ì“o˜^
 	void StackDrawList(int localZorder, Vec_int drawGraph);
+
 private:
 	ImageMng() {}
 
 	//-----‰æ‘œ“o˜^—pmap
-	std::map<std::string, Vec_int> _imgMap;	//‰æ‘œ“o˜^(–¼‘OA‰æ‘œ)
+	std::map<std::string, Vec_int> _imgMap;		//‰æ‘œ“o˜^(–¼‘OA‰æ‘œ)
 
 	std::map<int, std::vector<int>> _drawList;	//•`‰æ‡‚Ì“o˜^
 
