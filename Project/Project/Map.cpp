@@ -40,10 +40,6 @@ void Map::Init(void)
 	fclose(fp);	//ƒtƒ@ƒCƒ‹‚ð•Â‚¶‚é
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7a66e5c4052386da804dad20cd28cdb1f5d27e43
 void Map::Draw(void)
 {
 	for (int y = 0; y < MAP_CHIP_Y; y++)
