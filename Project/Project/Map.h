@@ -23,7 +23,6 @@ public:
 	~Map();
 
 	void Init(void);
-	void Hit(void);
 	void Draw(void);
 
 	//Õ“Ë”»’è
