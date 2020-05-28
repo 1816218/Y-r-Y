@@ -75,7 +75,7 @@ void Enemy::Update(void)
 		{
 			DrawBox(ePos.x, ePos.y, ePos.x + 32 * 3, ePos.y + 32 * 3, 0xffffff, false);
 			if (ePos.x < pPos.x && pPos.x < ePos.x + 32.0f * 3
-				|| ePos.y < pPos.y && pPos.y < ePos.y + 32 * 3)
+				&& ePos.y < pPos.y && pPos.y < ePos.y + 32 * 3)
 			{
 				_pos += direction * _speed;
 				_animDir = _dir;
