@@ -30,5 +30,6 @@ public:
 private:
 	Vector2F _playerPos;
 	Vector2F _speed;
+	CHARA_DIR _dir;
 };
 

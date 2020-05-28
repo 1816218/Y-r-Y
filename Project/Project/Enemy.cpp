@@ -35,7 +35,26 @@ void Enemy::Update(void)
 {
 	Vector2F direction = _playerPos - _pos;
 	direction.Normalize();
-	_pos += direction * _speed;
+
+	direction.x < 0 ? _dir = CHARA_DIR::RIGHT : _dir = CHARA_DIR::LEFT;
+	direction.y < 0 ? _dir = CHARA_DIR::UP : _dir = CHARA_DIR::DOWN;
+
+	auto tracking = [&](const CHARA_DIR dir, Vector2F ePos, Vector2F pPos)
+	{
+		if (_dir == dir)
+		{
+			if (ePos.x < pPos.x && pPos.x < ePos.x + 32.0f * 3
+				|| ePos.y < pPos.y && pPos.y < ePos.y + 32 * 3)
+			{
+				_pos += direction * _speed;
+			}
+		}
+	};
+
+	tracking(CHARA_DIR::UP, { _pos.x - 32, _pos.y + 32 * 3 }, _playerPos);
+	tracking(CHARA_DIR::RIGHT, { _pos.x, _pos.y - 32 }, _playerPos);
+	tracking(CHARA_DIR::LEFT, { _pos.x + 32 * 3, _pos.y - 32 }, _playerPos);
+	tracking(CHARA_DIR::DOWN, { _pos.x - 32, _pos.y }, _playerPos);
 }
 
 void Enemy::Draw(void)
