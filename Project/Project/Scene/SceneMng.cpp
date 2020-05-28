@@ -14,8 +14,8 @@ void SceneMng::Run(void)
 	SysInit();
 
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
-	lpImageMng.SetID("player", "image/player.png", { 32.0f, 32.0f }, { 4,4 });
-	lpImageMng.SetID("enemy", "image/enemy1.png", {32.0f, 32.0f}, {4,4});
+	lpImageMng.SetID("player", "image/player.png", { 32.0f, 32.0f }, { 4, 4 });
+	lpImageMng.SetID("enemy" , "image/enemy1.png", { 32.0f, 32.0f }, { 4, 4 });
 
 	//ƒƒCƒ“ƒ‹[ƒv
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) != 1)

@@ -31,5 +31,9 @@ private:
 	Vector2F _playerPos;
 	Vector2F _speed;
 	CHARA_DIR _dir;
+	bool _moveFlag;
+
+	int _animCnt;			//アニメーションカウント
+	CHARA_DIR _animDir;		//アニメーションの向き
 };
 

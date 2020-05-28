@@ -17,12 +17,13 @@ GameScene::~GameScene()
 unique_Base GameScene::Update(unique_Base own)
 {
 	//ƒQ[ƒ€ƒƒCƒ“‚Ìˆ—
+	lpMap.Draw();
+
 	for (auto obj : _objects)
 	{
 		obj->SetPos(_player->GetPos());
 		obj->Update();
 	}
-
 	_player->Update();
 
 	Draw();
@@ -53,7 +54,6 @@ bool GameScene::Init(void)
 
 void GameScene::Draw(void)
 {
-	lpMap.Draw();
 	for (auto obj : _objects)
 	{
 		obj->Draw();
