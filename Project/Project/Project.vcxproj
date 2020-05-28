@@ -23,6 +23,7 @@
     <ClCompile Include="HitCheck.cpp" />
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="InputKey.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Obj.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="HitCheck.h" />
     <ClInclude Include="InputKey.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Player.h" />
