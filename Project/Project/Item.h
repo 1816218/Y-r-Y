@@ -5,12 +5,11 @@
 class Item : public Obj
 {
 public:
-	Item() {}
 	Item(const Vector2F& pos, const Vector2F& size);
 	~Item();
 
 	bool Init(void);
-	void Update(void) override;
+	void mapItem(void);
 
 	//描画
 	void Draw(void) override;
@@ -30,8 +29,5 @@ public:
 	const double GetExRate(void);
 	void SetExRate(const double exRate);
 private:
-	bool _moveFlag;			//true:移動、false:停止
-	CHARA_DIR _direction;	//向き
-	int _animCnt;			//アニメーションカウント
 };
 

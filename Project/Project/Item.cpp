@@ -16,23 +16,27 @@ Item::~Item()
 
 bool Item::Init(void)
 {
+
 	_angle = 0.0;
 	_exRate = 1.0;
+
 
 
 	return true;
 }
 
-void Item::Update(void)
+void Item::mapItem(void)
 {
+	while (Init()==true) {
+		_pos = { GetRand(MAP_CHIP_X - 1) * _size.x + 8, GetRand(32 - 1) * _size.y + 8 };
+	}
 
 }
 //-----•`‰æ
 void Item::Draw(void)
 {
-
+	DrawRotaGraph(_pos.x, _pos.y, _exRate, _angle, IMAGE_ID("enemy")[0], true);
 }
-//-----ˆÚ“®ˆ—
 
 //-----GetESet
 //À•W
