@@ -1,8 +1,9 @@
-#include<DxLib.h>
+#include <DxLib.h>
 #include "Enemy.h"
-#include"ImageMng.h"
+#include "ImageMng.h"
+#include "Map.h"
 
-#define PI 3.141592653589793
+#define PI 3.141592653589793	//‰~Žü—¦(16Œ…)
 
 Enemy::Enemy()
 {
@@ -77,9 +78,9 @@ void Enemy::Update(void)
 			if (ePos.x < pPos.x && pPos.x < ePos.x + 32.0f * 3
 				&& ePos.y < pPos.y && pPos.y < ePos.y + 32 * 3)
 			{
-				_pos += direction * _speed;
 				_animDir = _dir;
 				_moveFlag = true;
+				_pos += direction * _speed;
 			}
 		}
 	};
