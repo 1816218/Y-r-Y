@@ -36,6 +36,33 @@ void SceneMng::Run(void)
 	}
 }
 
+SceneMng::SceneMng()
+{
+}
+
+SceneMng::~SceneMng()
+{
+}
+//--------------------------------
+//システム初期化処理
+bool SceneMng::SysInit(void)
+{
+	ChangeWindowMode(true);				//true:window false:フルスクリーン
+	SetWindowText("Coronet Pandemic");	//window名
+	SetGraphMode(800, 640, 16);			//65536色モードにする
+
+	//DXﾗｲﾌﾞﾗﾘ初期化処理
+	if (DxLib_Init() == -1)
+	{
+		return -1;
+	}
+	SetDrawScreen(DX_SCREEN_BACK);		//ﾊﾞｯｸﾊﾞｯﾌｧに描画
+	
+	_activeScene = std::make_unique<TitleScene>();
+
+	return true;
+}
+
 unique_Base SceneMng::SelectScene(void)
 {
 	switch (_sceneID)
@@ -67,31 +94,3 @@ unique_Base SceneMng::SelectScene(void)
 	}
 	return std::move(_activeScene);
 }
-
-SceneMng::SceneMng()
-{
-}
-
-SceneMng::~SceneMng()
-{
-}
-//--------------------------------
-//システム初期化処理
-bool SceneMng::SysInit(void)
-{
-	ChangeWindowMode(true);				//true:window false:フルスクリーン
-	SetWindowText("Coronet Pandemic");	//window名
-	SetGraphMode(800, 640, 16);			//65536色モードにする
-
-	//DXﾗｲﾌﾞﾗﾘ初期化処理
-	if (DxLib_Init() == -1)
-	{
-		return -1;
-	}
-	SetDrawScreen(DX_SCREEN_BACK);		//ﾊﾞｯｸﾊﾞｯﾌｧに描画
-	
-	_activeScene = std::make_unique<TitleScene>();
-
-	return true;
-}
-
