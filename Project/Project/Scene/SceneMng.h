@@ -13,8 +13,6 @@ public:
 
 	//メインループ処理
 	void Run(void);
-
-	unique_Base SelectScene(void);
 private:
 	struct SceneMngDeleter
 	{
@@ -26,11 +24,13 @@ private:
 	SceneMng();
 	~SceneMng();
 
-	bool SysInit(void);	//ｼｽﾃﾑ処理
+	//システム初期化処理
+	bool SysInit(void);
+
+	unique_Base SelectScene(void);
 
 	unique_Base _activeScene;	//動作しているシーン
 	SCN_ID _sceneID;
-
 	static std::unique_ptr<SceneMng, SceneMngDeleter> s_Instance;
 };
 
