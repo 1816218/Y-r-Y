@@ -21,29 +21,7 @@ void Map::Init(void)
 	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,4 });
 
 	//-----ファイルの読み込み
-	FILE* fp;
-	//ファイルを開く
-	fopen_s(&fp, "Data/test.csv", "r");	
-	//ファイルの中身が空なら処理を抜ける
-	if (fp == nullptr)
-	{
-		return;
-	}
-	//ファイルの読み込み
-	for (int y = 0; y < MAP_CHIP_Y; y++)
-	{
-		for (int x = 0; x < MAP_CHIP_X; x++)
-		{
-			fscanf_s(fp, "%d", &_mapData[y][x].id);
-			if (_mapData[y][x].id == 3 || _mapData[y][x].id == 4 || _mapData[y][x].id == 5 || _mapData[y][x].id == 16 || _mapData[y][x].id == 17 
-				|| _mapData[y][x].id == 18 || _mapData[y][x].id == 19 || _mapData[y][x].id == 20 || _mapData[y][x].id == 21 || _mapData[y][x].id == 22)
-			{
-				continue;
-			}
-			_mapData[y][x].type = CHIP_TYPE::WALL;
-		}
-	}
-	fclose(fp);	//ファイルを閉じる
+	ReadFile("Data/map.csv");
 }
 
 void Map::Draw(void)
@@ -55,6 +33,42 @@ void Map::Draw(void)
 			DrawGraph(x * _mapChipSize.x, y * _mapChipSize.y, IMAGE_ID("map")[_mapData[y][x].id], true);
 		}
 	}
+}
+//-----ファイルの読み込み
+void Map::ReadFile(const std::string fileName)
+{
+	std::ifstream ifs;
+	std::string line;
+
+	ifs.open(fileName);
+	if (ifs.fail())
+	{
+		return;
+	}
+	int y = 0;
+	while (std::getline(ifs, line))
+	{
+		std::vector<std::string> strVec = Split(line, ',');
+		for (int i = 0; i < strVec.size(); i++)
+		{
+			_mapData[y][i].id = atoi(strVec.at(i).c_str());
+		}
+		y++;
+	}
+	ifs.close();
+}
+//-----文字列を格納
+std::vector<std::string> Map::Split(std::string& input, char delimiter)
+{
+	std::istringstream stream(input);
+	std::string filed;
+	std::vector<std::string> result;
+
+	while (std::getline(stream, filed, delimiter))
+	{
+		result.push_back(filed);
+	}
+	return result;
 }
 
 bool Map::Collision(Vector2F pos, Vector2F size)

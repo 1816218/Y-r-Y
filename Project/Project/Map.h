@@ -36,6 +36,10 @@ public:
 	void Init(void);
 	void Draw(void);
 
+	void ReadFile(const std::string fileName);
+
+	std::vector<std::string> Split(std::string& input, char delimiter);
+
 	//Õ“Ë”»’è
 	bool Collision(Vector2F pos, Vector2F size);
 private:
