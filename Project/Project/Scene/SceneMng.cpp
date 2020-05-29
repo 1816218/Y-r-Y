@@ -1,4 +1,5 @@
 #include <DxLib.h>
+#include <algorithm>
 #include "SceneMng.h"
 #include "TitleScene.h"
 #include "GameScene.h"
@@ -20,8 +21,6 @@ void SceneMng::Run(void)
 	//メインループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) != 1)
 	{
-		ClsDrawScreen();
-
 		lpInputKey.Update();
 
 		//動作させるシーン処理
@@ -32,17 +31,56 @@ void SceneMng::Run(void)
 		}
 		_activeScene = SelectScene();
 
-		ScreenFlip();
+		Draw();
 	}
 }
 
-SceneMng::SceneMng()
+bool SceneMng::SetScreen(int ghScreen)
+{
+	_ghBefor = GetDrawScreen();
+	SetDrawScreen(ghScreen);
+	return true;
+}
+
+bool SceneMng::RevScreen(void)
+{
+	SetDrawScreen(_ghBefor);
+	return true;
+}
+
+void SceneMng::Draw(void)
+{
+	SetDrawScreen(DX_SCREEN_BACK);
+	ClsDrawScreen();
+
+	for (auto drawQue : _drawList)
+	{
+		DrawGraph(std::get<static_cast<int>(DRAW_QUE::X)>(drawQue.second),
+			std::get<static_cast<int>(DRAW_QUE::Y)>(drawQue.second),
+			std::get<static_cast<int>(DRAW_QUE::IMAGE)>(drawQue.second), true);
+	}
+	ScreenFlip();
+}
+
+bool SceneMng::AddDrawQue(const int localZorder, DrawQueT que)
+{
+	if (std::get<static_cast<int>(DRAW_QUE::IMAGE)>(que) == -1)
+	{
+		return false;
+	}
+	_drawList.push_back(std::make_pair(localZorder, que));
+	std::sort(_drawList.begin(), _drawList.end());
+	return true;
+}
+
+SceneMng::SceneMng() : screenSize(800, 640)
 {
 }
 
 SceneMng::~SceneMng()
 {
 }
+
 //--------------------------------
 //システム初期化処理
 bool SceneMng::SysInit(void)
@@ -56,8 +94,6 @@ bool SceneMng::SysInit(void)
 	{
 		return -1;
 	}
-	SetDrawScreen(DX_SCREEN_BACK);		//ﾊﾞｯｸﾊﾞｯﾌｧに描画
-	
 	_activeScene = std::make_unique<TitleScene>();
 
 	return true;
