@@ -1,8 +1,9 @@
 #include <DxLib.h>
 #include "GameScene.h"
-#include "../Player.h"
-#include"../Enemy.h"
+#include "SceneMng.h"
 #include "../ImageMng.h"
+#include "../Player.h"
+#include "../Enemy.h"
 #include "../Map.h"
 
 GameScene::GameScene(): _gameScreenSize(800, 640)
@@ -17,8 +18,6 @@ GameScene::~GameScene()
 unique_Base GameScene::Update(unique_Base own)
 {
 	//ƒQ[ƒ€ƒƒCƒ“‚Ìˆ—
-	lpMap.Draw();
-
 	for (auto obj : _objects)
 	{
 		obj->SetPos(_player->GetPos());
@@ -49,14 +48,25 @@ bool GameScene::Init(void)
 
 	_sceneID = SCN_ID::MAIN;
 
+	_ghGameScreen = MakeScreen(lpSceneMng.screenSize.x, lpSceneMng.screenSize.y, true);
+
+	lpMap.Draw();
+
 	return true;
 }
 
 void GameScene::Draw(void)
 {
+	lpSceneMng.SetScreen(_ghGameScreen);
+	SetDrawBright(255, 255, 255);
+	ClsDrawScreen();
+
 	for (auto obj : _objects)
 	{
 		obj->Draw();
 	}
 	_player->Draw();
+
+	lpSceneMng.AddDrawQue( 1, { _ghGameScreen, 0, 0 });
+	lpSceneMng.RevScreen();
 }

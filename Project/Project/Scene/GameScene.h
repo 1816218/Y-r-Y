@@ -10,7 +10,6 @@ public:
 	GameScene();
 	~GameScene();
 
-
 	unique_Base Update(unique_Base own) override;
 
 	//シーンIDを取得
@@ -21,6 +20,7 @@ private:
 	void Draw(void);
 
 	Vector2F _gameScreenSize;	//スクリーンサイズ
+	int _ghGameScreen;
 
 	std::vector<Obj*> _objects;
 	Obj* _player;
