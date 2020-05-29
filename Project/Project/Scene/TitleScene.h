@@ -16,6 +16,7 @@ private:
 	bool Init(void);
 	void Draw(void);
 
+	int _ghTitleScreen;
 	Vector2F pos;	//タイトルロゴの座標
 	float bright;	//明るさ
 };
