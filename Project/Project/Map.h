@@ -48,6 +48,9 @@ private:
 	MapChip _mapData[MAP_CHIP_Y][MAP_CHIP_X];
 
 	Vector2 _mapChipSize;	//マップチップのサイス
+	
+	int _ghMapScreen;
+	int _ghFrool;
 
 	static Map* s_Instance;
 };
