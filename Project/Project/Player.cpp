@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "Player.h"
-#include"ImageMng.h"
+#include "Scene/SceneMng.h"
+#include "ImageMng.h"
 #include "Map.h"
 
 Player::Player(const Vector2F& pos, const Vector2F& size)
