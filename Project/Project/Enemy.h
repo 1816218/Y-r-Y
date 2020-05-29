@@ -26,7 +26,6 @@ public:
 
 	const double GetExRate(void);
 	void SetExRate(const double exRate);
-
 private:
 	Vector2F _playerPos;
 	Vector2F _speed;
