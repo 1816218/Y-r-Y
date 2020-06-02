@@ -11,6 +11,7 @@ TitleScene::TitleScene() : pos(200.0f, 200.0f), bright(0.0f)
 
 TitleScene::~TitleScene()
 {
+	lpSceneMng.DeleteDrawQue();
 }
 
 unique_Base TitleScene::Update(unique_Base own)

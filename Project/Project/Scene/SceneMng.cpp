@@ -73,6 +73,12 @@ bool SceneMng::AddDrawQue(const int localZorder, DrawQueT que)
 	return true;
 }
 
+bool SceneMng::DeleteDrawQue(void)
+{
+	_drawList.clear();
+	return true;
+}
+
 SceneMng::SceneMng() : screenSize(800, 640)
 {
 }

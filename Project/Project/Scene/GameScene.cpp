@@ -13,6 +13,7 @@ GameScene::GameScene(): _gameScreenSize(800, 640)
 
 GameScene::~GameScene()
 {
+	lpSceneMng.DeleteDrawQue();
 }
 
 unique_Base GameScene::Update(unique_Base own)

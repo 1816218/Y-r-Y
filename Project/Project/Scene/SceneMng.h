@@ -34,6 +34,7 @@ public:
 	void Draw(void);
 
 	bool AddDrawQue(const int localZorder, DrawQueT que);
+	bool DeleteDrawQue(void);
 
 	const Vector2Dbl screenSize;		// ‰æ–Ê‚Ì‘å‚«‚³
 private:
