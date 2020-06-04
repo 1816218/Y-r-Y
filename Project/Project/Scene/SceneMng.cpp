@@ -60,6 +60,8 @@ void SceneMng::Draw(void)
 			std::get<static_cast<int>(DRAW_QUE::IMAGE)>(drawQue.second), true);
 	}
 	ScreenFlip();
+
+	_drawList.clear();
 }
 
 bool SceneMng::AddDrawQue(const int localZorder, DrawQueT que)

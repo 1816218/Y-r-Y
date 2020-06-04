@@ -11,6 +11,7 @@ TitleScene::TitleScene() : pos(200.0f, 200.0f), bright(0.0f)
 
 TitleScene::~TitleScene()
 {
+	lpImageMng.DeleteAllImageMap();
 	lpSceneMng.DeleteDrawQue();
 }
 
@@ -45,7 +46,6 @@ void TitleScene::Draw(void)
 
 	lpSceneMng.AddDrawQue(0, { _ghTitleScreen, 0, 0 });
 	lpSceneMng.RevScreen();
-
 }
 //-----ƒV[ƒ“ID‚ğæ“¾
 SCN_ID TitleScene::GetSceneID(void)

@@ -5,7 +5,7 @@
 ImageMng* ImageMng::s_Instance = nullptr;	//²İ½Àİ½‚·‚é
 
 //-----‰æ‘œ‚Ì“o˜^(‰æ‘œˆê–‡)
-const Vec_int& ImageMng::SetID(const std::string& keyName, const std::string& fileName)
+const VecInt& ImageMng::SetID(const std::string& keyName, const std::string& fileName)
 {
 	if (_imgMap.find(keyName) == _imgMap.end())
 	{
@@ -17,19 +17,19 @@ const Vec_int& ImageMng::SetID(const std::string& keyName, const std::string& fi
 	return _imgMap[keyName];
 }
 //-----‰æ‘œ‚Ì“o˜^(ƒAƒjƒ[ƒVƒ‡ƒ“)
-const Vec_int& ImageMng::SetID(const std::string& keyName, const std::string& fileName, const Vector2F& divSize, const Vector2& divNum)
+const VecInt& ImageMng::SetID(const std::string& keyName, const std::string& fileName, const Vector2F& divSize, const Vector2& divNum)
 {
 	if (_imgMap.find(keyName) == _imgMap.end())
 	{
 		//“®“I‚È—v‘f”‚ğİ’è(vectorŒ^”z—ñ)
 		_imgMap[keyName].resize(divNum.x*divNum.y);
 
-		LoadDivGraph(fileName.c_str(), divNum.x*divNum.y, divNum.x, divNum.y, divSize.x, divSize.y, &_imgMap[keyName][0], true);
+		LoadDivGraph(fileName.c_str(), divNum.x*divNum.y, divNum.x, divNum.y, (int)divSize.x, (int)divSize.y, &_imgMap[keyName][0], true);
 	}
 	return _imgMap[keyName];
 }
 //-----‰æ‘œƒnƒ“ƒhƒ‹‚ğæ“¾
-const Vec_int& ImageMng::GetID(const std::string& keyName)
+const VecInt& ImageMng::GetID(const std::string& keyName)
 {
 	//—v‘f‚ªŒ©‚Â‚©‚Á‚½‚ç‰æ‘œƒnƒ“ƒhƒ‹‚ğ•Ô‚·
 	if (_imgMap.find(keyName) != _imgMap.end())
@@ -37,8 +37,36 @@ const Vec_int& ImageMng::GetID(const std::string& keyName)
 		return _imgMap[keyName];
 	}
 }
-//-----•`‰æ‡”Ô‚ğ“o˜^
-void ImageMng::StackDrawList(int localZorder, Vec_int drawGraph)
+//-----‰æ‘œ‚Ìíœ
+bool ImageMng::DeleteImageMap(const std::string& keyName)
 {
-	_drawList.insert(std::make_pair(localZorder, drawGraph));
+	// ğŒˆê’v‚µ‚½—v‘f‚ğíœ‚·‚é
+	if (_imgMap.find(keyName) != _imgMap.end())
+	{
+		DeleteGraph(_imgMap[keyName][0]);
+		_imgMap.erase(keyName);
+		return true;
+	}
+	return false;
+}
+//-----‘S‚Ä‚Ì‰æ‘œ‚Ìíœ
+bool ImageMng::DeleteAllImageMap(void)
+{
+	//ƒRƒ“ƒeƒi‚ª‹ó‚Å‚È‚¯‚ê‚Î
+	//—v‘f‚ğ‚·‚×‚Äíœ
+	if (!_imgMap.empty())
+	{
+		InitGraph();
+		_imgMap.clear();
+		return true;
+	}
+	return false;
+}
+
+ImageMng::~ImageMng()
+{
+	if (!_imgMap.empty())
+	{
+		_imgMap.clear();
+	}
 }

@@ -7,8 +7,7 @@
 #define lpImageMng ImageMng::GetInstance()
 #define IMAGE_ID(KEY) ImageMng::GetInstance().GetID(KEY)
 
-using Vec_int = std::vector<int>;
-using Pair_int = std::pair<int, int>;
+using VecInt = std::vector<int>;
 
 class ImageMng
 {
@@ -22,27 +21,36 @@ public:
 		}
 		return (*s_Instance);	// 実態を返す
 	}
-	~ImageMng() {}
+	~ImageMng();
 
 	//登録
-	const Vec_int& SetID(const std::string & keyName, const std::string & fileName);
+	//@param keyName 呼び出す名前
+	//@param fileName 画像ファイル名
+	const VecInt& SetID(const std::string & keyName, const std::string & fileName);
 
 	//登録(アニメーション)
-	const Vec_int& SetID(const std::string& keyName, const std::string & fileName, const Vector2F & divSize, const Vector2 & divNum);
+	//@param keyName 呼び出す名前
+	//@param fileName 画像ファイル名
+	//@param divSize 画像サイズ(float)
+	//@param divNum 画像チップ数(int)
+	const VecInt& SetID(const std::string& keyName, const std::string & fileName, const Vector2F & divSize, const Vector2 & divNum);
 
 	//画像ハンドル取得
-	const Vec_int& GetID(const std::string& keyName);
+	//@param keyName 呼び出す名前
+	const VecInt& GetID(const std::string& keyName);
 
-	//描画順の登録
-	void StackDrawList(int localZorder, Vec_int drawGraph);
+	//画像の削除
+	//@param keyName 呼び出す名前
+	bool DeleteImageMap(const std::string& keyName);
+
+	//すべての画像の削除
+	bool DeleteAllImageMap(void);
 
 private:
 	ImageMng() {}
 
 	//-----画像登録用map
-	std::map<std::string, Vec_int> _imgMap;		//画像登録(名前、画像)
-
-	std::map<int, std::vector<int>> _drawList;	//描画順の登録
+	std::map<std::string, VecInt> _imgMap;		//画像登録(名前、画像)
 
 	static ImageMng* s_Instance;
 };

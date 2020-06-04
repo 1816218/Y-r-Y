@@ -51,13 +51,13 @@ bool GameScene::Init(void)
 
 	_ghGameScreen = MakeScreen(lpSceneMng.screenSize.x, lpSceneMng.screenSize.y, true);
 
-	lpMap.Draw();
-
 	return true;
 }
 
 void GameScene::Draw(void)
 {
+	lpMap.Draw();
+
 	lpSceneMng.SetScreen(_ghGameScreen);
 	SetDrawBright(255, 255, 255);
 	ClsDrawScreen();
