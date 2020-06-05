@@ -50,6 +50,9 @@ public:
 	//画面サイスを取得する
 	const Vector2F& GetScreenSize(void);
 
+	//シーンを設定
+	//@param id 設定するシーン
+	void SetSceneID(const SCN_ID id);
 private:
 	struct SceneMngDeleter
 	{
@@ -66,11 +69,11 @@ private:
 	//シーン切り替え処理
 	unique_Base SelectScene(void);
 
-	const Vector2F _screenSize;							// 画面の大きさ
-	SCN_ID		_sceneID;								//シーンの状態
-	unique_Base _activeScene;							//動作しているシーン
+	SCN_ID			_sceneID;			//シーンの状態
+	unique_Base		_activeScene;		//動作しているシーン
+	const Vector2F	_screenSize;		// 画面の大きさ
+	int				_ghBefor;			//前の画面
 	std::vector<std::pair<int, DrawQueT>> _drawList;	//描画するもの
-	int _ghBefor;										//前の画面
 
 	static std::unique_ptr<SceneMng, SceneMngDeleter> s_Instance;
 };

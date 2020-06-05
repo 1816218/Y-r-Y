@@ -28,7 +28,7 @@ void Map::Init(void)
 void Map::Draw(void)
 {
 	lpSceneMng.SetScreen(_ghMapScreen);
-	ClsDrawScreen();
+	ClearDrawScreen();
 
 	for (int y = 0; y < MAP_CHIP_Y; y++)
 	{
@@ -45,7 +45,7 @@ void Map::Draw(void)
 	lpSceneMng.RevScreen();
 
 	lpSceneMng.SetScreen(_ghFrool);
-	ClsDrawScreen();
+	ClearDrawScreen();
 
 	for (int y = 0; y < MAP_CHIP_Y; y++)
 	{

@@ -10,19 +10,20 @@ public:
 	GameScene();
 	~GameScene();
 
+	//内容の更新
 	unique_Base Update(unique_Base own) override;
 
 	//シーンIDを取得
 	SCN_ID GetSceneID(void) override;
-	void SetSceneID(SCN_ID sceneID) override;
 private:
+	//初期化処理
 	bool Init(void);
+	//描画処理
 	void Draw(void);
 
-	Vector2F _gameScreenSize;	//スクリーンサイズ
-	int _ghGameScreen;
+	int _ghGameScreen;	//描画対処にしたｸﾞﾗﾌｨｯｸﾊﾝﾄﾞﾙを保持
 
-	std::vector<Obj*> _objects;
-	Obj* _player;
+	Obj*				_player;	//プレイヤー
+	std::vector<Obj*>	_objects;	//敵
 };
 
