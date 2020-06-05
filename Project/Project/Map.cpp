@@ -48,7 +48,7 @@ void Map::Draw(void)
 bool Map::Collision(Vector2F pos, Vector2F size)
 {
 	//座標をマップチップに変換
-	Vector2 chip = { (int)(pos.x + size.x) / _mapChipSize.x, (int)(pos.y + size.y) / _mapChipSize.y };
+	Vector2 chip = { (int)(pos.x + size.x ) / _mapChipSize.x, (int)(pos.y + size.y) / _mapChipSize.y };
 
 	//壁に当たっていたら当たったことにする
 	if (_mapData[chip.y][chip.x].type == CHIP_TYPE::WALL)
@@ -70,7 +70,7 @@ Map::~Map()
 void Map::Init(void)
 {
 	//ファイルの読み込み
-	ReadFile("Data/map.csv");
+	ReadFile("Data/stage1map.csv");
 
 	//描画対象にする画面の作成
 	_ghMapScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);

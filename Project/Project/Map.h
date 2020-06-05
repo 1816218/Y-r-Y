@@ -5,7 +5,7 @@
 #include "VECTOR2.h"
 
 #define lpMap Map::GetInstance()
-#define MAP_CHIP_X 25
+#define MAP_CHIP_X 50
 #define MAP_CHIP_Y 20
 
 enum class CHIP_TYPE
