@@ -33,17 +33,26 @@ public:
 	}
 	~Map();
 
-	void Init(void);
+	//描画処理
 	void Draw(void);
 
-	void ReadFile(const std::string fileName);
-
-	std::vector<std::string> Split(std::string& input, char delimiter);
-
 	//衝突判定
+	//@param pos 座標
+	//@param size サイズ
 	bool Collision(Vector2F pos, Vector2F size);
 private:
 	Map();
+	//初期化処理
+	void Init(void);
+
+	//ファイルの読み込み
+	//@param fileName ファイル名
+	void ReadFile(const std::string fileName);
+
+	//特定の文字で区切った文字列を返す
+	//@param input 読み込んだ一行分の文字列
+	//@param delimiter 区切る文字
+	std::vector<std::string> Split(std::string& input, char delimiter);
 
 	MapChip _mapData[MAP_CHIP_Y][MAP_CHIP_X];
 

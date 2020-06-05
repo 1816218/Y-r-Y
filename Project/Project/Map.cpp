@@ -7,24 +7,7 @@
 
 Map* Map::s_Instance = nullptr;
 
-Map::Map() : _mapChipSize(32,32)
-{
-	Init();
-}
-
-Map::~Map()
-{
-}
-
-void Map::Init(void)
-{
-	//-----ファイルの読み込み
-	ReadFile("Data/map.csv");
-
-	_ghMapScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
-	_ghFrool = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
-}
-
+//-----描画処理
 void Map::Draw(void)
 {
 	lpSceneMng.SetScreen(_ghMapScreen);
@@ -61,55 +44,84 @@ void Map::Draw(void)
 	lpSceneMng.AddDrawQue(10, { _ghFrool, 0, 0 });
 	lpSceneMng.RevScreen();
 }
+//-----当たり判定
+bool Map::Collision(Vector2F pos, Vector2F size)
+{
+	//座標をマップチップに変換
+	Vector2 chip = { (int)(pos.x + size.x) / _mapChipSize.x, (int)(pos.y + size.y) / _mapChipSize.y };
+
+	//壁に当たっていたら当たったことにする
+	if (_mapData[chip.y][chip.x].type == CHIP_TYPE::WALL)
+	{
+		return true;	//当たっている
+	}
+	return false;	//当たっていない
+}
+
+Map::Map() : _mapChipSize(32, 32)
+{
+	Init();
+}
+
+Map::~Map()
+{
+}
+//-----初期化処理
+void Map::Init(void)
+{
+	//ファイルの読み込み
+	ReadFile("Data/map.csv");
+
+	//描画対象にする画面の作成
+	_ghMapScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
+	_ghFrool = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
+}
 //-----ファイルの読み込み
 void Map::ReadFile(const std::string fileName)
 {
 	std::ifstream ifs;
 	std::string line;
+	int y = 0;
 
+	//ファイルを開く
 	ifs.open(fileName);
+	//ファイルを開くのに失敗したら処理をしない
 	if (ifs.fail())
 	{
 		return;
 	}
-	int y = 0;
+	//ファイルの終端まで一行ずつ読み込む
 	while (std::getline(ifs, line))
 	{
+		//カンマ区切りの文字列を格納する
 		std::vector<std::string> strVec = Split(line, ',');
-		for (int i = 0; i < strVec.size(); i++)
+
+		for (int x = 0; x < strVec.size(); x++)
 		{
-			_mapData[y][i].id = atoi(strVec.at(i).c_str());
-			if ((_mapData[y][i].id != 17) && (_mapData[y][i].id != 3) && (_mapData[y][i].id != 4))
+			//char→intへ変換した数値を代入
+			_mapData[y][x].id = atoi(strVec.at(x).c_str());
+
+			//壁として登録
+			if ((_mapData[y][x].id != 17) && (_mapData[y][x].id != 3) && (_mapData[y][x].id != 4))
 			{
-				_mapData[y][i].type = CHIP_TYPE::WALL;
+				_mapData[y][x].type = CHIP_TYPE::WALL;
 			}
 		}
 		y++;
 	}
-	ifs.close();
+	ifs.close();	//ファイルを閉じる
 }
 //-----文字列を格納
 std::vector<std::string> Map::Split(std::string& input, char delimiter)
 {
-	std::istringstream stream(input);
-	std::string filed;
-	std::vector<std::string> result;
+	std::istringstream			stream(input);	//読み込んだ一行分の文字
+	std::string					charString;		//文字列
+	std::vector<std::string>	result;			//一行分の文字列
 
-	while (std::getline(stream, filed, delimiter))
+	//指定した文字で区切った文字列を格納する
+	while (std::getline(stream, charString, delimiter))
 	{
-		result.push_back(filed);
+		result.push_back(charString);
 	}
-	return result;
+	return result;	//文字列を返す
 }
-
-bool Map::Collision(Vector2F pos, Vector2F size)
-{
-	Vector2 chip = { (int)(pos.x + size.x) / _mapChipSize.x, (int)(pos.y + size.y) / _mapChipSize.y };
-
-	if (_mapData[chip.y][chip.x].type == CHIP_TYPE::WALL)
-	{
-		return true;
-	}
-	return false;
-}
-
