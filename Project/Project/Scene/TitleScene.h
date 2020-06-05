@@ -11,7 +11,7 @@ public:
 	~TitleScene();
 
 	//内容の更新
-	unique_Base Update(unique_Base own) override;
+	void Update(void) override;
 	//シーン情報を取得する
 	SCN_ID GetSceneID(void) override;
 private:

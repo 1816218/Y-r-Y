@@ -19,13 +19,14 @@ void SceneMng::Run(void)
 		DeleteAllDrawList();
 
 		lpInputKey.Update();
+
+		SelectScene();
+
 		//動作させるシーン処理
 		if (_activeScene != nullptr)
 		{
-			_sceneID = _activeScene->GetSceneID();
-			_activeScene = _activeScene->Update(std::move(_activeScene));
+			_activeScene->Update();
 		}
-		_activeScene = SelectScene();
 
 		Draw();
 	}
@@ -126,29 +127,37 @@ bool SceneMng::SysInit(void)
 	}
 
 	_sceneID = SCN_ID::TITLE;
-	_activeScene = std::make_unique<TitleScene>();
+	_activeScene = std::make_unique<TitleScene>(Vector2F(_screenSize.x / 4, _screenSize.y / 3), 0);
 
 	return true;
 }
 //-----シーン切り替え
-unique_Base SceneMng::SelectScene(void)
+void SceneMng::SelectScene(void)
 {
-	switch (_sceneID)
+	if (ResetActiveScene())
 	{
-	case SCN_ID::TITLE:
-		if (_activeScene->GetSceneID() != _sceneID)
+		switch (_sceneID)
 		{
+		case SCN_ID::TITLE:
 			_activeScene.reset(new TitleScene({ _screenSize.x / 4, _screenSize.y / 3 }, 0));
-		}
-		break;
-	case SCN_ID::MAIN:
-		if (_activeScene->GetSceneID() != _sceneID)
-		{
+			break;
+		case SCN_ID::MAIN:
 			_activeScene.reset(new GameScene());
+			break;
+		case SCN_ID::OVER:
+			break;
 		}
-		break;
-	case SCN_ID::OVER:
-		break;
 	}
-	return std::move(_activeScene);
+}
+//-----シーンの解放
+bool SceneMng::ResetActiveScene(void)
+{
+	//現在のシーン情報が更新されていたら
+	//リソースを解放する
+	if (_activeScene->GetSceneID() != _sceneID)
+	{
+		_activeScene.reset();//リソースの解放
+		return true;
+	}
+	return false;
 }

@@ -18,7 +18,7 @@ TitleScene::~TitleScene()
 	lpSceneMng.DeleteAllDrawList();
 }
 //-----メイン処理
-unique_Base TitleScene::Update(unique_Base own)
+void TitleScene::Update(void)
 {
 	//起動したらフェードインさせる
 	if (_bright < 255)
@@ -37,8 +37,6 @@ unique_Base TitleScene::Update(unique_Base own)
 	}
 
 	Draw();
-
-	return std::move(own);	//現在のシーンを返す
 }
 //-----初期処理
 bool TitleScene::Init(void)

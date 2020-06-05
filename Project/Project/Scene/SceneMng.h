@@ -53,6 +53,7 @@ public:
 	//シーンを設定
 	//@param id 設定するシーン
 	void SetSceneID(const SCN_ID id);
+
 private:
 	struct SceneMngDeleter
 	{
@@ -67,7 +68,9 @@ private:
 	//システム初期化処理
 	bool SysInit(void);
 	//シーン切り替え処理
-	unique_Base SelectScene(void);
+	void SelectScene(void);
+	//シーンの解放
+	bool ResetActiveScene(void);
 
 	SCN_ID			_sceneID;			//シーンの状態
 	unique_Base		_activeScene;		//動作しているシーン

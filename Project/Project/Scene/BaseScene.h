@@ -18,7 +18,7 @@ class BaseScene
 public:
 	BaseScene() : _sceneID(SCN_ID::MAX) {}
 	virtual ~BaseScene() {}
-	virtual unique_Base Update(unique_Base own) = 0;
+	virtual void Update(void) = 0;
 	virtual SCN_ID GetSceneID(void) = 0;
 protected:
 	SCN_ID _sceneID;	//ÉVÅ[ÉìID

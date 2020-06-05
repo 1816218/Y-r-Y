@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "SceneMng.h"
 #include "../ImageMng.h"
+#include "../Obj.h"
 #include "../Player.h"
 #include "../Enemy.h"
 #include "../Map.h"
@@ -17,10 +18,9 @@ GameScene::~GameScene()
 	lpImageMng.DeleteAllImageMap();
 	lpSceneMng.DeleteAllDrawList();
 }
-
-unique_Base GameScene::Update(unique_Base own)
+//-----ƒQ[ƒ€ƒƒCƒ“ˆ—
+void GameScene::Update(void)
 {
-	//ƒQ[ƒ€ƒƒCƒ“‚Ìˆ—
 	for (auto obj : _objects)
 	{
 		obj->SetPos(_player->GetPos());
@@ -29,8 +29,6 @@ unique_Base GameScene::Update(unique_Base own)
 	_player->Update();
 
 	Draw();
-
-	return std::move(own);
 }
 //-----ƒV[ƒ“î•ñ‚ðŽæ“¾
 SCN_ID GameScene::GetSceneID(void)
@@ -43,7 +41,7 @@ bool GameScene::Init(void)
 	//‰æ‘œ‚Ì“Ç‚Ýž‚Ý
 	lpImageMng.SetID("player", "image/player.png", { 32.0f, 32.0f }, { 4, 4 });
 	lpImageMng.SetID("enemy", "image/enemy1.png", { 32.0f, 32.0f }, { 4, 4 });
-	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,4 });
+	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,7 });
 
 	//•`‰æ‘ÎÛ‚É‚·‚é‰æ–Ê‚Ìì¬
 	_ghGameScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
@@ -56,8 +54,6 @@ bool GameScene::Init(void)
 //-----•`‰æˆ—
 void GameScene::Draw(void)
 {
-	lpMap.Draw();
-
 	lpSceneMng.SetScreen(_ghGameScreen);
 	ClearDrawScreen();
 	for (auto obj : _objects)
@@ -67,4 +63,6 @@ void GameScene::Draw(void)
 	_player->Draw();
 	lpSceneMng.AddDrawQue( 1, { _ghGameScreen, 0, 0 });
 	lpSceneMng.RevScreen();
+
+	lpMap.Draw();
 }
