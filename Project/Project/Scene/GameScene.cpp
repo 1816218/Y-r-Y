@@ -13,7 +13,8 @@ GameScene::GameScene(): _gameScreenSize(800, 640)
 
 GameScene::~GameScene()
 {
-	lpSceneMng.DeleteDrawQue();
+	lpImageMng.DeleteAllImageMap();
+	lpSceneMng.DeleteAllDrawList();
 }
 
 unique_Base GameScene::Update(unique_Base own)
@@ -49,7 +50,12 @@ bool GameScene::Init(void)
 
 	_sceneID = SCN_ID::MAIN;
 
-	_ghGameScreen = MakeScreen(lpSceneMng.screenSize.x, lpSceneMng.screenSize.y, true);
+	_ghGameScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
+
+	//âÊëúÇÃì«Ç›çûÇ›
+	lpImageMng.SetID("player", "image/player.png", { 32.0f, 32.0f }, { 4, 4 });
+	lpImageMng.SetID("enemy", "image/enemy1.png", { 32.0f, 32.0f }, { 4, 4 });
+	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,4 });
 
 	return true;
 }

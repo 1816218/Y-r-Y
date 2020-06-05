@@ -5,7 +5,8 @@ class TitleScene :
 	public BaseScene
 {
 public:
-	TitleScene();
+	TitleScene() {}
+	TitleScene(const Vector2F& pos, const int bright);
 	~TitleScene();
 
 	unique_Base Update(unique_Base own) override;
@@ -17,7 +18,7 @@ private:
 	void Draw(void);
 
 	int _ghTitleScreen;
-	Vector2F pos;	//タイトルロゴの座標
-	float bright;	//明るさ
+	Vector2F _pos;	//タイトルロゴの座標
+	float _bright;	//明るさ
 };
 

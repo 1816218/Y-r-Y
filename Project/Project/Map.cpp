@@ -18,13 +18,11 @@ Map::~Map()
 
 void Map::Init(void)
 {
-	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,4 });
-
 	//-----ÉtÉ@ÉCÉãÇÃì«Ç›çûÇ›
 	ReadFile("Data/map.csv");
 
-	_ghMapScreen = MakeScreen(lpSceneMng.screenSize.x, lpSceneMng.screenSize.y, true);
-	_ghFrool = MakeScreen(lpSceneMng.screenSize.x, lpSceneMng.screenSize.y, true);
+	_ghMapScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
+	_ghFrool = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 }
 
 void Map::Draw(void)

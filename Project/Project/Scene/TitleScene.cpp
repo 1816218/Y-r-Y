@@ -4,7 +4,7 @@
 #include "SceneMng.h"
 #include "../ImageMng.h"
 
-TitleScene::TitleScene() : pos(200.0f, 200.0f), bright(0.0f)
+TitleScene::TitleScene(const Vector2F& pos, const int bright) : _pos(pos), _bright(bright)
 {
 	Init();
 }
@@ -12,16 +12,16 @@ TitleScene::TitleScene() : pos(200.0f, 200.0f), bright(0.0f)
 TitleScene::~TitleScene()
 {
 	lpImageMng.DeleteAllImageMap();
-	lpSceneMng.DeleteDrawQue();
+	lpSceneMng.DeleteAllDrawList();
 }
 
 unique_Base TitleScene::Update(unique_Base own)
 {
 	//起動したらフェードインさせる
-	if (bright < 255)
+	if (_bright < 255)
 	{
-		bright += 3;
-		SetDrawBright(bright, bright, bright);
+		_bright += 3;
+		DxLib::SetDrawBright(_bright, _bright, _bright);
 	}
 
 	Draw();
@@ -31,18 +31,24 @@ unique_Base TitleScene::Update(unique_Base own)
 //-----初期処理
 bool TitleScene::Init(void)
 {
-	_sceneID = SCN_ID::TITLE;
+	//画像の読み込み
 	lpImageMng.SetID("title", "image/title.png");
-	_ghTitleScreen = MakeScreen(lpSceneMng.screenSize.x, lpSceneMng.screenSize.y, true);
+
+	//描画する画面データの作成
+	_ghTitleScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
+
+	_sceneID = SCN_ID::TITLE;
+
 	return true;
 }
 //-----描画
 void TitleScene::Draw(void)
 {
+	//描画する画面を設定
 	lpSceneMng.SetScreen(_ghTitleScreen);
 	ClsDrawScreen();
 
-	DrawGraph(pos.x, pos.y, IMAGE_ID("title")[0], true);
+	DrawGraph(_pos.x, _pos.y, IMAGE_ID("title")[0], true);
 
 	lpSceneMng.AddDrawQue(0, { _ghTitleScreen, 0, 0 });
 	lpSceneMng.RevScreen();

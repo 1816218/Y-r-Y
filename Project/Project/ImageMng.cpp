@@ -65,8 +65,4 @@ bool ImageMng::DeleteAllImageMap(void)
 
 ImageMng::~ImageMng()
 {
-	if (!_imgMap.empty())
-	{
-		_imgMap.clear();
-	}
 }
