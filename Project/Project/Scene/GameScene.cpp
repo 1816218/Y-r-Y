@@ -61,8 +61,12 @@ void GameScene::Draw(void)
 		obj->Draw();
 	}
 	_player->Draw();
+<<<<<<< HEAD
+
+=======
 	lpSceneMng.AddDrawQue( 1, { _ghGameScreen, 0, 0 });
 	lpSceneMng.RevScreen();
 
 	lpMap.Draw();
+>>>>>>> 771dc45bd31f8128b59f03ac0014d23bafb2b9e9
 }
