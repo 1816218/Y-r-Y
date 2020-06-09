@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
 #include "BaseScene.h"
-#include "../Obj.h"
+
+class Obj;
 
 class GameScene :
 	public BaseScene
@@ -10,19 +11,19 @@ public:
 	GameScene();
 	~GameScene();
 
-
-	unique_Base Update(unique_Base own) override;
+	//内容の更新
+	void Update(void) override;
 
 	//シーンIDを取得
 	SCN_ID GetSceneID(void) override;
-	void SetSceneID(SCN_ID sceneID) override;
 private:
+	//初期化処理
 	bool Init(void);
+	//描画処理
 	void Draw(void);
 
-	Vector2F _gameScreenSize;	//スクリーンサイズ
-
-	std::vector<Obj*> _objects;
-	Obj* _player;
+	int					_ghGameScreen;	//描画対処にしたｸﾞﾗﾌｨｯｸﾊﾝﾄﾞﾙを保持
+	Obj*				_player;		//プレイヤー
+	std::vector<Obj*>	_objects;		//敵
 };
 

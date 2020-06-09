@@ -2,23 +2,30 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include "Scene/SceneMng.h"
 #include "VECTOR2.h"
 
 #define lpMap Map::GetInstance()
-#define MAP_CHIP_X 25
+#define MAP_CHIP_X 50
 #define MAP_CHIP_Y 20
 
-enum class CHIP_TYPE
+//マップチップの状態
+enum class CHIP_STATE
 {
-	WALL,	//壁
-	FLOOR	//床
+	HIT,		//当たる
+	NOT_HIT,	//当たらない
+	FRONT,		//前面
+	MAX
 };
 
 struct MapChip
 {
-	CHIP_TYPE type;	//チップ種類
-	int id;			//チップ番号
+	int			id;			//画像番号
+	Vector2		chipPos;	//チップ数
+	CHIP_STATE	state;		//マップチップの状態
 };
+
+using VecMap = std::vector<MapChip>;
 
 class Map
 {
@@ -33,21 +40,38 @@ public:
 	}
 	~Map();
 
-	void Init(void);
+	//描画処理
 	void Draw(void);
 
-	void ReadFile(const std::string fileName);
-
-	std::vector<std::string> Split(std::string& input, char delimiter);
-
 	//衝突判定
+	//@param pos 座標
+	//@param size サイズ
 	bool Collision(Vector2F pos, Vector2F size);
 private:
 	Map();
+	//初期化処理
+	void Init(void);
 
-	MapChip _mapData[MAP_CHIP_Y][MAP_CHIP_X];
+	//ファイルの読み込み
+	//@param fileName ファイル名
+	//@param chip マップチップ数
+	//@param flag 描画対象(true：前面、false：後面)
+	void ReadFile(const std::string fileName, const Vector2& chip, bool flag);
 
-	Vector2 _mapChipSize;	//マップチップのサイス
+	//特定の文字で区切った文字列を返す
+	//@param input 読み込んだ一行分の文字列
+	//@param delimiter 区切る文字
+	std::vector<std::string> Split(std::string& input, char delimiter);
+
+	//画面に描画
+	void DrawScreen(std::vector<MapChip>& mapData, int localZorder, DrawQueT que);
+
+	int		_ghFrontScreen;	//前画面
+	int		_ghBackScreen;	//後画面
+	std::vector<MapChip>	_mapFront;		//マップデータを保持(前面)
+	std::vector<MapChip>	_mapBack;		//マップデータを保持(後面)
+	Vector2					_mapChip;		//マップチップの最大数
+	Vector2					_mapChipSize;	//マップチップのサイズ
 
 	static Map* s_Instance;
 };
