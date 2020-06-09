@@ -59,4 +59,5 @@ void GameScene::Draw(void)
 		obj->Draw();
 	}
 	_player->Draw();
+
 }
