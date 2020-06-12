@@ -43,7 +43,7 @@ bool TitleScene::Init(void)
 {
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
 	lpImageMng.SetID("title", "image/title.png");
-
+	PlayMusic("Sound/title.mp3", DX_PLAYTYPE_LOOP);
 	//•`‰æ‚·‚é‰æ–Êƒf[ƒ^‚Ìì¬
 	_ghTitleScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 
