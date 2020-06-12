@@ -54,6 +54,8 @@ bool GameScene::Init(void)
 //-----•`‰æˆ—
 void GameScene::Draw(void)
 {
+	lpMap.Draw();
+
 	lpSceneMng.SetScreen(_ghGameScreen);
 	ClearDrawScreen();
 	for (auto obj : _objects)
@@ -63,6 +65,4 @@ void GameScene::Draw(void)
 	_player->Draw();
 	lpSceneMng.AddDrawQue( 1, { _ghGameScreen, 0, 0 });
 	lpSceneMng.RevScreen();
-
-	lpMap.Draw();
 }
