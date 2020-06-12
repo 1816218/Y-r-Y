@@ -29,6 +29,7 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="Scene\OverScene.cpp" />
     <ClCompile Include="Scene\SceneMng.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
   </ItemGroup>
@@ -45,6 +46,7 @@
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Scene\OverScene.h" />
     <ClInclude Include="Scene\SceneMng.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="VECTOR2.h" />
