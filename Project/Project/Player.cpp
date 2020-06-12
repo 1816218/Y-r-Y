@@ -26,6 +26,7 @@ bool Player::Init(void)
 	_moveFlag = false;
 	_direction = CHARA_DIR::DOWN;
 	_animCnt = 0;
+
 	return true;
 }
 

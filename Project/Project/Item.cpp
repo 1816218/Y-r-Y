@@ -5,8 +5,6 @@
 #include "Item.h"
 Item::Item()
 {
-	_pos = { 0,0 };
-	_size = { 32,32 };
 	Init();
 }
 
@@ -17,6 +15,8 @@ Item::~Item()
 bool Item::Init(void)
 {
 
+	_pos = { 0,0 };
+	_size = { 32,32 };
 
 
 
@@ -27,11 +27,14 @@ void Item::mapItem(void)
 {
 	while (Init()==true) {
 		_pos = { GetRand(MAP_CHIP_X - 1) * _size.x + 8, GetRand(32 - 1) * _size.y + 8 };
+
 	}
 
 }
 //-----•`‰æ
 void Item::Draw(void)
 {
-	DrawRotaGraph(_pos.x, _pos.y, 1.0f, 0, IMAGE_ID("enemy2")[0], true);
+	DrawRotaGraph(_pos.x, _pos.y, 1.0f, 0, IMAGE_ID("corone")[0], true);
+	DrawRotaGraph(_pos.x, _pos.y, 1.0f, 0, IMAGE_ID("Elixir")[0], true);
+
 }
