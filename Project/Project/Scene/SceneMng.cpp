@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "SceneMng.h"
 #include "TitleScene.h"
+#include"OverScene.h"
 #include "GameScene.h"
 #include "../ImageMng.h"
 #include "../InputKey.h"
@@ -145,6 +146,7 @@ void SceneMng::SelectScene(void)
 			_activeScene.reset(new GameScene());
 			break;
 		case SCN_ID::OVER:
+			_activeScene.reset(new OverScene({ _screenSize.x / 4, _screenSize.y / 3 }, 0));
 			break;
 		}
 	}
