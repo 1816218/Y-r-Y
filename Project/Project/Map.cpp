@@ -4,7 +4,6 @@
 #include <cmath>
 #include "Map.h"
 #include "ImageMng.h"
-#include "Scene/SceneMng.h"
 
 Map* Map::s_Instance = nullptr;
 
@@ -58,17 +57,14 @@ Map::~Map()
 void Map::Init(void)
 {
 	//ファイルの読み込み
-	//ReadFile("Data/stage1_front.csv", { 50, 20 }, true);
-	//ReadFile("Data/stage1_back.csv", { 50, 20 }, false);
+	ReadFile(DRAW_SCREEN::FRONT, "Data/stage1_front.csv");
+	ReadFile(DRAW_SCREEN::BACK, "Data/stage1_back.csv");
 
 	//描画対象にする画面の作成
 	_ghFrontScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 	_ghBackScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 }
 //-----ファイルの読み込み
-//@param fileName ファイル名
-//@param chip マップチップ数
-//@param flag 描画対象(true：前面、false：後面)
 bool Map::ReadFile(DRAW_SCREEN screen, const std::string& fileName)
 {
 	std::ifstream ifs;
@@ -104,14 +100,24 @@ bool Map::ReadFile(DRAW_SCREEN screen, const std::string& fileName)
 		for (int x = 0; x < strVec.size(); x++)
 		{
 			//char→intへ変換した数値を代入
-			int num = atoi(line.c_str());
+			int num = atoi(strVec.at(x).c_str());
 
 			data.id = num / 10;
 			data.chipPos = { x, y };
 
-			//衝突判定用IDの登録
-			data.state = num % 10 == 0 ? CHIP_STATE::HIT : CHIP_STATE::NOT_HIT;
-
+			//チップの状態を登録
+			if (num % 10 == 0)
+			{
+				data.state = CHIP_STATE::HIT;
+			}
+			else if (num % 10 == 1)
+			{
+				data.state = CHIP_STATE::NOT_HIT;
+			}
+			else
+			{
+				data.state = CHIP_STATE::NOT_DRAW;
+			}
 			map.push_back(data);
 		}
 	}
@@ -136,17 +142,17 @@ std::vector<std::string> Map::Split(std::string& input, char delimiter)
 	return result;	//文字列を返す
 }
 //----画面に描画
-void Map::DrawScreen(VecMap& mapData, int localZorder, DrawQueT que)
+void Map::DrawScreen(VecMap& mapData, int localZorder, DrawQueT drawQue)
 {
-	lpSceneMng.SetScreen(std::get<static_cast<int>(DRAW_QUE::IMAGE)>(que));
+	lpSceneMng.SetScreen(std::get<static_cast<int>(DRAW_QUE::IMAGE)>(drawQue));
 	ClearDrawScreen();
 	for (auto map : mapData)
 	{
-		if (map.id >= 0)
+		if (map.state != CHIP_STATE::NOT_DRAW)
 		{
-			DrawGraph(map.chipPos.x * _mapChipSize.x, map.chipPos.y * _mapChipSize.y, IMAGE_ID("map")[map.id], true);
+ 			DrawGraph(map.chipPos.x * _mapChipSize.x, map.chipPos.y * _mapChipSize.y, IMAGE_ID("map")[map.id], true);
 		}
 	}
-	lpSceneMng.AddDrawQue(localZorder, que);
+	lpSceneMng.AddDrawQue(localZorder, drawQue);
 	lpSceneMng.RevScreen();
 }

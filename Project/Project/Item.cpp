@@ -26,7 +26,7 @@ bool Item::Init(void)
 void Item::mapItem(void)
 {
 	while (Init()==true) {
-		_pos = { GetRand(MAP_CHIP_X - 1) * _size.x + 8, GetRand(32 - 1) * _size.y + 8 };
+		_pos = { GetRand(50 - 1) * _size.x + 8, GetRand(32 - 1) * _size.y + 8 };
 
 	}
 
