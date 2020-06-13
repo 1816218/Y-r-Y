@@ -11,8 +11,17 @@ Map* Map::s_Instance = nullptr;
 //-----描画処理
 void Map::Draw(void)
 {
-	DrawScreen(_mapFront, 100, { _ghFrontScreen, 0, 0 });
-	DrawScreen(_mapBack, 0, { _ghBackScreen, 0, 0 });
+	for (auto map : _mapData)
+	{
+		if (map.first == DRAW_SCREEN::FRONT)
+		{
+			DrawScreen(map.second, 100, { _ghFrontScreen, 0, 0 });
+		}
+		else
+		{
+			DrawScreen(map.second, 0, { _ghBackScreen, 0, 0 });
+		}
+	}
 }
 //-----当たり判定
 bool Map::Collision(Vector2F pos, Vector2F size)
@@ -21,9 +30,18 @@ bool Map::Collision(Vector2F pos, Vector2F size)
 	Vector2 chip = { (int)(pos.x + size.x ) / _mapChipSize.x, (int)(pos.y + size.y) / _mapChipSize.y };
 
 	//壁に当たっていたら当たったことにする
-	if(_mapBack.at(chip.y * MAP_CHIP_X + chip.x).state == CHIP_STATE::HIT)
+	for (auto map : _mapData)
 	{
-		return true;	//当たっている
+		for (auto data : map.second)
+		{
+			if (data.chipPos.x == chip.x && data.chipPos.y == chip.y)
+			{
+				if (data.state == CHIP_STATE::HIT)
+				{
+					return true;	//当たっている
+				}
+			}
+		}
 	}
 	return false;	//当たっていない
 }
@@ -40,8 +58,8 @@ Map::~Map()
 void Map::Init(void)
 {
 	//ファイルの読み込み
-	ReadFile("Data/stage1_front.csv", { 50, 20 }, true);
-	ReadFile("Data/stage1_back.csv", { 50, 20 }, false);
+	//ReadFile("Data/stage1_front.csv", { 50, 20 }, true);
+	//ReadFile("Data/stage1_back.csv", { 50, 20 }, false);
 
 	//描画対象にする画面の作成
 	_ghFrontScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
@@ -51,68 +69,57 @@ void Map::Init(void)
 //@param fileName ファイル名
 //@param chip マップチップ数
 //@param flag 描画対象(true：前面、false：後面)
-void Map::ReadFile(const std::string fileName, const Vector2& chip, bool flag)
+bool Map::ReadFile(DRAW_SCREEN screen, const std::string& fileName)
 {
 	std::ifstream ifs;
 	std::string line;
 	MapChip data;
-	int y = 0;
-
-	//チップの最大数を設定
-	_mapChip = chip;
+	VecMap map;
 
 	//ファイルを開く
 	ifs.open(fileName);
+
 	//ファイルを開くのに失敗したら処理をしない
 	if (ifs.fail())
 	{
-		return;
+		return false;
+	}
+
+	{//マップチップの最大数を設定
+		//カンマ区切りで文字列を格納する
+		std::getline(ifs, line);
+		std::vector<std::string> strVec = Split(line, ',');
+		_mapChip = { atoi(strVec.at(0).c_str()), atoi(strVec.at(1).c_str()) };
 	}
 
 	//メモリの確保(マップチップの総数)
-	if (flag)
-	{
-		_mapFront.reserve(_mapChip.x * _mapChip.y);
-	}
-	else
-	{
-		_mapBack.reserve(_mapChip.x * _mapChip.y);
-	}
+	map.reserve(_mapChip.y * _mapChip.x);
 
-	//ファイルの終端まで一行ずつ読み込む
-	while (std::getline(ifs, line))
+	for(int y = 0; y<_mapChip.y; y++)
 	{
-		//カンマ区切りの文字列を格納する
+		//カンマ区切りで文字列を格納する
+		std::getline(ifs, line);
 		std::vector<std::string> strVec = Split(line, ',');
 
 		for (int x = 0; x < strVec.size(); x++)
 		{
 			//char→intへ変換した数値を代入
-			data.id = atoi(strVec.at(x).c_str());
+			int num = atoi(line.c_str());
+
+			data.id = num / 10;
 			data.chipPos = { x, y };
 
-			//当たり判定用のIDの登録
-			if (flag)
-			{
-				data.state = CHIP_STATE::FRONT;
-				_mapFront.push_back(data);
-			}
-			else
-			{
-				if (data.id >= 0)
-				{
-					data.state = CHIP_STATE::HIT;	//当たる
-				}
-				else
-				{
-					data.state = CHIP_STATE::NOT_HIT;	//当たらない
-				}
-				_mapBack.push_back(data);
-			}
+			//衝突判定用IDの登録
+			data.state = num % 10 == 0 ? CHIP_STATE::HIT : CHIP_STATE::NOT_HIT;
+
+			map.push_back(data);
 		}
-		y++;
 	}
 	ifs.close();	//ファイルを閉じる
+
+	_mapData.push_back(std::make_pair(screen, map));
+
+	return true;
 }
 //-----文字列を格納
 std::vector<std::string> Map::Split(std::string& input, char delimiter)
@@ -129,23 +136,15 @@ std::vector<std::string> Map::Split(std::string& input, char delimiter)
 	return result;	//文字列を返す
 }
 //----画面に描画
-void Map::DrawScreen(std::vector<MapChip>& mapData, int localZorder, DrawQueT que)
+void Map::DrawScreen(VecMap& mapData, int localZorder, DrawQueT que)
 {
-	//前面に描画
 	lpSceneMng.SetScreen(std::get<static_cast<int>(DRAW_QUE::IMAGE)>(que));
 	ClearDrawScreen();
 	for (auto map : mapData)
 	{
-		if (map.state == CHIP_STATE::FRONT)
+		if (map.id >= 0)
 		{
-			if (map.id >= 0)
-			{
-				DrawGraph(map.chipPos.x * _mapChipSize.x, map.chipPos.y * _mapChipSize.y, IMAGE_ID("map")[map.id], true);
-			}
-		}
-		else
-		{
-			DrawGraph(map.chipPos.x * _mapChipSize.x, map.chipPos.y * _mapChipSize.y, IMAGE_ID("map")[abs(map.id)], true);
+			DrawGraph(map.chipPos.x * _mapChipSize.x, map.chipPos.y * _mapChipSize.y, IMAGE_ID("map")[map.id], true);
 		}
 	}
 	lpSceneMng.AddDrawQue(localZorder, que);

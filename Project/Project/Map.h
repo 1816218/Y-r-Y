@@ -18,14 +18,23 @@ enum class CHIP_STATE
 	MAX
 };
 
+//描画対象にする画面
+enum class DRAW_SCREEN
+{
+	FRONT,	//前画面
+	BACK,	//後ろ画面
+	MAX
+};
+
 struct MapChip
 {
 	int			id;			//画像番号
-	Vector2		chipPos;	//チップ数
+	Vector2		chipPos;	//マップチップ座標
 	CHIP_STATE	state;		//マップチップの状態
 };
 
 using VecMap = std::vector<MapChip>;
+using PairMap = std::pair<DRAW_SCREEN, VecMap>;
 
 class Map
 {
@@ -56,7 +65,7 @@ private:
 	//@param fileName ファイル名
 	//@param chip マップチップ数
 	//@param flag 描画対象(true：前面、false：後面)
-	void ReadFile(const std::string fileName, const Vector2& chip, bool flag);
+	bool ReadFile(DRAW_SCREEN screen, const std::string& fileName);
 
 	//特定の文字で区切った文字列を返す
 	//@param input 読み込んだ一行分の文字列
@@ -64,12 +73,15 @@ private:
 	std::vector<std::string> Split(std::string& input, char delimiter);
 
 	//画面に描画
-	void DrawScreen(std::vector<MapChip>& mapData, int localZorder, DrawQueT que);
+	void DrawScreen(VecMap& mapData, int localZorder, DrawQueT que);
 
 	int		_ghFrontScreen;	//前画面
 	int		_ghBackScreen;	//後画面
 	std::vector<MapChip>	_mapFront;		//マップデータを保持(前面)
 	std::vector<MapChip>	_mapBack;		//マップデータを保持(後面)
+
+	std::vector<std::pair<DRAW_SCREEN, VecMap>> _mapData;
+
 	Vector2					_mapChip;		//マップチップの最大数
 	Vector2					_mapChipSize;	//マップチップのサイズ
 
