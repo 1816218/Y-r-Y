@@ -72,11 +72,11 @@ private:
 	//シーンの解放
 	bool ResetActiveScene(void);
 
-	SCN_ID			_sceneID;			//シーンの状態
-	unique_Base		_activeScene;		//動作しているシーン
-	const Vector2F	_screenSize;		// 画面の大きさ
-	int				_ghBefor;			//前の画面
-	std::vector<std::pair<int, DrawQueT>> _drawList;	//描画するもの
+	SCN_ID									_sceneID;		//シーンの状態
+	unique_Base								_activeScene;	//動作しているシーン
+	const Vector2F							_screenSize;	//画面の大きさ
+	int										_ghBefor;		//前の画面
+	std::vector<std::pair<int, DrawQueT>>	_drawList;		//描画するもの
 
 	static std::unique_ptr<SceneMng, SceneMngDeleter> s_Instance;
 };

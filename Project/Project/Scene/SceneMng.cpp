@@ -1,11 +1,11 @@
 #include <DxLib.h>
 #include <algorithm>
-#include "SceneMng.h"
 #include "TitleScene.h"
-#include"OverScene.h"
+#include "SceneMng.h"
 #include "GameScene.h"
-#include "../ImageMng.h"
+#include "OverScene.h"
 #include "../InputKey.h"
+#include "../ImageMng.h"
 
 std::unique_ptr<SceneMng, SceneMng::SceneMngDeleter> SceneMng::s_Instance(new SceneMng);
 
