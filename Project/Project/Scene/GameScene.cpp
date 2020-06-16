@@ -47,7 +47,7 @@ bool GameScene::Init(void)
 	_ghGameScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 
 	_player = new Player({ 800 / 2, 640 / 3 }, { 32, 32 });
-	_objects.push_back(new Enemy({ 100, 100 }, { 32,32 }));
+	_objects.push_back(new Enemy({ 200, 200 }, { 32,32 }));
 
 	return true;
 }
