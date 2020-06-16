@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include <algorithm>
+#include <assert.h>
 #include "TitleScene.h"
 #include "SceneMng.h"
 #include "GameScene.h"
@@ -148,6 +149,8 @@ void SceneMng::SelectScene(void)
 		case SCN_ID::OVER:
 			_activeScene.reset(new OverScene({ _screenSize.x / 4, _screenSize.y / 3 }, 0));
 			break;
+		default:
+			assert(0);
 		}
 	}
 }

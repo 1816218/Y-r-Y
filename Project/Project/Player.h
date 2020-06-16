@@ -6,7 +6,11 @@
 class Player : public Obj
 {
 public:
-	Player() {}
+	Player() : 
+		_moveFlag(false),
+		_direction(CHARA_DIR::MAX), 
+		_animCnt(0)  
+	{}
 	Player(const Vector2F& pos, const Vector2F& size);
 	~Player();
 
@@ -34,6 +38,9 @@ public:
 	const double GetExRate(void);
 	void SetExRate(const double exRate);
 private:
+	
+	void AddMove(const KEY_CODE& key, const CHARA_DIR& dir, float& move, float add);
+
 	bool _moveFlag;			//true:移動、false:停止
 	CHARA_DIR _direction;	//向き
 	int _animCnt;			//アニメーションカウント

@@ -27,6 +27,8 @@ bool Player::Init(void)
 	_direction = CHARA_DIR::DOWN;
 	_animCnt = 0;
 
+
+
 	return true;
 }
 
@@ -49,48 +51,21 @@ void Player::Draw(void)
 //-----à⁄ìÆèàóù
 void Player::Move(void)
 {
-	auto move = [&](bool flag, const CHARA_DIR& dir, const Vector2F& speed)
-	{
-		if (!flag)
-		{
-			_moveFlag = true;
-		}
+	_moveFlag = false;
 
-		if (_direction != dir)
-		{
-			_direction = dir;
-		}
-		_pos += speed;
-	};
+	Vector2F movePos = _pos;
+	AddMove(_1P_UP, CHARA_DIR::UP, movePos.y, -1);
+	AddMove(_1P_RIGHT, CHARA_DIR::RIGHT, movePos.x, 1);
+	AddMove(_1P_LEFT, CHARA_DIR::LEFT, movePos.x, -1);
+	AddMove(_1P_DOWN, CHARA_DIR::DOWN, movePos.y, 1);
 
-	//ÉLÅ[ì¸óÕÇ…ÇÊÇÈà⁄ìÆ
-	if (lpInputKey.newKey[KEY_CODE::_1P_UP])
+	if (!lpMap.Collision(movePos))
 	{
-		if (!lpMap.Collision(_pos, { 0, 0 }))
-		{
-			move(_moveFlag, CHARA_DIR::UP, { 0, -1 });
-		}
+		_pos = movePos;
 	}
-	if (lpInputKey.newKey[KEY_CODE::_1P_RIGHT])
+	else
 	{
-		if (!lpMap.Collision(_pos, { 16, 0 }))
-		{
-			move(_moveFlag, CHARA_DIR::RIGHT, { 1, 0 });
-		}
-	}
-	if (lpInputKey.newKey[KEY_CODE::_1P_LEFT])
-	{
-		if (!lpMap.Collision(_pos, { -16, 0 }))
-		{
-			move(_moveFlag, CHARA_DIR::LEFT, { -1, 0 });
-		}
-	}
-	if (lpInputKey.newKey[KEY_CODE::_1P_DOWN])
-	{
-		if (!lpMap.Collision(_pos, { 0, 16 }))
-		{
-			move(_moveFlag, CHARA_DIR::DOWN, { 0, 1 });
-		}
+		_moveFlag = false;
 	}
 }
 
@@ -136,4 +111,13 @@ void Player::SetExRate(const double exRate)
 	_exRate = exRate;
 }
 
+void Player::AddMove(const KEY_CODE& key, const CHARA_DIR& dir, float& move, float add)
+{
+	if (lpInputKey.newKey[key])
+	{
+		_moveFlag = true;
+		_direction = dir;
+		move += add;
+	}
+}
 

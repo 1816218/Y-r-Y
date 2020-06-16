@@ -52,7 +52,7 @@ public:
 	//衝突判定
 	//@param pos 座標
 	//@param size サイズ
-	bool Collision(Vector2F pos, Vector2F size);
+	bool Collision(const Vector2F& pos, const Vector2F& size = {});
 private:
 	Map();
 
@@ -73,7 +73,7 @@ private:
 	//@param mapData マップデータ
 	//@param localZorder 描画順(昇順)
 	//@param drawQue 描画する画面(ｸﾞﾗﾌｨｯｸﾊﾝﾄﾞﾙ、ｘ、ｙ)
-	void DrawScreen(VecMap& mapData, int localZorder, DrawQueT drawQue);
+	void DrawScreen(const VecMap& mapData, int localZorder, DrawQueT drawQue);
 
 	int						_ghFrontScreen;	//前画面
 	int						_ghBackScreen;	//後画面

@@ -23,10 +23,11 @@ void Map::Draw(void)
 	}
 }
 //-----当たり判定
-bool Map::Collision(Vector2F pos, Vector2F size)
+bool Map::Collision(const Vector2F& pos, const Vector2F& size)
 {
 	//座標をマップチップに変換
-	Vector2 chip = { (int)(pos.x + size.x ) / _mapChipSize.x, (int)(pos.y + size.y) / _mapChipSize.y };
+	Vector2 chip(static_cast<int>(pos.x + size.x) / _mapChipSize.x,
+				 static_cast<int>(pos.y + size.y) / _mapChipSize.y);
 
 	//壁に当たっていたら当たったことにする
 	for (auto map : _mapData)
@@ -89,7 +90,7 @@ bool Map::ReadFile(DRAW_SCREEN screen, const std::string& fileName)
 	}
 
 	//メモリの確保(マップチップの総数)
-	map.reserve(_mapChip.y * _mapChip.x);
+	map.resize(_mapChip.y * _mapChip.x);
 
 	for(int y = 0; y<_mapChip.y; y++)
 	{
@@ -118,7 +119,7 @@ bool Map::ReadFile(DRAW_SCREEN screen, const std::string& fileName)
 			{
 				data.state = CHIP_STATE::NOT_DRAW;
 			}
-			map.push_back(data);
+			map.at(y * _mapChip.x + x) = data;
 		}
 	}
 	ifs.close();	//ファイルを閉じる
@@ -142,7 +143,7 @@ std::vector<std::string> Map::Split(std::string& input, char delimiter)
 	return result;	//文字列を返す
 }
 //----画面に描画
-void Map::DrawScreen(VecMap& mapData, int localZorder, DrawQueT drawQue)
+void Map::DrawScreen(const VecMap& mapData, int localZorder, DrawQueT drawQue)
 {
 	lpSceneMng.SetScreen(std::get<static_cast<int>(DRAW_QUE::IMAGE)>(drawQue));
 	ClearDrawScreen();
