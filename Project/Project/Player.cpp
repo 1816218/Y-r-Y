@@ -4,6 +4,11 @@
 #include "ImageMng.h"
 #include "Map.h"
 
+Player::Player()
+{
+	Init();
+}
+
 Player::Player(const Vector2F& pos, const Vector2F& size)
 {
 	_pos = pos;
@@ -19,16 +24,17 @@ bool Player::Init(void)
 {
 	_angle = 0.0;
 	_exRate = 1.0;
-
 	_alive = true;
 	_death = false;
 
+	_animCnt = 0;
 	_moveFlag = false;
 	_direction = CHARA_DIR::DOWN;
-	_animCnt = 0;
-
-
-
+	_edg = { Vector2F(-_size.x / 2, -_size.y / 4),
+			 Vector2F(_size.x / 2, -_size.y / 4),
+			 Vector2F(-_size.x / 2, _size.y / 2),
+			 Vector2F(_size.x / 2, _size.y / 2)};
+	_speed = 1.5f;
 	return true;
 }
 
@@ -53,20 +59,11 @@ void Player::Move(void)
 {
 	_moveFlag = false;
 
-	Vector2F movePos = _pos;
-	AddMove(_1P_UP, CHARA_DIR::UP, movePos.y, -1);
-	AddMove(_1P_RIGHT, CHARA_DIR::RIGHT, movePos.x, 1);
-	AddMove(_1P_LEFT, CHARA_DIR::LEFT, movePos.x, -1);
-	AddMove(_1P_DOWN, CHARA_DIR::DOWN, movePos.y, 1);
-
-	if (!lpMap.Collision(movePos))
-	{
-		_pos = movePos;
-	}
-	else
-	{
-		_moveFlag = false;
-	}
+	//è’ìÀÇµÇƒÇ¢Ç»Ç©Ç¡ÇΩÇÁà⁄ìÆÇ∑ÇÈ
+	AddMove(_1P_UP,		CHARA_DIR::UP,		{       0, -_speed });
+	AddMove(_1P_RIGHT,	CHARA_DIR::RIGHT,	{  _speed,       0 });
+	AddMove(_1P_LEFT,	CHARA_DIR::LEFT,	{ -_speed,       0 });
+	AddMove(_1P_DOWN,	CHARA_DIR::DOWN,	{       0,  _speed });
 }
 
 //-----GetÅESet
@@ -110,14 +107,38 @@ void Player::SetExRate(const double exRate)
 {
 	_exRate = exRate;
 }
-
-void Player::AddMove(const KEY_CODE& key, const CHARA_DIR& dir, float& move, float add)
+//-----à⁄ìÆó ÇÃâ¡éZ
+void Player::AddMove(const KEY_CODE& key, const CHARA_DIR& dir, const Vector2F& add)
 {
+	Vector2F movePos = _pos;
+
+	//è’ìÀîªíËÇ∑ÇÈâ”èäÇ™àÍÇ¬Ç≈Ç‡ìñÇΩÇ¡ÇƒÇ¢ÇΩèÍçáÇÕê^Çï‘Ç∑
+	auto hitFlag = [&](const Vector2F& move)
+	{
+		for (auto edg : _edg)
+		{
+			if (lpMap.Collision(move, edg))
+			{
+				return true;
+			}
+		}
+		return false;
+	};
+
 	if (lpInputKey.newKey[key])
 	{
 		_moveFlag = true;
 		_direction = dir;
-		move += add;
+		movePos += add;
+
+		if (hitFlag(movePos))
+		{
+			_pos = movePos - add;	//ÇﬂÇËçûÇÒÇæï™ñﬂÇ∑
+		}
+		else
+		{
+			_pos = movePos;	//à⁄ìÆ
+		}
 	}
 }
 

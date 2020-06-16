@@ -1,16 +1,13 @@
 #pragma once
+#include <array>
 #include "Obj.h"
-#include"VECTOR2.h"
+#include "VECTOR2.h"
 #include "InputKey.h"
 
 class Player : public Obj
 {
 public:
-	Player() : 
-		_moveFlag(false),
-		_direction(CHARA_DIR::MAX), 
-		_animCnt(0)  
-	{}
+	Player();
 	Player(const Vector2F& pos, const Vector2F& size);
 	~Player();
 
@@ -39,9 +36,11 @@ public:
 	void SetExRate(const double exRate);
 private:
 	
-	void AddMove(const KEY_CODE& key, const CHARA_DIR& dir, float& move, float add);
+	void AddMove(const KEY_CODE& key, const CHARA_DIR& dir, const Vector2F& add);
 
-	bool _moveFlag;			//true:移動、false:停止
-	CHARA_DIR _direction;	//向き
-	int _animCnt;			//アニメーションカウント
+	int						_animCnt;		//アニメーションカウント
+	bool					_moveFlag;		//true:移動、false:停止
+	CHARA_DIR				_direction;		//向き
+	std::array<Vector2F, 4> _edg;			//衝突判定用
+	float					_speed;			//速度
 };
