@@ -3,7 +3,7 @@
 #include "ImageMng.h"
 #include "Map.h"
 
-#define PI 3.141592653589793	//‰~ü—¦(16Œ…)
+const float PI = 3.141592653589793f;	//‰~ü—¦(16Œ…)
 
 Enemy::Enemy()
 {
@@ -25,7 +25,6 @@ bool Enemy::Init(void)
 {
 	_angle = 0.0;
 	_exRate = 1.0;
-
 	_alive = true;
 	_death = false;
 
@@ -33,7 +32,11 @@ bool Enemy::Init(void)
 	_dir = CHARA_DIR::DOWN;
 	_moveFlag = false;
 	_animCnt = 0;
-	_animDir = _dir;
+
+	_edg = { Vector2F(-_size.x / 2, -_size.y / 4),
+			 Vector2F( _size.x / 2, -_size.y / 4),
+			 Vector2F(-_size.x / 2,  _size.y / 2),
+			 Vector2F( _size.x / 2,  _size.y / 2) };
 
 	return true;
 }
@@ -43,12 +46,12 @@ void Enemy::Update(void)
 	_moveFlag = false;
 
 	//ƒvƒŒƒCƒ„[‚Æ“G‚Æ‚Ì‹——£‚ğŒvZ
-	Vector2F direction = _playerPos - _pos;
+	Vector2F distance = _playerPos - _pos;
 	//³‹K‰»
-	direction.Normalize();
+	distance.Normalize();
 
 	//Šp“x‚ğ‹‚ß‚éŒvZ
-	double radian = atan2(direction.y, direction.x);
+	double radian = atan2(distance.y, distance.x);
 	double degree = radian * 180.0 / PI;
 
 	//Šp“x‚É‰‚¶‚Å“G‚ÌŒü‚«‚ğŒˆ‚ß‚é
@@ -68,34 +71,19 @@ void Enemy::Update(void)
 	{
 		_dir = CHARA_DIR::RIGHT;
 	}
-
 	//ˆÚ“®•ûŒüã‚Ì”ÍˆÍ“à‚ÉƒvƒŒƒCƒ„[‚ª‚¢‚½‚ç’Ç‚¢‚©‚¯‚é
-	auto tracking = [&](const CHARA_DIR dir, Vector2F ePos, Vector2F pPos)
-	{
-		if (_dir == dir)
-		{
-			DrawBox(ePos.x, ePos.y, ePos.x + 32 * 3, ePos.y + 32 * 3, 0xffffff, false);
-			if (ePos.x < pPos.x && pPos.x < ePos.x + 32.0f * 3
-				&& ePos.y < pPos.y && pPos.y < ePos.y + 32 * 3)
-			{
-				_animDir = _dir;
-				_moveFlag = true;
-				_pos += direction * _speed;
-			}
-		}
-	};
+	SetMove(CHARA_DIR::UP, { _pos.x - 48, _pos.y - 32 * 3 }, _playerPos);
+	SetMove(CHARA_DIR::RIGHT, { _pos.x, _pos.y - 48 }, _playerPos);
+	SetMove(CHARA_DIR::LEFT, { _pos.x - 32 * 3, _pos.y - 48 }, _playerPos);
+	SetMove(CHARA_DIR::DOWN, { _pos.x - 48, _pos.y }, _playerPos);
 
-	tracking(CHARA_DIR::UP, { _pos.x - 48, _pos.y - 32 * 3 }, _playerPos);
-	tracking(CHARA_DIR::RIGHT, { _pos.x, _pos.y - 48 }, _playerPos);
-	tracking(CHARA_DIR::LEFT, { _pos.x - 32 * 3, _pos.y - 48 }, _playerPos);
-	tracking(CHARA_DIR::DOWN, { _pos.x - 48, _pos.y }, _playerPos);
 }
 
 void Enemy::Draw(void)
 {
 	_moveFlag != false ? _animCnt++ : _animCnt = 0;
 
-	DrawRotaGraphF(_pos.x, _pos.y, _exRate, _angle, IMAGE_ID("enemy")[(static_cast<int>(_animDir) * 4) + (_animCnt / 20 % 4)], true);
+	DrawRotaGraphF(_pos.x, _pos.y, _exRate, _angle, IMAGE_ID("enemy")[(static_cast<int>(_dir) * 4) + (_animCnt / 20 % 4)], true);
 }
 
 const Vector2F& Enemy::GetPos(void)
@@ -136,4 +124,41 @@ const double Enemy::GetExRate(void)
 void Enemy::SetExRate(const double exRate)
 {
 	_exRate = exRate;
+}
+
+void Enemy::SetMove(const CHARA_DIR& dir, const Vector2F& ePos, const Vector2F& pPos)
+{
+	Vector2F move = _pos;
+	Vector2F distance = pPos - _pos;
+	distance.Normalize();
+
+	auto flag = [&]()
+	{
+		for (auto edg : _edg)
+		{
+			if (lpMap.Collision(move, edg))
+			{
+				return true;
+			}
+			return false;
+		}
+	};
+
+	if (_dir == dir)
+	{
+		if (ePos.x < pPos.x && pPos.x < ePos.x + 32.0f * 3
+			&& ePos.y < pPos.y && pPos.y < ePos.y + 32 * 3)
+		{
+			_moveFlag = true;
+			move += distance * _speed;
+			if (flag())
+			{
+				_pos = move;
+			}
+			else
+			{
+				_pos = move - (distance * _speed);
+			}
+		}
+	}
 }

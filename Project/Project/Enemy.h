@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include "Obj.h"
 #include "VECTOR2.h"
 
@@ -27,12 +28,13 @@ public:
 	const double GetExRate(void);
 	void SetExRate(const double exRate);
 private:
+	void SetMove(const CHARA_DIR& dir, const Vector2F& ePos, const Vector2F& pPos);
+
 	Vector2F _playerPos;
 	Vector2F _speed;
 	CHARA_DIR _dir;
 	bool _moveFlag;
-
 	int _animCnt;			//アニメーションカウント
-	CHARA_DIR _animDir;		//アニメーションの向き
+	std::array<Vector2F, 4> _edg;
 };
 
