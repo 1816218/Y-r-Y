@@ -83,7 +83,9 @@ void Enemy::Draw(void)
 {
 	_moveFlag != false ? _animCnt++ : _animCnt = 0;
 
-	DrawRotaGraphF(_pos.x, _pos.y, _exRate, _angle, IMAGE_ID("enemy")[(static_cast<int>(_dir) * 4) + (_animCnt / 20 % 4)], true);
+	DrawRotaGraphF( _pos.x - lpMap.GetScrooll().x,
+					_pos.y - lpMap.GetScrooll().y,
+					_exRate, _angle, IMAGE_ID("enemy")[(static_cast<int>(_dir) * 4) + (_animCnt / 20 % 4)], true);
 }
 
 const Vector2F& Enemy::GetPos(void)

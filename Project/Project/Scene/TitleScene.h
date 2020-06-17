@@ -6,8 +6,7 @@ class TitleScene :
 	public BaseScene
 {
 public:
-	TitleScene() : _pos({ 0,0 }), _bright(0), _ghTitleScreen(0) {}
-	TitleScene(const Vector2F& pos, const int bright);
+	TitleScene();
 	~TitleScene();
 
 	//内容の更新
@@ -20,8 +19,9 @@ private:
 	//描画処理
 	void Draw(void);
 
-	Vector2F _pos;			//画像の座標
 	float	_bright;		//画面の明るさ
 	int		_ghTitleScreen;	//描画対象にするｸﾞﾗﾌｨｯｸﾊﾝﾄﾞﾙを保持する
+	int		_animFrame;		//アニメーション用
+	int		_alphaCount;		//画像のブレンド：アルファ値		
 };
 

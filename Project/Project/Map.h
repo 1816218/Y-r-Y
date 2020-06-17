@@ -53,6 +53,12 @@ public:
 	//@param pos 座標
 	//@param size サイズ
 	bool Collision(const Vector2F& pos, const Vector2F& size = {});
+	
+	//スクロール値取得
+	const Vector2F& GetScrooll(void) const;
+
+	//スクロール値の加算
+	void AddScroll(const Vector2F& move = {});
 private:
 	Map();
 
@@ -80,6 +86,7 @@ private:
 	std::vector<PairMap>	_mapData;		//マップデータ(描画する画面のID、マップデータ)
 	Vector2					_mapChip;		//マップチップの最大数
 	Vector2					_mapChipSize;	//マップチップのサイズ
+	Vector2F				_scroll;		//スクロールさせる移動量
 	static Map*				s_Instance;
 };
 

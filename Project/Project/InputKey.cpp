@@ -3,6 +3,7 @@
 
 InputKey* InputKey::s_Instance = nullptr;
 tagXINPUT_STATE xBox360input;//XbBox360パッド対応用の管理構造体（Dxlib固有）
+
 InputKey::InputKey()
 {
 	Init();

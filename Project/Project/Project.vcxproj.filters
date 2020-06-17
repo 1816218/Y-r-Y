@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="HitCheck.cpp" />
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="InputKey.cpp" />
     <ClCompile Include="main.cpp" />
@@ -18,7 +17,6 @@
   <ItemGroup>
     <ClInclude Include="details\VECTOR2.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="HitCheck.h" />
     <ClInclude Include="InputKey.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />

@@ -45,8 +45,21 @@ bool Map::Collision(const Vector2F& pos, const Vector2F& size)
 	}
 	return false;	//当たっていない
 }
+//-----スクロール値を取得
+const Vector2F& Map::GetScrooll(void) const
+{
+	return _scroll;
+}
+//-----スクロールの加算
+void Map::AddScroll(const Vector2F& move)
+{
+	_scroll += move;
+}
 
-Map::Map() : _mapChip(0,0), _mapChipSize(32, 32)
+Map::Map() : 
+	_mapChip(0, 0),
+	_mapChipSize(32, 32), 
+	_scroll({})
 {
 	Init();
 }
@@ -151,7 +164,9 @@ void Map::DrawScreen(const VecMap& mapData, int localZorder, DrawQueT drawQue)
 	{
 		if (map.state != CHIP_STATE::NOT_DRAW)
 		{
- 			DrawGraph(map.chipPos.x * _mapChipSize.x, map.chipPos.y * _mapChipSize.y, IMAGE_ID("map")[map.id], true);
+ 			DrawGraph(map.chipPos.x * _mapChipSize.x - _scroll.x,
+					  map.chipPos.y * _mapChipSize.y - _scroll.y,
+					 IMAGE_ID("map")[map.id], true);
 		}
 	}
 	lpSceneMng.AddDrawQue(localZorder, drawQue);

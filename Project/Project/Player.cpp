@@ -52,7 +52,9 @@ void Player::Draw(void)
 	//アニメーションカウントを増やす
 	_moveFlag != false ? _animCnt++ : _animCnt = 0;
 
-	DrawRotaGraphF(_pos.x, _pos.y, _exRate, _angle, IMAGE_ID("player")[(static_cast<int>(_direction) * 4) + (_animCnt / 20 % 4)], true);
+	DrawRotaGraphF( _pos.x - lpMap.GetScrooll().x,
+					_pos.y - lpMap.GetScrooll().y,
+					_exRate, _angle, IMAGE_ID("player")[(static_cast<int>(_direction) * 4) + (_animCnt / 20 % 4)], true);
 }
 //-----移動処理
 void Player::Move(void)
@@ -138,6 +140,19 @@ void Player::AddMove(const KEY_CODE& key, const CHARA_DIR& dir, const Vector2F& 
 		else
 		{
 			_pos = movePos;	//移動
+
+			if (lpSceneMng.GetScreenSize().x / 2 <= _pos.x 
+				&& _pos.x <= lpSceneMng.GetScreenSize().x/2 + lpSceneMng.GetScreenSize().x / 4)
+			{
+				lpMap.AddScroll({ add.x, 0 });
+			}
+
+			if (lpSceneMng.GetScreenSize().y / 2 <= _pos.y
+				&& _pos.y <= lpSceneMng.GetScreenSize().y / 2 + lpSceneMng.GetScreenSize().y / 4)
+			{
+				lpMap.AddScroll({ 0, add.y });
+
+			}
 		}
 	}
 }

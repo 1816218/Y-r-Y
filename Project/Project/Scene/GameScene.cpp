@@ -42,7 +42,8 @@ bool GameScene::Init(void)
 	lpImageMng.SetID("player", "image/player.png", { 32.0f, 32.0f }, { 4, 4 });
 	lpImageMng.SetID("enemy", "image/enemy1.png", { 32.0f, 32.0f }, { 4, 4 });
 	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,7 });
-	StopMusic();
+	lpImageMng.SetID("light", "image/light.png");
+
 	//•`‰æ‘ÎÛ‚É‚·‚é‰æ–Ê‚Ìì¬
 	_ghGameScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 
@@ -54,10 +55,9 @@ bool GameScene::Init(void)
 //-----•`‰æˆ—
 void GameScene::Draw(void)
 {
-	lpMap.Draw();
-
 	lpSceneMng.SetScreen(_ghGameScreen);
 	ClearDrawScreen();
+	lpMap.Draw();
 	for (auto obj : _objects)
 	{
 		obj->Draw();

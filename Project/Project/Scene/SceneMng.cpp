@@ -104,7 +104,7 @@ void SceneMng::SetSceneID(const SCN_ID id)
 }
 
 SceneMng::SceneMng()
-	: _screenSize(800, 600), 
+	: _screenSize(1280, 960), 
 	_ghBefor(0), 
 	_sceneID(SCN_ID::MAX),
 	_activeScene(nullptr)
@@ -129,7 +129,7 @@ bool SceneMng::SysInit(void)
 	}
 
 	_sceneID = SCN_ID::TITLE;
-	_activeScene = std::make_unique<TitleScene>(Vector2F(_screenSize.x / 4, _screenSize.y / 3), 0);
+	_activeScene = std::make_unique<TitleScene>();
 
 	return true;
 }
@@ -141,7 +141,7 @@ void SceneMng::SelectScene(void)
 		switch (_sceneID)
 		{
 		case SCN_ID::TITLE:
-			_activeScene.reset(new TitleScene({ _screenSize.x / 4, _screenSize.y / 3 }, 0));
+			_activeScene = std::make_unique<TitleScene>();
 			break;
 		case SCN_ID::MAIN:
 			_activeScene.reset(new GameScene());
