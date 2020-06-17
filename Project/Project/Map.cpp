@@ -55,6 +55,16 @@ void Map::AddScroll(const Vector2F& move)
 {
 	_scroll += move;
 }
+//-----マップチップの総数取得
+const Vector2& Map::GetMapChipMax(void) const
+{
+	return _mapChip;
+}
+//-----マップチップサイス取得
+const Vector2& Map::GetMapChipSize(void) const
+{
+	return _mapChipSize;
+}
 
 Map::Map() : 
 	_mapChip(0, 0),

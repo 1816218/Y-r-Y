@@ -141,14 +141,15 @@ void Player::AddMove(const KEY_CODE& key, const CHARA_DIR& dir, const Vector2F& 
 		{
 			_pos = movePos;	//移動
 
+			//スクロール値を設定
 			if (lpSceneMng.GetScreenSize().x / 2 <= _pos.x 
-				&& _pos.x <= lpSceneMng.GetScreenSize().x/2 + lpSceneMng.GetScreenSize().x / 4)
+				&& _pos.x <= lpMap.GetMapChipMax().x * lpMap.GetMapChipSize().x - lpSceneMng.GetScreenSize().x/2)
 			{
 				lpMap.AddScroll({ add.x, 0 });
 			}
 
 			if (lpSceneMng.GetScreenSize().y / 2 <= _pos.y
-				&& _pos.y <= lpSceneMng.GetScreenSize().y / 2 + lpSceneMng.GetScreenSize().y / 4)
+				&& _pos.y <= lpMap.GetMapChipMax().y * lpMap.GetMapChipSize().y - lpSceneMng.GetScreenSize().y / 2)
 			{
 				lpMap.AddScroll({ 0, add.y });
 
