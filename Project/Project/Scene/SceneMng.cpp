@@ -104,7 +104,7 @@ void SceneMng::SetSceneID(const SCN_ID id)
 }
 
 SceneMng::SceneMng()
-	: _screenSize(1280, 960), 
+	: _screenSize(800, 600), 
 	_ghBefor(0), 
 	_sceneID(SCN_ID::MAX),
 	_activeScene(nullptr)
@@ -120,7 +120,7 @@ bool SceneMng::SysInit(void)
 {
 	DxLib::ChangeWindowMode(true);										//true:window false:フルスクリーン
 	DxLib::SetWindowText("Coronet Pandemic");							//window名
-	DxLib::SetGraphMode((int)_screenSize.x, (int)_screenSize.y, 32);	//１６６７万色モードにする
+	DxLib::SetGraphMode((int)_screenSize.x, (int)_screenSize.y, 16);	//１６６７万色モードにする
 
 	//DXﾗｲﾌﾞﾗﾘ初期化処理
 	if (DxLib::DxLib_Init())

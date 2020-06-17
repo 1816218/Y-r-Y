@@ -65,11 +65,11 @@ void TitleScene::Draw(void)
 
 	lpSceneMng.SetScreen(_ghTitleScreen);
 	ClearDrawScreen();
-	DrawRotaGraph(lpSceneMng.GetScreenSize().x / 2, lpSceneMng.GetScreenSize().y / 2, 2.0, 0.0, IMAGE_ID("flame")[_animFrame / 5 % 10], true);
-	DrawRotaGraph(lpSceneMng.GetScreenSize().x / 2, lpSceneMng.GetScreenSize().y / 3, 2.5, 0.0, IMAGE_ID("title")[0], true);
+	DrawRotaGraph(lpSceneMng.GetScreenSize().x / 2, lpSceneMng.GetScreenSize().y / 2, 1.3, 0.0, IMAGE_ID("flame")[_animFrame / 5 % 10], true);
+	DrawRotaGraph(lpSceneMng.GetScreenSize().x / 2, lpSceneMng.GetScreenSize().y / 3, 1.0, 0.0, IMAGE_ID("title")[0], true);
 
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, alpha);
-	DrawRotaGraph(lpSceneMng.GetScreenSize().x / 2, lpSceneMng.GetScreenSize().y / 2 + 100, 1.0, 0.0, IMAGE_ID("press")[0], true);
+	DrawRotaGraph(lpSceneMng.GetScreenSize().x / 2, lpSceneMng.GetScreenSize().y / 2 + 100, 0.5, 0.0, IMAGE_ID("press")[0], true);
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL, 0);
 
 	lpSceneMng.AddDrawQue(0, { _ghTitleScreen, 0, 0 });
