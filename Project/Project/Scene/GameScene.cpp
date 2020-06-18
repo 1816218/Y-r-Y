@@ -17,6 +17,7 @@ GameScene::~GameScene()
 	//íœ
 	lpImageMng.DeleteAllImageMap();
 	lpSceneMng.DeleteAllDrawList();
+	StopMusic();
 }
 //-----ƒQ[ƒ€ƒƒCƒ“ˆ—
 void GameScene::Update(void)
@@ -25,6 +26,7 @@ void GameScene::Update(void)
 	{
 		obj->SetPos(_player->GetPos());
 		obj->Update();
+		
 	}
 	_player->Update();
 
@@ -43,13 +45,13 @@ bool GameScene::Init(void)
 	lpImageMng.SetID("enemy", "image/enemy1.png", { 32.0f, 32.0f }, { 4, 4 });
 	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,7 });
 	lpImageMng.SetID("light", "image/light.png");
-
+	
 	//•`‰æ‘ÎÛ‚É‚·‚é‰æ–Ê‚Ìì¬
 	_ghGameScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 
 	_player = new Player({ 800 / 2, 640 / 3 }, { 32, 32 });
 	_objects.push_back(new Enemy({ 200, 200 }, { 32,32 }));
-
+	PlayMusic("Sound/main.mp3", DX_PLAYTYPE_LOOP);
 	return true;
 }
 //-----•`‰æˆ—
