@@ -13,6 +13,7 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Scene\OverScene.cpp" />
+    <ClCompile Include="Scene\ClearScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="details\VECTOR2.h" />
@@ -30,5 +31,6 @@
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Scene\OverScene.h" />
+    <ClInclude Include="Scene\ClearScene.h" />
   </ItemGroup>
 </Project>

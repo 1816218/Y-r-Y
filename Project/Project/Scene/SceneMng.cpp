@@ -5,6 +5,7 @@
 #include "SceneMng.h"
 #include "GameScene.h"
 #include "OverScene.h"
+#include"ClearScene.h"
 #include "../InputKey.h"
 #include "../ImageMng.h"
 
@@ -148,6 +149,9 @@ void SceneMng::SelectScene(void)
 			break;
 		case SCN_ID::OVER:
 			_activeScene.reset(new OverScene({ _screenSize.x / 4, _screenSize.y / 3 }, 0));
+			break;
+		case SCN_ID::CLEAR:
+			_activeScene = std::make_unique<ClearScene>();
 			break;
 		default:
 			assert(0);

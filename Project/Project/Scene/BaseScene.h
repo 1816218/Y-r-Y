@@ -7,6 +7,7 @@ enum class SCN_ID
 	TITLE,	//ゲームタイトル
 	MAIN,	//ゲームメイン
 	OVER,	//ゲームオーバー
+	CLEAR,
 	MAX
 };
 

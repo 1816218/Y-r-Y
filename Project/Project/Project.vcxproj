@@ -27,6 +27,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\OverScene.cpp" />
     <ClCompile Include="Scene\SceneMng.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="Scene\BaseScene.h" />
