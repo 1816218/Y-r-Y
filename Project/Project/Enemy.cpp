@@ -142,8 +142,8 @@ void Enemy::SetMove(const CHARA_DIR& dir, const Vector2F& ePos, const Vector2F& 
 			{
 				return true;
 			}
-			return false;
 		}
+		return false;
 	};
 
 	if (_dir == dir)

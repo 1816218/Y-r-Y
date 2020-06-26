@@ -21,7 +21,7 @@ private:
 	void Draw(void);
 
 	Vector2F _pos;			//‰æ‘œ‚ÌÀ•W
-	float	_bright;		//‰æ–Ê‚Ì–¾‚é‚³
+	int		_bright;		//‰æ–Ê‚Ì–¾‚é‚³
 	int		_ghOverScreen;	//•`‰æ‘ÎÛ‚É‚·‚é¸Ş×Ì¨¯¸ÊİÄŞÙ‚ğ•Û‚·‚é
 };
 
