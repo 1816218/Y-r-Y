@@ -148,7 +148,7 @@ void SceneMng::SelectScene(void)
 			_activeScene.reset(new GameScene());
 			break;
 		case SCN_ID::OVER:
-			_activeScene.reset(new OverScene({ _screenSize.x / 4, _screenSize.y / 3 }, 0));
+			_activeScene = std::make_unique<OverScene>();
 			break;
 		case SCN_ID::CLEAR:
 			_activeScene = std::make_unique<ClearScene>();

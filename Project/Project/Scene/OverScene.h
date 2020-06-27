@@ -6,8 +6,7 @@ class OverScene :
 	public BaseScene
 {
 public:
-	OverScene() : _pos({ 0,0 }), _bright(0), _ghOverScreen(0) {}
-	OverScene(const Vector2F& pos, const int bright);
+	OverScene();
 	~OverScene();
 
 	//内容の更新
@@ -20,8 +19,9 @@ private:
 	//描画処理
 	void Draw(void);
 
-	Vector2F _pos;			//画像の座標
-	int		_bright;		//画面の明るさ
+	float	_bright;		//画面の明るさ
 	int		_ghOverScreen;	//描画対象にするｸﾞﾗﾌｨｯｸﾊﾝﾄﾞﾙを保持する
+	int		_OanimFrame;		//アニメーション用
+	int		_OalphaCount;		//画像のブレンド：アルファ値		
 };
 
