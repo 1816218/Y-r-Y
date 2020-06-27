@@ -18,6 +18,7 @@ OverScene::~OverScene()
 	//削除
 	lpImageMng.DeleteAllImageMap();
 	lpSceneMng.DeleteAllDrawList();
+	StopMusic();
 }
 //-----メイン処理
 void OverScene::Update(void)
@@ -36,6 +37,10 @@ void OverScene::Update(void)
 		{
 			lpSceneMng.SetSceneID(SCN_ID::TITLE);
 		}
+		if (lpInputKey.trgKey[_1P_START])
+		{
+			lpSceneMng.SetSceneID(SCN_ID::TITLE);
+		}
 	}
 
 	Draw();
@@ -50,7 +55,8 @@ bool OverScene::Init(void)
 
 	//描画する画面データの作成
 	_ghOverScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
-
+	//音
+	PlayMusic("Sound/over.mp3", DX_PLAYTYPE_BACK);
 	return true;
 }
 //-----描画

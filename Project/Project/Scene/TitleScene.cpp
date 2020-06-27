@@ -41,6 +41,10 @@ void TitleScene::Update(void)
 		{
 			lpSceneMng.SetSceneID(SCN_ID::MAIN);
 		}
+		if (lpInputKey.trgKey[_1P_START])
+		{
+			lpSceneMng.SetSceneID(SCN_ID::MAIN);
+		}
 	}
 	Draw();
 }

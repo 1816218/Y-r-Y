@@ -54,7 +54,7 @@ bool ClearScene::Init(void)
 	//•`‰æ‚·‚é‰æ–Êƒf[ƒ^‚Ìì¬
 	_ghClearScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 	//‰¹
-	
+	PlayMusic("Sound/clear.mp3", DX_PLAYTYPE_LOOP);
 
 	return true;
 }
