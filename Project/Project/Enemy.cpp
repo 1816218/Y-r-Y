@@ -76,7 +76,11 @@ void Enemy::Update(void)
 	SetMove(CHARA_DIR::RIGHT, { _pos.x, _pos.y - 48 }, _playerPos);
 	SetMove(CHARA_DIR::LEFT, { _pos.x - 32 * 3, _pos.y - 48 }, _playerPos);
 	SetMove(CHARA_DIR::DOWN, { _pos.x - 48, _pos.y }, _playerPos);
-
+	//エネミーに接触したらゲームオーバーに遷移
+	if (_pos.x-16<_playerPos.x&&_playerPos.x<_pos.x+16&&_pos.y-16<_playerPos.y&&_playerPos.y < _pos.y+16)
+	{
+		lpSceneMng.SetSceneID(SCN_ID::OVER);
+	}
 }
 
 void Enemy::Draw(void)

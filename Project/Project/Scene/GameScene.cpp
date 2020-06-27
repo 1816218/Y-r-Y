@@ -26,8 +26,10 @@ void GameScene::Update(void)
 	{
 		obj->SetPos(_player->GetPos());
 		obj->Update();
+		//SetDrawBright(0, 0, 0);
 		
 	}
+	
 	_player->Update();
 
 	Draw();
@@ -57,8 +59,18 @@ bool GameScene::Init(void)
 //-----•`‰æˆ—
 void GameScene::Draw(void)
 {
+	
 	lpSceneMng.SetScreen(_ghGameScreen);
 	ClearDrawScreen();
+	
+	//if (!(_player->GetPos().x - lpMap.GetScrooll().x, _player->GetPos().y - lpMap.GetScrooll().y, 32))
+	//{
+	//	SetDrawBright(0, 0, 0);
+	//}
+	//else if((_player->GetPos().x - lpMap.GetScrooll().x, _player->GetPos().y - lpMap.GetScrooll().y, 32))
+	//{
+	//	SetDrawBright(255, 255, 255);
+	//}
 	lpMap.Draw();
 	for (auto obj : _objects)
 	{
