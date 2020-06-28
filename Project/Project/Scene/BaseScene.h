@@ -24,3 +24,6 @@ public:
 protected:
 	SCN_ID _sceneID;	//ƒV[ƒ“ID
 };
+
+
+
