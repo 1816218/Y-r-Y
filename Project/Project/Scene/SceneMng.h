@@ -26,11 +26,17 @@ public:
 		return (*s_Instance);
 	}
 
+	//システム初期化処理
+	bool SystemInit(void);
+
 	//メインループ処理
 	void Run(void);
 
 	//追加した画面をまとめて描画
 	void Draw(void);
+
+	//後処理
+	void Terminate(void);
 
 	//描画画面の設定
 	//@param ghScreen 描画する画面
@@ -63,10 +69,10 @@ private:
 		}
 	};
 	SceneMng();
+	SceneMng(const SceneMng&) = delete;
+	void operator=(const SceneMng&) = delete;
 	~SceneMng();
 
-	//システム初期化処理
-	bool SysInit(void);
 	//シーン切り替え処理
 	void SelectScene(void);
 	//シーンの解放

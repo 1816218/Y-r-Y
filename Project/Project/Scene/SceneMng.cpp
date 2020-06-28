@@ -11,11 +11,28 @@
 
 std::unique_ptr<SceneMng, SceneMng::SceneMngDeleter> SceneMng::s_Instance(new SceneMng);
 
+//-----システム初期化処理
+bool SceneMng::SystemInit(void)
+{
+	DxLib::ChangeWindowMode(true);										//true:window false:フルスクリーン
+	DxLib::SetWindowText("Coronet Pandemic");							//window名
+	DxLib::SetGraphMode((int)_screenSize.x, (int)_screenSize.y, 16);	//１６６７万色モードにする
+
+	//DXﾗｲﾌﾞﾗﾘ初期化処理
+	if (DxLib::DxLib_Init())
+	{
+		return false;//異常終了
+	}
+
+	_sceneID = SCN_ID::TITLE;
+	_activeScene = std::make_unique<TitleScene>();
+
+	return true;
+}
+
 //-----メイン処理
 void SceneMng::Run(void)
 {
-	SysInit();
-
 	//メインループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) != 1)
 	{
@@ -34,6 +51,7 @@ void SceneMng::Run(void)
 		Draw();
 	}
 }
+
 //-----描画処理
 void SceneMng::Draw(void)
 {
@@ -52,6 +70,13 @@ void SceneMng::Draw(void)
 	}
 	ScreenFlip();
 }
+
+//-----後処理
+void SceneMng::Terminate(void)
+{
+	DxLib::DxLib_End();
+}
+
 //-----描画する画面を設定する
 bool SceneMng::SetScreen(int ghScreen)
 {
@@ -59,12 +84,14 @@ bool SceneMng::SetScreen(int ghScreen)
 	SetDrawScreen(ghScreen);
 	return true;
 }
+
 //-----表示させる画面
 bool SceneMng::RevScreen(void)
 {
 	SetDrawScreen(_ghBefor);
 	return true;
 }
+
 //-----描画した画面の追加
 bool SceneMng::AddDrawQue(const int localZorder, DrawQueT que)
 {
@@ -88,6 +115,7 @@ bool SceneMng::DeleteAllDrawList(void)
 	}
 	return false;
 }
+
 //-----画面サイズを取得
 const Vector2F& SceneMng::GetScreenSize(void)
 {
@@ -116,24 +144,6 @@ SceneMng::~SceneMng()
 {
 }
 
-//-----システム初期化処理
-bool SceneMng::SysInit(void)
-{
-	DxLib::ChangeWindowMode(true);										//true:window false:フルスクリーン
-	DxLib::SetWindowText("Coronet Pandemic");							//window名
-	DxLib::SetGraphMode((int)_screenSize.x, (int)_screenSize.y, 16);	//１６６７万色モードにする
-
-	//DXﾗｲﾌﾞﾗﾘ初期化処理
-	if (DxLib::DxLib_Init())
-	{
-		return -1;//異常終了
-	}
-
-	_sceneID = SCN_ID::TITLE;
-	_activeScene = std::make_unique<TitleScene>();
-
-	return true;
-}
 //-----シーン切り替え
 void SceneMng::SelectScene(void)
 {
@@ -158,6 +168,7 @@ void SceneMng::SelectScene(void)
 		}
 	}
 }
+
 //-----シーンの解放
 bool SceneMng::ResetActiveScene(void)
 {
