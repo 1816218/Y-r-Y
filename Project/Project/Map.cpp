@@ -4,7 +4,7 @@
 #include <cmath>
 #include "Map.h"
 #include "ImageMng.h"
-
+int ItemCount;
 Map* Map::s_Instance = nullptr;
 
 //-----描画処理
@@ -38,6 +38,24 @@ bool Map::Collision(const Vector2F& pos, const Vector2F& size)
 			{
 				if (data.state == CHIP_STATE::HIT)
 				{
+					return true;	//当たっている
+				}
+			}
+		}
+	}
+	//アイテムが集まった時ゴールに入る
+	for (auto map : _mapData)
+	{
+		for (auto data : map.second)
+		{
+			if (data.chipPos.x == chip.x && data.chipPos.y == chip.y)
+			{
+				if (data.state == CHIP_STATE::GOAL)
+				{
+					if (ItemCount >= 3) {
+						lpSceneMng.SetSceneID(SCN_ID::CLEAR);
+
+					}
 					return true;	//当たっている
 				}
 			}

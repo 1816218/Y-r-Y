@@ -6,6 +6,8 @@
 #include "VECTOR2.h"
 
 #define lpMap Map::GetInstance()
+//アイテムカウント
+extern int ItemCount;
 
 //マップチップの状態
 enum class CHIP_STATE
@@ -13,6 +15,7 @@ enum class CHIP_STATE
 	HIT,		//当たる
 	NOT_HIT,	//当たらない
 	NOT_DRAW,	//描画しない
+	GOAL,
 	MAX
 };
 //描画対象にする画面
