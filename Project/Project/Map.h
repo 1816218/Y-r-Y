@@ -8,14 +8,13 @@
 #define lpMap Map::GetInstance()
 //アイテムカウント
 extern int ItemCount;
-
 //マップチップの状態
 enum class CHIP_STATE
 {
 	HIT,		//当たる
 	NOT_HIT,	//当たらない
 	NOT_DRAW,	//描画しない
-	GOAL,
+	GOAL,		//ゴール
 	MAX
 };
 //描画対象にする画面
@@ -39,6 +38,7 @@ using PairMap = std::pair<DRAW_SCREEN, VecMap>;
 class Map
 {
 public:
+	
 	static Map& GetInstance()
 	{
 		if (s_Instance == nullptr)
@@ -51,7 +51,8 @@ public:
 
 	//描画処理
 	void Draw(void);
-
+	//アイテムカウント
+	
 	//衝突判定
 	//@param pos 座標
 	//@param size サイズ
@@ -65,6 +66,7 @@ public:
 	const Vector2& GetMapChipMax(void) const;
 	//マップチップサイス取得
 	const Vector2& GetMapChipSize(void) const;
+	
 private:
 	Map();
 
@@ -94,5 +96,6 @@ private:
 	Vector2					_mapChipSize;	//マップチップのサイズ
 	Vector2F				_scroll;		//スクロールさせる移動量
 	static Map*				s_Instance;
+	
 };
 

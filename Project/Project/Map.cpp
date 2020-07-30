@@ -21,10 +21,12 @@ void Map::Draw(void)
 			DrawScreen(map.second, 0, { _ghBackScreen, 0, 0 });
 		}
 	}
+	
 }
 //-----当たり判定
 bool Map::Collision(const Vector2F& pos, const Vector2F& size)
 {
+	
 	//座標をマップチップに変換
 	Vector2 chip(static_cast<int>(pos.x + size.x) / _mapChipSize.x,
 				 static_cast<int>(pos.y + size.y) / _mapChipSize.y);
@@ -43,7 +45,6 @@ bool Map::Collision(const Vector2F& pos, const Vector2F& size)
 			}
 		}
 	}
-	//アイテムが集まった時ゴールに入る
 	for (auto map : _mapData)
 	{
 		for (auto data : map.second)
@@ -54,7 +55,7 @@ bool Map::Collision(const Vector2F& pos, const Vector2F& size)
 				{
 					if (ItemCount >= 3) {
 						lpSceneMng.SetSceneID(SCN_ID::CLEAR);
-
+						
 					}
 					return true;	//当たっている
 				}
@@ -94,6 +95,7 @@ Map::Map() :
 
 Map::~Map()
 {
+
 }
 //-----初期化処理
 void Map::Init(void)
@@ -101,7 +103,7 @@ void Map::Init(void)
 	//ファイルの読み込み
 	ReadFile(DRAW_SCREEN::FRONT, "Data/stage1_front.csv");
 	ReadFile(DRAW_SCREEN::BACK, "Data/stage1_back.csv");
-
+	
 	//描画対象にする画面の作成
 	_ghFrontScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 	_ghBackScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
@@ -147,6 +149,8 @@ bool Map::ReadFile(DRAW_SCREEN screen, const std::string& fileName)
 			data.id = num / 10;
 			data.chipPos = { x, y };
 
+
+
 			//チップの状態を登録
 			if (num % 10 == 0)
 			{
@@ -156,10 +160,15 @@ bool Map::ReadFile(DRAW_SCREEN screen, const std::string& fileName)
 			{
 				data.state = CHIP_STATE::NOT_HIT;
 			}
+			else if (num % 10 == 3)
+			{
+				data.state = CHIP_STATE::GOAL;
+			}
 			else
 			{
 				data.state = CHIP_STATE::NOT_DRAW;
 			}
+
 			map.at(y * _mapChip.x + x) = data;
 		}
 	}
