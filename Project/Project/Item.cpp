@@ -20,19 +20,17 @@ Item::~Item()
 
 bool Item::Init(void)
 {
-
-	
-	//mapItem();
-
-
+	ItemCount = 0;
+	ItemFlag = FALSE;
 	return true;
 }
 void Item::Update(void)
 {
-	/*if (_pos.x - 16 < _playerPos.x && _playerPos.x < _pos.x + 16 && _pos.y - 16 < _playerPos.y && _playerPos.y < _pos.y + 16)
+	if (CheckHitKey(KEY_INPUT_A))
 	{
-		lpSceneMng.SetSceneID(SCN_ID::OVER);
-	}*/
+		ItemFlag = TRUE;
+		ItemCount = 3;
+	}
 }
 
 void Item::mapItem(void)
@@ -46,7 +44,7 @@ void Item::mapItem(void)
 //-----•`‰æ
 void Item::Draw(void)
 {
-	
-	DrawRotaGraph(_pos.x- lpMap.GetScrooll().x, _pos.y- lpMap.GetScrooll().y, 1.0f, 0, IMAGE_ID("Elixir")[0], true);
-
+	if (ItemFlag == FALSE) {
+		DrawRotaGraph(_pos.x - lpMap.GetScrooll().x, _pos.y - lpMap.GetScrooll().y, 1.0f, 0, IMAGE_ID("Elixir")[0], true);
+	}
 }

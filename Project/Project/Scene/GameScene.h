@@ -3,7 +3,7 @@
 #include "BaseScene.h"
 
 class Obj;
-extern int ItemCount;
+
 class GameScene :
 	public BaseScene
 {

@@ -3,6 +3,7 @@
 #include "Obj.h"
 #include "VECTOR2.h"
 #include "InputKey.h"
+extern int ItemCount;
 class Item : public Obj
 {
 public:
@@ -20,5 +21,6 @@ public:
 private:
 	Vector2F _pos;
 	Vector2F _size;
+	int ItemFlag;
 };
 
