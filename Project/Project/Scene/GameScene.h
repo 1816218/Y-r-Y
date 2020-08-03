@@ -25,5 +25,6 @@ private:
 	int					_ghGameScreen;	//•`‰æ‘Îˆ‚É‚µ‚½¸Ş×Ì¨¯¸ÊİÄŞÙ‚ğ•Û
 	Obj*				_player;		//ƒvƒŒƒCƒ„[
 	std::vector<Obj*>	_objects;		//“G
+	Obj*				_item;
 };
 

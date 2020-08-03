@@ -4,6 +4,7 @@
 #include "../ImageMng.h"
 #include "../Obj.h"
 #include "../Player.h"
+#include"../Item.h"
 #include "../Enemy.h"
 #include "../Map.h"
 
@@ -47,12 +48,13 @@ bool GameScene::Init(void)
 	lpImageMng.SetID("enemy", "image/enemy1.png", { 32.0f, 32.0f }, { 4, 4 });
 	lpImageMng.SetID("map", "image/map.png", { 32,32 }, { 6,7 });
 	lpImageMng.SetID("light", "image/light.png");
-	
+	lpImageMng.SetID("Elixir", "image/Elixir.png");
 	//•`‰æ‘ÎÛ‚É‚·‚é‰æ–Ê‚Ìì¬
 	_ghGameScreen = MakeScreen(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y, true);
 	ItemCount = 3;
 	_player = new Player({ 800 / 2, 640 / 3 }, { 32, 32 });
 	_objects.push_back(new Enemy({ 200, 200 }, { 32,32 }));
+	_item=new Item({ 1200, 140 }, { 32, 32 });
 	PlayMusic("Sound/main.mp3", DX_PLAYTYPE_LOOP);
 	return true;
 }
@@ -63,20 +65,14 @@ void GameScene::Draw(void)
 	lpSceneMng.SetScreen(_ghGameScreen);
 	ClearDrawScreen();
 	
-	//if (!(_player->GetPos().x - lpMap.GetScrooll().x, _player->GetPos().y - lpMap.GetScrooll().y, 32))
-	//{
-	//	SetDrawBright(0, 0, 0);
-	//}
-	//else if((_player->GetPos().x - lpMap.GetScrooll().x, _player->GetPos().y - lpMap.GetScrooll().y, 32))
-	//{
-	//	SetDrawBright(255, 255, 255);
-	//}
 	lpMap.Draw();
 	for (auto obj : _objects)
 	{
 		obj->Draw();
+		
 	}
 	_player->Draw();
+	_item->Draw();
 	lpSceneMng.AddDrawQue( 1, { _ghGameScreen, 0, 0 });
 	lpSceneMng.RevScreen();
 }

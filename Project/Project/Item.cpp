@@ -7,6 +7,12 @@ Item::Item()
 {
 	Init();
 }
+Item::Item(const Vector2F& pos, const Vector2F& size)
+{
+	_pos = pos;
+	_size = size;
+	Init();
+}
 
 Item::~Item()
 {
@@ -15,12 +21,18 @@ Item::~Item()
 bool Item::Init(void)
 {
 
-	_pos = { 0,0 };
-	_size = { 32,32 };
-
+	
+	//mapItem();
 
 
 	return true;
+}
+void Item::Update(void)
+{
+	/*if (_pos.x - 16 < _playerPos.x && _playerPos.x < _pos.x + 16 && _pos.y - 16 < _playerPos.y && _playerPos.y < _pos.y + 16)
+	{
+		lpSceneMng.SetSceneID(SCN_ID::OVER);
+	}*/
 }
 
 void Item::mapItem(void)
@@ -34,7 +46,7 @@ void Item::mapItem(void)
 //-----•`‰æ
 void Item::Draw(void)
 {
-	DrawRotaGraph(_pos.x, _pos.y, 1.0f, 0, IMAGE_ID("corone")[0], true);
-	DrawRotaGraph(_pos.x, _pos.y, 1.0f, 0, IMAGE_ID("Elixir")[0], true);
+	
+	DrawRotaGraph(_pos.x- lpMap.GetScrooll().x, _pos.y- lpMap.GetScrooll().y, 1.0f, 0, IMAGE_ID("Elixir")[0], true);
 
 }
