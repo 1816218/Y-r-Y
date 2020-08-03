@@ -3,14 +3,15 @@
 #include "BaseScene.h"
 
 class Obj;
-
+extern int ItemCount;
+extern int ItemFlag;
 class GameScene :
 	public BaseScene
 {
 public:
 	GameScene();
 	~GameScene();
-
+	
 	//内容の更新
 	void Update(void) override;
 
@@ -21,7 +22,7 @@ private:
 	bool Init(void);
 	//描画処理
 	void Draw(void);
-
+	
 	int					_ghGameScreen;	//描画対処にしたｸﾞﾗﾌｨｯｸﾊﾝﾄﾞﾙを保持
 	Obj*				_player;		//プレイヤー
 	std::vector<Obj*>	_objects;		//敵

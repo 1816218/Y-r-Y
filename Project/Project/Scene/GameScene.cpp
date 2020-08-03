@@ -30,9 +30,20 @@ void GameScene::Update(void)
 		//SetDrawBright(0, 0, 0);
 		
 	}
+	//アイテムとの当たり判定
+	if (_player->GetPos().x - _player->GetSize().x / 2 < _item->GetPos().x + _item->GetSize().x / 2 &&
+		_player->GetPos().x + _player->GetSize().x / 2 > _item->GetPos().x - _item->GetSize().x / 2 &&
+		_player->GetPos().y - _player->GetSize().y / 2 < _item->GetPos().y + _item->GetSize().y / 2 &&
+		_player->GetPos().y + _player->GetSize().y / 2 > _item->GetPos().y - _item->GetSize().y / 2)
+	{
+		ItemCount = 3;
+		ItemFlag = TRUE;
+	}
 	
+	//更新
 	_player->Update();
 	_item->Update();
+	//描画
 	Draw();
 }
 //-----シーン情報を取得
